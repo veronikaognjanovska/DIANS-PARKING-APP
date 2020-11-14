@@ -28,5 +28,6 @@ then
 	psql -p $port -h $host -U $user -d parking_spots -c 'CREATE TABLE parking(id varchar(255) primary key, lat double precision not null, lng double precision not null, name varchar(255), capacity integer, access varchar(10), fee varchar(10), operator varchar(255), website varchar(1024), supervised varchar(25), parking_type varchar(50));'
 fi
 
+
 echo "Database creation finished..."
 exit
