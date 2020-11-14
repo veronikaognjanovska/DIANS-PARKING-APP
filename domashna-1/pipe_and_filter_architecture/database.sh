@@ -16,7 +16,7 @@ sudo apt install osmctools
 
 #connect to postgresql database
 database_exists=`psql -p $port -h $host -U $user -c 'SELECT datname FROM pg_database WHERE datistemplate = false;' | grep 'parking_spots' | wc -l`
-if [ $database_exists -ne 1 ]
+if [ $database_exists -lt 1 ]
 then
 	psql -p $port -h $host -U $user -c 'CREATE DATABASE parking_spots;'
 fi
