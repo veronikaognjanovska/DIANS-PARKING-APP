@@ -19,7 +19,7 @@ public class ParkingSpotsFilterService {
     private Map<String, List<ParkingSpot>> parkingSpotsByType = new HashMap<>();
 
     @PostConstruct
-    private void init(){
+    private void init() {
         loadData();
     }
 
