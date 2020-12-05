@@ -14,19 +14,22 @@ class HomeController{
 
     @Autowired
     ParkingSpotsFilterService service;
-    @GetMapping("/get")
+    @GetMapping("/")
     public String home(Model model){
 
         List<ParkingSpot> parkingSpotList = service.getParkingSpotsAll();
         model.addAttribute("allParkings", parkingSpotList);
-        //return mapa.html //fajlot na monika koga kje go stavi
-        return null;
+        return "home.html"; //fajlot na monika koga kje go stavi
+
     }
 
-    @GetMapping("/get/user") //podocna da bide zameneto so @GetMapping("/get/user/{id}")
+    /*
+    @GetMapping("/user") //podocna da bide zameneto so @GetMapping("/get/user/{id}")
     public String user(){
 
         return null;
         //return user.html //kje go napravam
     }
+
+     */
 }
