@@ -17,10 +17,10 @@ public class Route{
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int ID;
 
-    @OneToMany
+    @ManyToMany
     private List<Point> points;
 
-    @OneToMany
-    private List<String> streetNames;
+    @ManyToMany
+    private List<StreetName> streetNames;
 
 }
