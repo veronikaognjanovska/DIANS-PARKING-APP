@@ -6,11 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 @Data
-@RequiredArgsConstructor
+
 public class Route{
 
     @Id
@@ -23,4 +24,8 @@ public class Route{
     @ManyToMany
     private List<StreetName> streetNames;
 
+    public Route() {
+        this.points=new LinkedList<>();
+        this.streetNames=new LinkedList<>();
+    }
 }

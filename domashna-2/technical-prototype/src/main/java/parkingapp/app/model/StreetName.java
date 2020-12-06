@@ -20,4 +20,5 @@ public class StreetName {
 
     private String streetName;
 
+
 }

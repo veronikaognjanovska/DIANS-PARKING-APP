@@ -24,4 +24,5 @@ public class Point {
     @NonNull
     private double lng;
 
+
 }
