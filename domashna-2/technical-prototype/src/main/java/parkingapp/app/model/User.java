@@ -1,22 +1,18 @@
 package parkingapp.app.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.RouteMatcher;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 
 @Entity
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class User implements UserDetails {
 
     @Id
@@ -31,11 +27,9 @@ public class User implements UserDetails {
 
     //@OneToMany
     //private List<RouteMatcher.Route> lastFiveLocations;
-
+    public User() {}
     @Builder.Default
     private UserRole userRole = UserRole.USER;
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

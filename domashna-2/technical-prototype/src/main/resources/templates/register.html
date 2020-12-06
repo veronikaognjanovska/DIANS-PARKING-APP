@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Регистрирај се</title>
+</head>
+<body>
+<h1>Регистрирај се!</h1>
+<form role="form" th:action="@{/register}" th:method="post" th:object="${user}">
+
+    <lable>Email адреса: </lable>
+    <input type="text" id="email" name="email" th:field="*{email}"><br/>
+
+    <lable>Лозинка: </lable>
+    <input type="password" id="password" name="password" th:field="*{password}"> <br/>
+
+    <input type="submit" value="Регистрирај се">
+</form>
+<a th:href="@{/}">Почетна</a>
+</body>
+</html>

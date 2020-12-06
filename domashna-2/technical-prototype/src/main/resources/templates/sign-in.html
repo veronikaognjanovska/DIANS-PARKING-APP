@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Најави се</title>
+</head>
+<body>
+<h3>Најави се</h3>
+<form role="form" th:action="@{/sign-in}" th:method="post">
+    <lable>Корисничко име:</lable>
+    <input type="text" id="username" name="username"><br/>
+
+    <lable>Лозинка:</lable>
+    <input type="password" id="password" name="password"><br/>
+
+    <input type="submit" value="Најава">
+</form>
+<a th:href="@{/}">Почетна</a>
+</body>
+</html>

@@ -37,10 +37,8 @@ public class ParkingSpotDataLoader {
     private void readDataFromRepository() {
         List<ParkingSpot> parkingSpotsAll = StreamSupport
                 .stream(parkingSpotRepository.findAll().spliterator(), false)
+                .filter(parkingSpot -> parkingSpot.getName()!=null && !parkingSpot.getName().isEmpty())
                 .collect(Collectors.toList());
-        parkingSpotsAll.stream()
-                .filter(parkingSpot -> parkingSpot.getName()==null || parkingSpot.getName().isEmpty())
-                .forEach(parkingSpot -> parkingSpot.setName("street"));
         parkingSpotsAll.stream()
                 .filter(parkingSpot -> parkingSpot.getParking_type()==null || parkingSpot.getParking_type().isEmpty())
                 .forEach(parkingSpot -> parkingSpot.setParking_type("surface"));

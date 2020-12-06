@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8" />
+    <meta content="application/xhtml+xml">
+    <style>
+        #map {
+            position: absolute;
+            top:85px;
+            bottom: 0;
+            left:0;
+            right: 0;
+        }
+        main {
+            width: 800px;
+            margin: auto !important;
+        }
+        .carpin-black{
+            width: 70px;
+            height: 70px;
+        }
+        .input-line{
+            position: absolute;
+            color: black;
+            bottom: 50px;
+            width: 900px;
+            position: fixed;
+            height: 70px;
+            background-color: #272727;
+            z-index:600;
+            border-radius: 25px;
+            left: 350px;
+        }
+        .one-input{
+            position: relative;
+            top: 15px;
+            left: 100px;
+            border-radius: 10px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        .two-input{
+            position: relative;
+            top: 15px;
+            left: 200px;
+            border-radius: 10px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        .buttton{
+            position: relative;
+            top: 15px;
+            left: 300px;
+            border-radius: 10px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            background-color: #ffdb98;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-inverse" style="background-color: #272727; height: 85px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <img class="carpin-black" src="images/carpin-black.png">
+                <!--<a class="navbar-brand">Balloon Shop App</a>-->
+            </div>
+            <div class="navbar-header navbar-right">
+                <a  class="p-2" th:href="@{/register}" style="color: white;">Регистрирај се!</a>
+                <a th:href="@{/sign-in}" style="color: white;">Најава</a>&nbsp;
+                <a th:href="@{/user-details}" style="color: white;">Профил</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div id="map"></div>
+<div class="input-line">
+    <input class="one-input" type="text" name="fname" value="Паркинг адреса">
+    <input class="two-input" type="text" name="fname" value="Моментална адреса">
+    <input class="buttton" type="submit" value="рута">
+</div>
+
+<span id="parkings" style="display: none;" th:text="${allParkings}"></span>
+</body>
+<script>
+$(document).ready(function(){
+    var parkingpots = JSON.parse(document.getElementById("parkings").innerHTML);
+    console.log(parkingpots);
+
+    var map = L.map('map').setView([42.006510, 21.421958], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    for(var i=0;i<parkingpots.length;i++)
+    {
+        console.log(parkingpots[i].name);
+        var name=parkingpots[i].name;
+        var capacity=parkingpots[i].capacity;
+        var access=parkingpots[i].access;
+
+        L.marker([parkingpots[i].lat, parkingpots[i].lng]).addTo(map)
+            .bindPopup("Име: " + name + "<br>" + "Капацитет: " + capacity + "<br>" + "Пристап: " + access)
+            .openPopup();
+    }
+});
+</script>
+</html>

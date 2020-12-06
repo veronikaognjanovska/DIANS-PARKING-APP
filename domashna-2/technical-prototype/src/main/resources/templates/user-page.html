@@ -21,9 +21,16 @@
                 <img class="carpin-crno" src="./images/carpin-black.png">
                 Мој профил
             </div>
+            <div>
+                <a th:href="@{/}">Почетна</a>
+            </div>
             <div class="navbar-header navbar-right">
                 <img class="carpin-crno" src="https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8184.jpg?size=626&ext=jpg" style="border-radius: 50%">
-                <a href="odjava" style="color: white;">Одјави се</a>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem" style="color:white"> Одјави се</a>
+
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Одјави се"/>
+                </form>
             </div>
         </div>
     </nav>
@@ -53,7 +60,6 @@
         </dl>
     </div>
 </div>
-
 
 </body>
 </html>
