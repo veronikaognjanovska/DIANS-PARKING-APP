@@ -188,7 +188,9 @@ $(document).ready(function(){
         var lng = parkingpots[i].lng;
         L.marker([parkingpots[i].lat, parkingpots[i].lng]).addTo(map)
             .bindPopup("<p>" + "Име: " + name + "<br>" + "Капацитет: " + capacity + "<br>" + "Пристап: " + access +
-            "<br>" +"<button data-lat='" + lat + "' data-lng='" + lng + "' name='" + name + "' class='registerbtn' type='button' >Избери</button></p>")
+            "<br>" + "<a href='/parking?id=" + parkingpots[i].id + "'>Детали</a><br>"
+            +"<button data-lat='" + lat + "' data-lng='" + lng + "' name='" + name
+            + "' class='registerbtn' type='button' >Избери</button></p>")
             .openPopup();
     }
     $(document).on('click', '.registerbtn', function () {
