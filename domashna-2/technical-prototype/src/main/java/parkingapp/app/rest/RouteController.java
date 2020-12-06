@@ -38,8 +38,8 @@ public class RouteController {
             json = (JSONObject) parser.parse(response);
         }catch(Exception e){
             //
-            Logger logger = (Logger) LoggerFactory.getLogger(Point.class);
-            logger.config("Exception");
+            //Logger logger = (Logger) LoggerFactory.getLogger(Point.class);
+            //logger.config("Exception");
             throw new RuntimeException(e);
         }
         return json;
@@ -59,8 +59,8 @@ public class RouteController {
             json = (JSONArray) parser.parse(response);
         }catch(Exception e){
             //
-            Logger logger = (Logger) LoggerFactory.getLogger(Point.class);
-            logger.config("Exception");
+            //Logger logger = (Logger) LoggerFactory.getLogger(Point.class);
+            //logger.config("Exception");
             throw new RuntimeException(e);
         }
         return json;
@@ -116,8 +116,8 @@ public class RouteController {
 
         }catch(Exception e){
             //
-            Logger logger = (Logger) LoggerFactory.getLogger(Point.class);
-            logger.config("Exception");
+            //Logger logger = (Logger) LoggerFactory.getLogger(Point.class);
+            //logger.config("Exception");
             throw new RuntimeException(e);
         }
 
@@ -134,17 +134,20 @@ public class RouteController {
 
         Point point = new Point();
         try {
+            if(!json.isEmpty()){
+
             JSONObject j1=(JSONObject)json.get(0);
             Double lng=Double.parseDouble((String) j1.get("lon"));
             Double lat=Double.parseDouble((String) j1.get("lat"));
             point = new Point();
             point.setLng(lng);
             point.setLat(lat);
+            }
 
         }catch(Exception e){
             //
-            Logger logger = (Logger) LoggerFactory.getLogger(Point.class);
-            logger.config("Exception");
+            //Logger logger = (Logger) LoggerFactory.getLogger(Point.class);
+            //logger.config("Exception");
             throw new RuntimeException(e);
         }
 

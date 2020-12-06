@@ -97,6 +97,20 @@
             border-radius: 25px;
             left: 50px;
         }
+        .registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
     </style>
 </head>
 <body>
@@ -118,16 +132,17 @@
 
 <div id="map"></div>
 <div class="input-line">
-    <input class="one-input" type="text" name="fname" value="Паркинг адреса" disabled>
-    <input class="two-input" type="text" name="fname" value="Моментална адреса">
-    <input class="buttton-2" type="submit" value="кординати">
-    <input class="buttton" type="submit" value="рута">
+    <input id="paddress" class="one-input" type="text" name="fname" style="color:white" value="Паркинг адреса" disabled>
+    <input id="address" class="two-input" type="text" name="fname" value="Skopje">
+    <input id="coordinates" class="buttton-2" type="button" value="коoрдинати">
+    <input id="route" class="buttton" type="button" value="рута">
 </div>
 <div class="street">
     <h2 style="text-align: center;padding-left: 10px;padding-right: 10px; padding-top: 10px;padding-bottom: 10px;">Рута:</h2>
     <br>
     <p class="input-address" style="padding-left: 5px; padding-right: 5px;padding-top: 10px;padding-bottom: 10px;"></p>
 </div>
+<span id="error" style="color:red">Ве молиме изберете паркинг место и ваша локација!</span>
 <footer>
     <div class="footer-copyright text-center py-3">
         <h1></h1>
@@ -137,7 +152,23 @@
 <span id="parkings" style="display: none;" th:text="${allParkings}"></span>
 </body>
 <script>
+var parking_lat=undefined;
+var parking_lng=undefined;
+var user_lat=undefined;
+var user_lng=undefined;
+
+var user_markers=[];
+var routes = [];
+var redIcon = L.icon({
+        iconUrl: 'images/marker-icon-red.png',
+        iconSize:     [25, 41], // size of the icon
+        iconAnchor:   [12, 41], // point of the icon which will correspond to marker's location
+        popupAnchor:  [1, -34] // point from which the popup should open relative to the iconAnchor
+    });
+
 $(document).ready(function(){
+    var error = $("#error");
+    error.hide();
     var parkingpots = JSON.parse(document.getElementById("parkings").innerHTML);
     console.log(parkingpots);
 
@@ -153,17 +184,97 @@ $(document).ready(function(){
         var name=parkingpots[i].name;
         var capacity=parkingpots[i].capacity;
         var access=parkingpots[i].access;
-
+        var lat = parkingpots[i].lat;
+        var lng = parkingpots[i].lng;
         L.marker([parkingpots[i].lat, parkingpots[i].lng]).addTo(map)
-            .bindPopup("Име: " + name + "<br>" + "Капацитет: " + capacity + "<br>" + "Пристап: " + access +
-            "<br>" +"<button type='button' onclick='info()'>Избери</button>" )
+            .bindPopup("<p>" + "Име: " + name + "<br>" + "Капацитет: " + capacity + "<br>" + "Пристап: " + access +
+            "<br>" +"<button data-lat='" + lat + "' data-lng='" + lng + "' name='" + name + "' class='registerbtn' type='button' >Избери</button></p>")
             .openPopup();
     }
+    $(document).on('click', '.registerbtn', function () {
+         var btn = $(this);
+            parking_lat=btn.attr("data-lat");
+            console.log(parking_lat);
+            parking_lng=btn.attr("data-lng");
+            $('#paddress').val(btn.attr("name"));
+    });
+
+    $('#coordinates').click(function(){
+        var address = $("#address").val();
+        $.ajax({
+                    method: "GET",
+                    url: "http://localhost:8080/api/name?q=" + address + "",
+                    headers: {
+                        "Content-type" : "application/json",
+                         "Access-Control-Allow-Origin": "*",
+                         "Access-Control-Allow-Methods":"GET",
+                         "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
+                    },
+                    success: function(data){
+
+                        if (data !== undefined){
+                        for (var marker in user_markers){
+                            user_markers[marker].remove();
+                        }
+                            user_lat = data.lat;
+                            user_lng=data.lng;
+                           var marker = L.marker([data.lat, data.lng], {
+                            icon: redIcon
+                            }).addTo(map);
+                            var latLngs = [ marker.getLatLng() ];
+                            var markerBounds = L.latLngBounds(latLngs);
+                            map.fitBounds(markerBounds);
+                            map.setZoom(13);
+                            user_markers.push(marker);
+                        }
+                    }
+         });
+    });
+    $('#route').click(function(){
+
+            if(parking_lat!==undefined && parking_lng!==undefined && user_lat!=undefined && user_lng!=undefined){
+            console.log("tuka");
+                $.ajax({
+                    method: "GET",
+                    url: "http://localhost:8080/api/route?lng1=" + parking_lat + "&lan1=" + parking_lng + "&lng2=" + user_lat + "&lan2=" + user_lng + "",
+                    headers: {
+                        "Content-type" : "application/json",
+                         "Access-Control-Allow-Origin": "*",
+                         "Access-Control-Allow-Methods":"GET",
+                         "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
+                    },
+                    success: function(data){
+                        for (var route in routes){
+                            routes[route].remove();
+                        }
+                        if (data !== undefined){
+                        var latlng = []
+                        var streets = ""
+                        for (ind in data.points){
+                            latlng.push([
+                            data.points[ind].lat,
+                            data.points[ind].lng
+                            ]);
+                            for (st in data.streetNames){
+                                streets += data.streetNames[st].streetName + "<br>";
+                            }
+
+                        }
+                        console.log(latlng);
+                        console.log(parking_lat);
+                        console.log(parking_lng);
+                        var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
+                        map.fitBounds(polyline.getBounds());
+                        console.log(streets);
+                        routes.push(polyline);
+                        $('#input-address').text(streets);
+                    }}
+         });
+       }else{
+        error.show();
+       }
+    });
 });
-function info(){
-    console.log("ksjdasjbk");
-    var button=$(this).parent("div");
-    var element=$("#info").innerHTML=button.text();
-}
+
 </script>
 </html>
