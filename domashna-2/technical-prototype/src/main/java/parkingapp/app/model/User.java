@@ -11,12 +11,12 @@ import java.util.Collections;
 
 
 @Entity
+@Table(name="`User`")
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class User implements UserDetails {
-
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
 
     private String userName;
