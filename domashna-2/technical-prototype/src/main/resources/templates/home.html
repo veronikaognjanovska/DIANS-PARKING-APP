@@ -11,7 +11,7 @@
         #map {
             position: absolute;
             top:85px;
-            bottom: 0;
+            bottom: 120px;
             left:0;
             right: 0;
         }
@@ -26,7 +26,7 @@
         .input-line{
             position: absolute;
             color: black;
-            bottom: 50px;
+            bottom: 150px;
             width: 900px;
             position: fixed;
             height: 70px;
@@ -48,7 +48,7 @@
         .two-input{
             position: relative;
             top: 15px;
-            left: 200px;
+            left: 155px;
             border-radius: 10px;
             padding-top: 7px;
             padding-bottom: 7px;
@@ -58,11 +58,44 @@
         .buttton{
             position: relative;
             top: 15px;
-            left: 300px;
+            left: 200px;
             border-radius: 10px;
             padding-top: 7px;
             padding-bottom: 7px;
             background-color: #ffdb98;
+        }
+        .buttton-2{
+            position: relative;
+            top: 15px;
+            left: 170px;
+            border-radius: 10px;
+            padding-top: 7px;
+            padding-bottom: 7px;
+            background-color: #ffdb98;
+        }
+        footer{
+            position: absolute;
+            color: white;
+            bottom: 0;
+            width: 100%;
+            position: fixed;
+            height: 120px;
+            background-color: #272727;
+        }
+        .info-la{
+            color: white;
+        }
+        .street{
+            position: absolute;
+            color: white;
+            background-color: #272727;
+            top: 200px;
+            width: auto;
+            position: fixed;
+            height: auto;
+            z-index:600;
+            border-radius: 25px;
+            left: 50px;
         }
     </style>
 </head>
@@ -85,11 +118,22 @@
 
 <div id="map"></div>
 <div class="input-line">
-    <input class="one-input" type="text" name="fname" value="Паркинг адреса">
+    <input class="one-input" type="text" name="fname" value="Паркинг адреса" disabled>
     <input class="two-input" type="text" name="fname" value="Моментална адреса">
+    <input class="buttton-2" type="submit" value="кординати">
     <input class="buttton" type="submit" value="рута">
 </div>
-
+<div class="street">
+    <h2 style="text-align: center;padding-left: 10px;padding-right: 10px; padding-top: 10px;padding-bottom: 10px;">Рута:</h2>
+    <br>
+    <p class="input-address" style="padding-left: 5px; padding-right: 5px;padding-top: 10px;padding-bottom: 10px;"></p>
+</div>
+<footer>
+    <div class="footer-copyright text-center py-3">
+        <h1></h1>
+        <p class="info-la" id="info"></p>
+    </div>
+</footer>
 <span id="parkings" style="display: none;" th:text="${allParkings}"></span>
 </body>
 <script>
@@ -111,9 +155,15 @@ $(document).ready(function(){
         var access=parkingpots[i].access;
 
         L.marker([parkingpots[i].lat, parkingpots[i].lng]).addTo(map)
-            .bindPopup("Име: " + name + "<br>" + "Капацитет: " + capacity + "<br>" + "Пристап: " + access)
+            .bindPopup("Име: " + name + "<br>" + "Капацитет: " + capacity + "<br>" + "Пристап: " + access +
+            "<br>" +"<button type='button' onclick='info()'>Избери</button>" )
             .openPopup();
     }
 });
+function info(){
+    console.log("ksjdasjbk");
+    var button=$(this).parent("div");
+    var element=$("#info").innerHTML=button.text();
+}
 </script>
 </html>
