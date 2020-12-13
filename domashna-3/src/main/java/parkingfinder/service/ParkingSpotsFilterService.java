@@ -26,7 +26,6 @@ public class ParkingSpotsFilterService {
     }
 
     private void loadData() {
-
         parkingSpotsByAccess = parkingSpotsAll.stream()
                 .collect(groupingBy(ParkingSpot::getAccess));
         parkingSpotsByType = parkingSpotsAll.stream()
