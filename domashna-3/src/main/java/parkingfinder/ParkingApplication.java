@@ -1,4 +1,4 @@
-package parkingfinder.parking;
+package parkingfinder;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

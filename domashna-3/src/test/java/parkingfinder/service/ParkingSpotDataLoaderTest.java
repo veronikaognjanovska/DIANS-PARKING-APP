@@ -25,6 +25,9 @@ class ParkingSpotDataLoaderTest {
     @InjectMocks
     private ParkingSpotDataLoader parkingSpotDataLoader;
 
+    @Mock
+    private ParkingSpotsFilterService parkingSpotsFilterService;
+
     @BeforeEach
     void initMocks(){
     }

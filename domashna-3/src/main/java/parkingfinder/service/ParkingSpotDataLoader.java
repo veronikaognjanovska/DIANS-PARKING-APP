@@ -21,6 +21,9 @@ public class ParkingSpotDataLoader {
     @Autowired
     ParkingSpotRepository parkingSpotRepository;
 
+    @Autowired
+    ParkingSpotsFilterService parkingSpotsFilterService;
+
     private List<ParkingSpot> parkingSpotsAll = new ArrayList<>();
 
     @PostConstruct
@@ -45,6 +48,8 @@ public class ParkingSpotDataLoader {
         parkingSpotsAll.stream()
                 .filter(parkingSpot -> parkingSpot.getAccess()==null || parkingSpot.getAccess().isEmpty())
                 .forEach(parkingSpot -> parkingSpot.setAccess("public"));
+
+        parkingSpotsFilterService.setParkingSpotsAll(parkingSpotsAll);
     }
 
     protected int getParkingSpotsCount() {
