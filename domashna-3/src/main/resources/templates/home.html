@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="icon" href="images/transparent-logo.png">
+    <meta charset="UTF-8" />
+    <meta content="application/xhtml+xml">
+
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-inverse" style="background-color: #272727; height: 85px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <img class="carpin-black" src="images/carpin-black.png">
+                <!--<a class="navbar-brand">Balloon Shop App</a>-->
+            </div>
+            <div class="navbar-header navbar-right">
+                <a  class="p-2" th:href="@{/register}" style="color: white;">Регистрирај се!</a>
+                <a th:href="@{/sign-in}" style="color: white;">Најава</a>&nbsp;
+                <a th:href="@{/user-details}" style="color: white;">Профил</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div id="map"></div>
+<div class="input-line">
+    <input id="paddress" class="one-input" type="text" name="fname" style="color:white" value="Паркинг адреса" disabled>
+    <input id="address" class="two-input" type="text" name="fname" value="Skopje">
+    <input id="coordinates" class="buttton-2" type="button" value="коoрдинати">
+    <input id="route" class="buttton" type="button" value="рута">
+</div>
+<div class="street">
+    <h2 style="text-align: center;padding-left: 10px;padding-right: 10px; padding-top: 10px;padding-bottom: 10px;">Рута:</h2>
+    <br>
+    <p class="input-address" style="padding-left: 5px; padding-right: 5px;padding-top: 10px;padding-bottom: 10px;"></p>
+</div>
+<span id="error" style="color:red">Ве молиме изберете паркинг место и ваша локација!</span>
+<footer>
+    <div class="footer-copyright text-center py-3">
+        <h1></h1>
+        <p class="info-la" id="info"></p>
+    </div>
+</footer>
+<span id="parkings" style="display: none;" th:text="${allParkings}"></span>
+</body>
+<script>
+    var parking_lat=undefined;
+    var parking_lng=undefined;
+    var user_lat=undefined;
+    var user_lng=undefined;
+
+    var user_markers=[];
+    var routes = [];
+    var redIcon = L.icon({
+        iconUrl: 'images/marker-icon-red.png',
+        iconSize:     [25, 41], // size of the icon
+        iconAnchor:   [12, 41], // point of the icon which will correspond to marker's location
+        popupAnchor:  [1, -34] // point from which the popup should open relative to the iconAnchor
+    });
+
+    $(document).ready(function(){
+        var error = $("#error");
+        error.hide();
+        var parkingpots = JSON.parse(document.getElementById("parkings").innerHTML);
+        console.log(parkingpots);
+
+        var map = L.map('map').setView([42.006510, 21.421958], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        for(var i=0;i<parkingpots.length;i++)
+        {
+            console.log(parkingpots[i].name);
+            var name=parkingpots[i].name;
+            var capacity=parkingpots[i].capacity;
+            var access=parkingpots[i].access;
+            var lat = parkingpots[i].lat;
+            var lng = parkingpots[i].lng;
+            L.marker([parkingpots[i].lat, parkingpots[i].lng]).addTo(map)
+                .bindPopup("<p>" + "Име: " + name + "<br>" + "Капацитет: " + capacity + "<br>" + "Пристап: " + access +
+                    "<br>" + "<a href='/parking?id=" + parkingpots[i].id + "'>Детали</a><br>"
+                    +"<button data-lat='" + lat + "' data-lng='" + lng + "' name='" + name
+                    + "' class='registerbtn' type='button' >Избери</button></p>")
+                .openPopup();
+        }
+        $(document).on('click', '.registerbtn', function () {
+            var btn = $(this);
+            parking_lat=btn.attr("data-lat");
+            console.log(parking_lat);
+            parking_lng=btn.attr("data-lng");
+            $('#paddress').val(btn.attr("name"));
+        });
+
+        $('#coordinates').click(function(){
+            var address = $("#address").val();
+            $.ajax({
+                method: "GET",
+                url: "http://localhost:8080/api/name?q=" + address + "",
+                headers: {
+                    "Content-type" : "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods":"GET",
+                    "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
+                },
+                success: function(data){
+
+                    if (data !== undefined){
+                        for (var marker in user_markers){
+                            user_markers[marker].remove();
+                        }
+                        user_lat = data.lat;
+                        user_lng=data.lng;
+                        var marker = L.marker([data.lat, data.lng], {
+                            icon: redIcon
+                        }).addTo(map);
+                        var latLngs = [ marker.getLatLng() ];
+                        var markerBounds = L.latLngBounds(latLngs);
+                        map.fitBounds(markerBounds);
+                        map.setZoom(13);
+                        user_markers.push(marker);
+                    }
+                }
+            });
+        });
+        $('#route').click(function(){
+
+            if(parking_lat!==undefined && parking_lng!==undefined && user_lat!=undefined && user_lng!=undefined){
+                console.log("tuka");
+                $.ajax({
+                    method: "GET",
+                    url: "http://localhost:8080/api/route?lng1=" + parking_lat + "&lan1=" + parking_lng + "&lng2=" + user_lat + "&lan2=" + user_lng + "",
+                    headers: {
+                        "Content-type" : "application/json",
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods":"GET",
+                        "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
+                    },
+                    success: function(data){
+                        for (var route in routes){
+                            routes[route].remove();
+                        }
+                        if (data !== undefined){
+                            var latlng = []
+                            var streets = ""
+                            for (ind in data.points){
+                                latlng.push([
+                                    data.points[ind].lat,
+                                    data.points[ind].lng
+                                ]);
+                                for (st in data.streetNames){
+                                    streets += data.streetNames[st].streetName + "<br>";
+                                }
+
+                            }
+                            console.log(latlng);
+                            console.log(parking_lat);
+                            console.log(parking_lng);
+                            var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
+                            map.fitBounds(polyline.getBounds());
+                            console.log(streets);
+                            routes.push(polyline);
+                            $('#input-address').text(streets);
+                        }}
+                });
+            }else{
+                error.show();
+            }
+        });
+    });
+
+</script>
+</html>
