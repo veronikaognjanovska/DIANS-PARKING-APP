@@ -19,8 +19,8 @@ public class Route{
     private Integer ID;
 
     // USER ???? BRANCH MERGE FIRST
-    // @ManyToOne
-    // private User userId;
+     @ManyToOne
+     private User userId;
 
     @ManyToMany
     private List<Point> points;

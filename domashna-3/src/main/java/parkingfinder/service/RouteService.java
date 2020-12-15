@@ -1,30 +1,51 @@
 package parkingfinder.service;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
+import org.omg.CORBA.DynAnyPackage.Invalid;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import parkingfinder.model.Point;
 import parkingfinder.model.Route;
 import parkingfinder.model.StreetName;
+import parkingfinder.model.User;
+import parkingfinder.model.exception.UserNotFoundException;
 import parkingfinder.repository.RouteRepository;
+import parkingfinder.repository.UserRepository;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RouteService {
 
-    private final RouteRepository repository;
+    private final RouteRepository routeRepository;
+    private final UserRepository userRepository;
 
-    public RouteService(RouteRepository repository) {
-        this.repository = repository;
+    public RouteService(RouteRepository routeRepository, UserRepository userRepository) {
+        this.routeRepository = routeRepository;
+        this.userRepository = userRepository;
     }
 
-//    public List<Route> findHistoryRoutes(User user){
-//        
-//    }
+    public List<Route> findHistoryRoutes(String userString){
+
+        // userString SHOULD BE THE EMAIL CAUSE WE DO NOT HAVE A USERNAME AS A USERNAME
+
+        Optional<User> userOpt = userRepository.findByEmail(userString);
+        if(!userOpt.isPresent()){
+            throw new UserNotFoundException(userString);
+        }
+        List<Route> routeList = routeRepository.findAllByUserId(userOpt.get());
+        if(routeList==null){
+            routeList=new LinkedList<>();
+        }
+        return routeList;
+    }
 
 
     public Route findRoute (String type, Double lng1, Double lan1, Double lng2, Double lan2){

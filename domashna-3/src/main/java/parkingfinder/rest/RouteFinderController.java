@@ -12,6 +12,9 @@ import parkingfinder.model.Route;
 import parkingfinder.model.StreetName;
 import parkingfinder.service.RouteService;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/route")
@@ -40,6 +43,10 @@ public class RouteFinderController {
         return this.routeService.findRoute("walking",lng1, lan1, lng2, lan2);
     }
 
+    @GetMapping("/history")
+    public List<Route> getRouteHistory(HttpServletRequest req) {
+        return this.routeService.findHistoryRoutes(req.getRemoteUser());
+    }
 
 
 
