@@ -6,8 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -26,10 +28,10 @@ public class Route{
     private List<Point> points;
 
     @ManyToMany
-    private List<StreetName> streetNames;
+    private Set<StreetName> streetNames;
 
     public Route() {
         this.points=new LinkedList<>();
-        this.streetNames=new LinkedList<>();
+        this.streetNames=new LinkedHashSet<>();
     }
 }
