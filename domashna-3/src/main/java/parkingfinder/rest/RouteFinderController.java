@@ -10,9 +10,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import parkingfinder.model.Point;
 import parkingfinder.model.Route;
 import parkingfinder.model.StreetName;
+import parkingfinder.model.exception.UserNotFoundException;
 import parkingfinder.service.RouteService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -45,7 +47,12 @@ public class RouteFinderController {
 
     @GetMapping("/history")
     public List<Route> getRouteHistory(HttpServletRequest req) {
-        return this.routeService.findHistoryRoutes(req.getRemoteUser());
+        try {
+            return this.routeService.findHistoryRoutes(req.getRemoteUser());
+        }catch (UserNotFoundException ex){
+            return new LinkedList<>();
+        }
+
     }
 
 
