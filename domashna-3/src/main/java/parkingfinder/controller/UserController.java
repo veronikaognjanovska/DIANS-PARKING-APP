@@ -31,11 +31,14 @@ public class UserController {
     }
 
     @GetMapping("/user-details")
-    String details() {
+    String details(Model model) {
 
-        User principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //User principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        User user = (User) userService.loadUserByUsername(principal.getEmail());
+        //User user = (User) userService.loadUserByUsername(principal.getEmail());
+
+        //model.addAttribute("user",user);
+
         return "user-page";
     }
 
