@@ -1,12 +1,16 @@
 package parkingfinder.config;
 
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -34,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/sign-in").permitAll()
+                .loginPage("/sign-in").permitAll().loginProcessingUrl("/sign-in-post")
                 .failureUrl("/sign-in?error=BadCredentials")
                 .defaultSuccessUrl("/", true)
                 .and()
@@ -64,4 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .authorities("ADMIN");
         auth.authenticationProvider(customUsernamePasswordAuthenticationProvider);
     }
+
+
+
 }

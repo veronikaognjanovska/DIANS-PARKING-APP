@@ -44,17 +44,13 @@ public class UserService implements UserDetailsService {
 //        final String encryptedPassword = bCryptPasswordEncoder.encode(user.getPassword());
 //        user.setPassword(encryptedPassword);
 //        final User createdUser = userRepository.save(user);
-        if (user.getUsername()==null || user.getUsername().isEmpty()  ||
-                user.getPassword()==null || user.getPassword().isEmpty() ||
-                user.getEmail()==null || user.getEmail().isEmpty()) {
-            throw new InvalidArgumentsException();
-        }
+
         if(this.userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new InvalidArgumentsException();
         }
-        User user1 = new User(user.getUsername(),user.getEmail(),
-                passwordEncoder.encode(user.getPassword()),UserRole.USER);
-        userRepository.save(user1);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setUserRole(UserRole.USER);
+        userRepository.save(user);
 
     }
 

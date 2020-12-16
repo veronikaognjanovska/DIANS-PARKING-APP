@@ -22,21 +22,21 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
 
-    private String userName;
+    private String name;
     private String password;
     private String email;
 
     private Boolean enabled = true;
 
     //    @Builder.Default
-    @Enumerated(value=EnumType.STRING)
+    @Enumerated()
     private UserRole userRole = UserRole.USER;
 
     //@OneToMany
     //private List<RouteMatcher.Route> lastFiveLocations;
     public User() {}
     public User(String name,String email,String password,UserRole role) {
-        this.userName=name;
+        this.name=name;
         this.email=email;
         this.password=password;
         this.userRole=role;
@@ -50,11 +50,11 @@ public class User implements UserDetails {
         return Collections.singletonList(userRole);
     }
 
-
     @Override
     public String getUsername() {
-        return email; // toa e unique
+        return email;
     }
+
 
     private boolean isAccountNonExpired=true;
     private boolean isAccountNonLocked=true;
