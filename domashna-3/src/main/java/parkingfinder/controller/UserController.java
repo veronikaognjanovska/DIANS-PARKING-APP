@@ -27,7 +27,7 @@ public class UserController {
 
 
 
-    @GetMapping("/sign-in")
+    @GetMapping("/sign-in")// optional error neds to e implemented
     String signIn() {
 
         return "sign-in";
@@ -48,28 +48,21 @@ public class UserController {
         return "register";
     }
 
-//    @PostMapping("/register")
-//    String signUp(User user) {
-//
-//        userService.signUpUser(user);
-//
-//        return "redirect:/sign-in";
-//    }
-
     @PostMapping("/register")
-    String signUp(@RequestParam String name,
-                  @RequestParam String surname,
-                  @RequestParam String email,
-                  @RequestParam String password
-    ) {
+    String signUp(User user) {
+
         try{
-            userService.signUpUser(name,surname,email,password);
+            userService.signUpUser(user);
             return "redirect:/sign-in";
         } catch (InvalidArgumentsException exception) {
             return "redirect:/register?error=" + exception.getMessage();
         }
 
     }
+
+
+
+
 
 
 

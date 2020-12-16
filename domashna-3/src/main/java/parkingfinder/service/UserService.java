@@ -39,28 +39,25 @@ public class UserService implements UserDetailsService {
 
     }
 
-//    public void signUpUser(User user, UserRole role) {
-//
-//        final String encryptedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-//
-//        user.setPassword(encryptedPassword);
-//
-//        final User createdUser = userRepository.save(user);
-//
-//    }
-    public void signUpUser(String name,String surname,String email,String password) throws InvalidArgumentsException{
+    public void signUpUser(User user) throws InvalidArgumentsException{
 
-        if (name==null || name.isEmpty()  || surname==null || surname.isEmpty()  ||
-                password==null || password.isEmpty() || email==null || email.isEmpty()) {
+//        final String encryptedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+//        user.setPassword(encryptedPassword);
+//        final User createdUser = userRepository.save(user);
+        if (user.getUsername()==null || user.getUsername().isEmpty()  ||
+                user.getPassword()==null || user.getPassword().isEmpty() ||
+                user.getEmail()==null || user.getEmail().isEmpty()) {
             throw new InvalidArgumentsException();
         }
-        if(this.userRepository.findByEmail(email).isPresent()) {
+        if(this.userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new InvalidArgumentsException();
         }
-        User user = new User(String.format("%s %s",name,surname),email,
-                passwordEncoder.encode(password),UserRole.USER);
-        userRepository.save(user);
+        User user1 = new User(user.getUsername(),user.getEmail(),
+                passwordEncoder.encode(user.getPassword()),UserRole.USER);
+        userRepository.save(user1);
+
     }
+
 
 
 }
