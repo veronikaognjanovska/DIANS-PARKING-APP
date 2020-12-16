@@ -15,12 +15,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final CustomUsernamePasswordAuthenticationProvider authenticationProvider;
+    private final CustomUsernamePasswordAuthenticationProvider customUsernamePasswordAuthenticationProvider;
 
     public WebSecurityConfig(PasswordEncoder passwordEncoder,
                              CustomUsernamePasswordAuthenticationProvider authenticationProvider) {
         this.passwordEncoder = passwordEncoder;
-        this.authenticationProvider = authenticationProvider;
+        this.customUsernamePasswordAuthenticationProvider = authenticationProvider;
     }
 
     @Override
@@ -34,8 +34,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
-                .failureUrl("/login?error=BadCredentials")
+                .loginPage("/sign-in").permitAll()
+                .failureUrl("/sign-in?error=BadCredentials")
                 .defaultSuccessUrl("/", true)
                 .and()
                 .logout()
@@ -43,9 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/login")
-                .and()
-                .exceptionHandling().accessDeniedPage("/access_denied");
+                .logoutSuccessUrl("/sign-in");
+//                .and()
+//                .exceptionHandling().accessDeniedPage("/access_denied");
         // koi starani ke se dostapni na neatentikuvan koristnik
         // kako greshkata ke se prikaze
         // kade ke go redirektira posle najava
@@ -54,14 +54,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password(passwordEncoder.encode("1234"))
-                .authorities("USER")
-                .and()
-                .withUser("admin")
-                .password(passwordEncoder.encode("1234"))
-                .authorities("ADMIN");
-        auth.authenticationProvider(authenticationProvider);
+//        auth.inMemoryAuthentication()
+//                .withUser("user")
+//                .password(passwordEncoder.encode("1234"))
+//                .authorities("USER")
+//                .and()
+//                .withUser("admin")
+//                .password(passwordEncoder.encode("1234"))
+//                .authorities("ADMIN");
+        auth.authenticationProvider(customUsernamePasswordAuthenticationProvider);
     }
 }
