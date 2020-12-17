@@ -6,8 +6,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="icon" th:href="@{/images/transparent-logo.png}">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="icon" href="images/transparent-logo.png">-->
+    <!--<link rel="stylesheet" type="text/css"  href="bootstrap.min.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
     <meta charset="UTF-8" />
     <meta content="application/xhtml+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,15 +36,20 @@
 <div id="map"></div>
 <div class="input_line">
     <input id="paddress" class="one-input" type="text" name="fname" style="color:black" placeholder="Паркинг адреса" value="" disabled>
-    <input id="address" class="two-input" type="text" name="fname" placeholder="Моментална локација" value=""><
+    <input id="address" class="two-input" type="text" name="fname" placeholder="Моментална локација" value="">
+    <input id="coordinates" class="buttton-2" type="button" value="Коoрдинати">
+    <input id="route" class="buttton" type="button" value="Рута"><br/>
+    <!--<input id="kola" class="buttton-3" type="button" value="Автомобил">-->
+    <!--<input id="covek" class="buttton-4" type="button" value="Пеш">-->
+    <span class="span-1">Тип на транспорт:</span>
+    <button class="outline-none buttton-person"  >
+        <i class="fa fa-user outline-none" aria-hidden="true" ></i>
+    </button>
+    <button class="outline-none buttton-car"  >
+        <i class="fa fa-car outline-none" aria-hidden="true" ></i>
+    </button>
 
-    <input id="coordinates" class="buttton-2" type="button" value="Коoрдинати"><br/>
-    <br>
-    &nbsp;<span style="color:white">Тип на транспорт:</span>
-    <input id="kola" class="buttton-3" type="button" value="Автомобил">
-    <input id="covek" class="buttton-4" type="button" value="Пеш"> &nbsp;&nbsp;&nbsp;&nbsp;
-    <input id="route" class="buttton" type="button" value="Рута"><br>
-    &nbsp;<span style="color:white">Филтрирај паркинг според:</span>
+    <span class="span-2">Филтрирај паркинг според:</span>
     <select  class="select-1" id="tip" name="tip">
         <option value="tip">Пристап</option>
         <option value="private">private</option>
