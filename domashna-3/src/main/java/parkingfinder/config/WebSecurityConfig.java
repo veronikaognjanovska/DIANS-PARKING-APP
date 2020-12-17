@@ -3,14 +3,11 @@ package parkingfinder.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -19,13 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final PasswordEncoder passwordEncoder;
     private final CustomUsernamePasswordAuthenticationProvider customUsernamePasswordAuthenticationProvider;
-
-    public WebSecurityConfig(PasswordEncoder passwordEncoder,
-                             CustomUsernamePasswordAuthenticationProvider authenticationProvider) {
-        this.passwordEncoder = passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+    public WebSecurityConfig(CustomUsernamePasswordAuthenticationProvider authenticationProvider, PasswordEncoder passwordEncoder) {
         this.customUsernamePasswordAuthenticationProvider = authenticationProvider;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -70,10 +65,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(customUsernamePasswordAuthenticationProvider);
     }
 
-
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
-    }
 
 }

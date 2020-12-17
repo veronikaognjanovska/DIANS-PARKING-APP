@@ -3,6 +3,7 @@
 package parkingfinder.model;
 
 
+import com.sun.istack.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import parkingfinder.enumeration.UserRole;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -23,11 +25,16 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ID;
 
+    @NotNull
     private String name;
+
+    @NotNull
     private String password;
+
+    @Email(message = "Невалидна email адреса")
     private String email;
 
-    private Boolean enabled = true;
+    private boolean enabled = true;
 
     //    @Builder.Default
     @Enumerated()

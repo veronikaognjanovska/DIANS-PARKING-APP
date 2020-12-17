@@ -24,10 +24,10 @@ public class CustomUsernamePasswordAuthenticationProvider implements Authenticat
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String email = authentication.getName();// treba da e email-ot
+        String email = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        if ("".equals(email) || "".equals(password)) {
+        if (email.isEmpty() || password.isEmpty()) {
             throw new BadCredentialsException("Invalid Credentials");
         }
 
