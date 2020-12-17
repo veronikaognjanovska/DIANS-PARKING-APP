@@ -1,6 +1,7 @@
 package parkingfinder.config;
 
 
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -8,8 +9,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.context.request.WebRequest;
 
 @Configuration
 @EnableWebSecurity
@@ -28,13 +29,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/assets/**", "/register").permitAll()
+                .antMatchers("/", "/assets/**", "/css/**", "/images/**", "/register").permitAll()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/sign-in").permitAll().loginProcessingUrl("/sign-in-post")
+                .loginPage("/sign-in").permitAll()
+                .loginProcessingUrl("/sign-in-post")
                 .failureUrl("/sign-in?error=BadCredentials")
                 .defaultSuccessUrl("/", true)
                 .and()
@@ -44,8 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/sign-in");
-//                .and()
-//                .exceptionHandling().accessDeniedPage("/access_denied");
+                //.and()
+                //.exceptionHandling().accessDeniedPage("/error");
         // koi starani ke se dostapni na neatentikuvan koristnik
         // kako greshkata ke se prikaze
         // kade ke go redirektira posle najava
@@ -65,5 +67,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(customUsernamePasswordAuthenticationProvider);
     }
 
+    @Bean
+    public ErrorAttributes errorAttributes() {
+        return new ErrorAttributes() {
+            @Override
+            public Throwable getError(WebRequest webRequest) {
+                return null;
+            }
+        };
+    }
 
 }
