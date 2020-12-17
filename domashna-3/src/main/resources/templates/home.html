@@ -31,20 +31,23 @@
 
 <div id="map"></div>
 <div class="input_line">
-    <input id="paddress" class="one-input" type="text" name="fname" style="color:white" placeholder="Паркинг адреса" value="" disabled>
-    <input id="address" class="two-input" type="text" name="fname" placeholder="Моментална локација" value=""><br/>
+    <input id="paddress" class="one-input" type="text" name="fname" style="color:black" placeholder="Паркинг адреса" value="" disabled>
+    <input id="address" class="two-input" type="text" name="fname" placeholder="Моментална локација" value=""><
 
-    <input id="coordinates" class="buttton-2" type="button" value="Коoрдинати">
-    <input id="route" class="buttton" type="button" value="Рута">
-    <input id="kola" class="buttton-3" type="button" value="Кола">
-    <input id="covek" class="buttton-4" type="button" value="Човек">
+    <input id="coordinates" class="buttton-2" type="button" value="Коoрдинати"><br/>
+    <br>
+    &nbsp;<span style="color:white">Тип на транспорт:</span>
+    <input id="kola" class="buttton-3" type="button" value="Автомобил">
+    <input id="covek" class="buttton-4" type="button" value="Пеш"> &nbsp;&nbsp;&nbsp;&nbsp;
+    <input id="route" class="buttton" type="button" value="Рута"><br>
+    &nbsp;<span style="color:white">Филтрирај паркинг според:</span>
     <select  class="select-1" id="tip" name="tip">
-        <option value="tip">Тип</option>
+        <option value="tip">Пристап</option>
         <option value="private">private</option>
         <option value="public">public</option>
     </select>
     <select class="select-2" id="fukcija" name="fukcija">
-        <option value="surface">Функција</option>
+        <option value="surface">Тип</option>
         <option value="surface">surface</option>
         <option value="mutli-storey">mutli-storey</option>
         <option value="underground">underground</option>
@@ -106,10 +109,10 @@
                 .bindPopup("<p>" + "Име: " + name + "<br>" + "Капацитет: " + capacity + "<br>" + "Пристап: " + access +
                     "<br>" + "<a href='/parking?id=" + parkingpots[i].id + "'>Детали</a><br>"
                     +"<button data-lat='" + lat + "' data-lng='" + lng + "' name='" + name
-                    + "' class='registerbtn' type='button' ><span>Избери</span></button></p>")
+                    + "' class='choose' type='button' ><span>Избери</span></button></p>")
                 .openPopup();
         }
-        $(document).on('click', '.registerbtn', function () {
+        $(document).on('click', '.choose', function () {
             var btn = $(this);
             parking_lat=btn.attr("data-lat");
             console.log(parking_lat);

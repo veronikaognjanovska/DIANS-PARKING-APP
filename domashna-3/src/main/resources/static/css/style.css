@@ -20,10 +20,10 @@ main {
 .input_line{
   position: absolute;
   color: black;
-  bottom: 130px;
+  bottom: 50px;
   width: 900px;
   position: fixed;
-  height: 100px;
+  height: 200px;
   background-color: #272727;
   z-index:600;
   border-radius: 25px;

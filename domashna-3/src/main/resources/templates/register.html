@@ -2,15 +2,15 @@
 <html  xmlns:th="http://www.thymeleaf.org" lang="mk">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" th:href="@{'/static/images/transparent-logo.png'}">
-    <link rel="stylesheet" th:href="@{'/static/css/bootstrap.min.css'}">
-    <link rel="stylesheet" th:href="@{'/static/css/style.css'}">
+    <link rel="icon" th:href="@{'/images/transparent-logo.png'}">
+    <link rel="stylesheet" th:href="@{'/css/bootstrap.min.css'}">
+    <link rel="stylesheet" th:href="@{'/css/style.css'}">
 </head>
 <body style="background-color: #272727">
 
 <form role="form" th:action="@{/register}" th:method="post" th:object="${user}" class="pole">
     <div class="imgcontainer">
-        <img src="/static/images/carpin-white.png" alt="Avatar" style="max-width:200px">
+        <img src="images/carpin-white.png" alt="Avatar" style="max-width:200px">
     </div>
     <h2 class="najava">Регистрирација</h2>
     <div class="container">
