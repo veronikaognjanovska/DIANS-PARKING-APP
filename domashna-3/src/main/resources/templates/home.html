@@ -4,50 +4,66 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" th:href="@{'/static/css/bootstrap.min.css'}">
+    <link rel="stylesheet" th:href="@{'/static/css/style.css'}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="icon" href="images/transparent-logo.png">
+    <link rel="icon" th:href="@{'/static/images/transparent-logo.png'}">
     <meta charset="UTF-8" />
     <meta content="application/xhtml+xml">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <header>
     <nav class="navbar navbar-inverse" style="background-color: #272727; height: 85px;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <img class="carpin-black" src="images/carpin-black.png">
+                <img class="carpin-black" src="/static/images/carpin-black.png">
                 <!--<a class="navbar-brand">Balloon Shop App</a>-->
             </div>
-            <div class="navbar-header navbar-right">
-                <a  class="p-2" th:href="@{/register}" style="color: white;">Регистрирај се!</a>
-                <a th:href="@{/sign-in}" style="color: white;">Најава</a>&nbsp;
-                <a th:href="@{/user-details}" style="color: white;">Профил</a>
+            <div class="navbar-header navbar-right meni">
+                <a  class="p-2" th:href="@{/register}" style="color: white;font-weight: bold;">Регистрирај се!</a>
+                <a th:href="@{/sign-in}" style="color: white;font-weight: bold;">Најава</a>&nbsp;
+                <a th:href="@{/user-details}" style="color: white;font-weight: bold;">Профил</a>
             </div>
         </div>
     </nav>
 </header>
 
 <div id="map"></div>
-<div class="input-line">
-    <input id="paddress" class="one-input" type="text" name="fname" style="color:white" value="Паркинг адреса" disabled>
-    <input id="address" class="two-input" type="text" name="fname" value="Skopje">
-    <input id="coordinates" class="buttton-2" type="button" value="коoрдинати">
-    <input id="route" class="buttton" type="button" value="рута">
+<div class="input_line">
+    <input id="paddress" class="one-input" type="text" name="fname" style="color:white" placeholder="Паркинг адреса" value="" disabled>
+    <input id="address" class="two-input" type="text" name="fname" placeholder="Моментална локација" value=""><br/>
+
+    <input id="coordinates" class="buttton-2" type="button" value="Коoрдинати">
+    <input id="route" class="buttton" type="button" value="Рута">
+    <input id="kola" class="buttton-3" type="button" value="Кола">
+    <input id="covek" class="buttton-4" type="button" value="Човек">
+    <select  class="select-1" id="tip" name="tip">
+        <option value="tip">Тип</option>
+        <option value="private">private</option>
+        <option value="public">public</option>
+    </select>
+    <select class="select-2" id="fukcija" name="fukcija">
+        <option value="surface">Функција</option>
+        <option value="surface">surface</option>
+        <option value="mutli-storey">mutli-storey</option>
+        <option value="underground">underground</option>
+    </select>
 </div>
 <div class="street">
-    <h2 style="text-align: center;padding-left: 10px;padding-right: 10px; padding-top: 10px;padding-bottom: 10px;">Рута:</h2>
+    <h3 class="p-ruta">Рута:</h3>
     <br>
     <p class="input-address" style="padding-left: 5px; padding-right: 5px;padding-top: 10px;padding-bottom: 10px;"></p>
 </div>
 <span id="error" style="color:red">Ве молиме изберете паркинг место и ваша локација!</span>
 <footer>
+    <p class="footer-style">За повеќе детали за паркингот:  <button class="detali-home"><span>Повеќе детали</span></button></p>
     <div class="footer-copyright text-center py-3">
         <h1></h1>
         <p class="info-la" id="info"></p>
     </div>
 </footer>
+
 <span id="parkings" style="display: none;" th:text="${allParkings}"></span>
 </body>
 <script>
@@ -59,7 +75,7 @@
     var user_markers=[];
     var routes = [];
     var redIcon = L.icon({
-        iconUrl: 'images/marker-icon-red.png',
+        iconUrl: '/static/images/marker-icon-red.png',
         iconSize:     [25, 41], // size of the icon
         iconAnchor:   [12, 41], // point of the icon which will correspond to marker's location
         popupAnchor:  [1, -34] // point from which the popup should open relative to the iconAnchor
@@ -89,7 +105,7 @@
                 .bindPopup("<p>" + "Име: " + name + "<br>" + "Капацитет: " + capacity + "<br>" + "Пристап: " + access +
                     "<br>" + "<a href='/parking?id=" + parkingpots[i].id + "'>Детали</a><br>"
                     +"<button data-lat='" + lat + "' data-lng='" + lng + "' name='" + name
-                    + "' class='registerbtn' type='button' >Избери</button></p>")
+                    + "' class='registerbtn' type='button' ><span>Избери</span></button></p>")
                 .openPopup();
         }
         $(document).on('click', '.registerbtn', function () {
