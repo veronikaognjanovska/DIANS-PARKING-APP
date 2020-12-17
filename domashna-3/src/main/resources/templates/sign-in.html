@@ -20,7 +20,7 @@
         <input class="input_korisnichko_ime" type="text" placeholder="Корисничко име" id="username" name="username" required><br/>
         <lable><b>Лозинка:</b></lable><br/>
         <input class="input_password" type="password" id="password" name="password" required>
-        <span th:if="${loginError}">Погрешно корисничко име или лозинка</span>
+        <span th:if="${loginError}" style="color:red">Погрешно корисничко име или лозинка</span>
         <br/>
 
         <input class="input_submit" type="submit" value="Најави се!"><br/>

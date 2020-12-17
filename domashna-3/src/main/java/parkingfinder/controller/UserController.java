@@ -12,9 +12,11 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import parkingfinder.config.CustomUsernamePasswordAuthenticationProvider;
 import parkingfinder.model.User;
@@ -23,6 +25,7 @@ import parkingfinder.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
@@ -80,21 +83,18 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    String signUp(User user) {
+    String signUp(@ModelAttribute @Valid User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
         try{
             userService.signUpUser(user);
             return "redirect:/sign-in";
         } catch (InvalidArgumentsException exception) {
-            return "redirect:/register?error=" + exception.getMessage();
+            model.addAttribute("emailExists", true);
+            return "register";
         }
-
     }
-
-
-
-
-
-
 
 }
 
