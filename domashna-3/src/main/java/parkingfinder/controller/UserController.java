@@ -13,7 +13,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import parkingfinder.config.CustomUsernamePasswordAuthenticationProvider;
 import parkingfinder.model.User;
 import parkingfinder.model.exception.InvalidArgumentsException;
@@ -40,8 +42,13 @@ public class UserController {
 
 
     @GetMapping("/sign-in")// optional error neds to e implemented
-    String signIn() {
+    String signIn(HttpServletRequest request, Model model) {
+        return "sign-in";
+    }
 
+    @GetMapping("/sign-in-error")// optional error neds to e implemented
+    String signInError(Model model) {
+        model.addAttribute("loginError", true);
         return "sign-in";
     }
 

@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/sign-in").permitAll()
                 .loginProcessingUrl("/sign-in-post")
-                .failureUrl("/sign-in?error=BadCredentials")
+                .failureUrl("/sign-in-error")
                 .defaultSuccessUrl("/", true)
                 .and()
                 .logout()
