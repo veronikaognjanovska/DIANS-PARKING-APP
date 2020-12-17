@@ -5,6 +5,7 @@
   left:0;
   right: 0;
 }
+
 main {
   width: 800px;
   margin: auto !important;
@@ -20,10 +21,10 @@ main {
 .input_line{
   position: absolute;
   color: black;
-  bottom: 50px;
+  bottom: 130px;
   width: 900px;
   position: fixed;
-  height: 200px;
+  height: 100px;
   background-color: #272727;
   z-index:600;
   border-radius: 25px;
@@ -31,8 +32,8 @@ main {
 }
 .one-input{
   position: relative;
-  top: 5px;
-  left: 75px;
+  top: 2px;
+  left: 45px;
   border-radius: 10px;
   padding-top: 6px;
   padding-bottom: 6px;
@@ -44,14 +45,20 @@ main {
 }
 .two-input{
   position: relative;
-  top: 5px;
-  left: 250px;
+  top: 2px;
+  left: 50px;
   border-radius: 10px;
   padding-top: 6px;
   padding-bottom: 6px;
   padding-left: 30px;
   padding-right: 30px;
   font-weight: bold;
+}
+.span-1{
+  color:white; padding-left: 50px;
+}
+.span-2{
+  color:white; padding-left: 70px;
 }
 
 .buttton {
@@ -60,12 +67,14 @@ main {
   cursor: pointer;
   outline: none;
   color: black;
-  margin-left: 55px;
-  margin-top: 10px;
+  margin-left: 5px;
+  margin-top: 2px;
+  top: 10px;
   background-color: #FFD15B;
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
   font-weight: bold;
+  width: 110px;
 }
 
 .buttton:hover {background-color: #EBC74A}
@@ -83,13 +92,13 @@ main {
   outline: none;
   color: black;
   margin-left: 75px;
-  margin-top: 20px;
-  top: 107px;
+  margin-top: 5px;
+  top: 10px;
   background-color: #FFD15B;
   border: none;
-  border-radius: 15px;
-  /*box-shadow: 0 9px #999;*/
+  border-radius: 10px;
   font-weight: bold;
+  width: 110px;
 }
 
 .buttton-2:hover {background-color: #EBC74A}
@@ -100,31 +109,9 @@ main {
   transform: translateY(4px);
 }
 
-.buttton-3 {
-  padding: 5px 5px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: black;
-  margin-left: 75px;
-  margin-top: 20px;
-  top: 107px;
-  background-color: #FFD15B;
-  border: none;
-  border-radius: 15px;
-  /*box-shadow: 0 7px #999;*/
-  font-weight: bold;
-}
-
-.buttton-3:hover {background-color: #EBC74A}
-
-.buttton-3:active {
-  background-color: #008b8b;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-.buttton-4 {
-  padding: 5px 5px;
+.buttton-person {
+  width: 30px;
+  height: 30px;
   text-align: center;
   cursor: pointer;
   outline: none;
@@ -134,14 +121,37 @@ main {
   top: 107px;
   background-color: #FFD15B;
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.buttton-person:hover {background-color: #EBC74A}
+
+.buttton-person:active {
+  background-color: #008b8b;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.buttton-car {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  margin-left: 5px;
+  margin-top: 20px;
+  top: 107px;
+  background-color: #FFD15B;
+  border: none;
+  border-radius: 10px;
   /*box-shadow: 0 9px #999;*/
   font-weight: bold;
 }
 
-.buttton-4:hover {background-color: #EBC74A}
+.buttton-car:hover {background-color: #EBC74A}
 
-.buttton-4:active {
+.buttton-car:active {
   background-color: #008b8b;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
@@ -153,13 +163,14 @@ main {
   cursor: pointer;
   outline: none;
   color: black;
-  margin-left: 45px;
+  margin-left: 90px;
   margin-top: 20px;
   top: 107px;
   background-color: #FFD15B;
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
   font-weight: bold;
+  width: 110px;
 }
 .select-2{
   padding: 5px 5px;
@@ -167,13 +178,14 @@ main {
   cursor: pointer;
   outline: none;
   color: black;
-  margin-left: 55px;
+  margin-left: 10px;
   margin-top: 20px;
   top: 107px;
   background-color: #FFD15B;
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
   font-weight: bold;
+  width: 110px;
 }
 footer{
   position: absolute;
@@ -674,7 +686,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     font-size: 15px;
     bottom: 10px;
   }
-  .buttton-3 {
+  .buttton-person {
     padding: 3px 3px;
     text-align: center;
     cursor: pointer;
@@ -689,7 +701,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     font-weight: bold;
     font-size: 15px;
   }
-  .buttton-4 {
+  .buttton-car {
     padding: 3px 3px;
     text-align: center;
     cursor: pointer;
@@ -944,7 +956,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     font-size: 8px;
     bottom: 8px;
   }
-  .buttton-3 {
+  .buttton-person {
     padding: 3px 3px;
     text-align: center;
     cursor: pointer;
@@ -959,7 +971,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     font-weight: bold;
     font-size: 8px;
   }
-  .buttton-4 {
+  .buttton-car {
     padding: 3px 3px;
     text-align: center;
     cursor: pointer;
@@ -1204,9 +1216,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
     position: absolute;
     color: black;
     bottom: 110px;
-    width: 320px;
+    width: 330px;
     position: fixed;
-    height: 80px;
+    height: 70px;
     background-color: #272727;
     z-index:600;
     border-radius: 15px;
@@ -1216,27 +1228,31 @@ body {font-family: Arial, Helvetica, sans-serif;}
     position: relative;
     top: 2px;
     left: 5px;
-    border-radius: 10px;
+    border-radius: 5px;
+    text-align: center;
     padding-top:2px;
     padding-bottom: 2px;
-    padding-left: 15px;
+    padding-left: 0px;
     padding-right: 0px;
     background-color: white;
     z-index:600;
+    width: 100px;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 8px;
   }
   .two-input{
     position: relative;
     top: 2px;
     left: 5px;
-    border-radius: 10px;
+    border-radius: 5px;
+    text-align: center;
     padding-top: 2px;
+    width: 100px;
     padding-bottom: 2px;
-    padding-left: 15px;
+    padding-left: 0px;
     padding-right: 0px;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 8px;
   }
   .buttton-2 {
     padding: 3px 3px;
@@ -1244,10 +1260,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
     cursor: pointer;
     outline: none;
     color: black;
+    width: 55px;
     margin-left: 5px;
     background-color: #FFD15B;
     border: none;
-    border-radius: 15px;
+    border-radius: 5px;
     font-weight: bold;
     font-size: 8px;
   }
@@ -1257,18 +1274,26 @@ body {font-family: Arial, Helvetica, sans-serif;}
     cursor: pointer;
     outline: none;
     color: black;
-    margin-left: 2px;
-    margin-top: 20px;
+    width: 50px;
+    margin-left: 0px;
+    margin-top: 2px;
     top: 107px;
     background-color: #FFD15B;
     border: none;
-    border-radius: 15px;
+    border-radius: 5px;
     font-weight: bold;
     font-size: 8px;
     bottom: 10px;
   }
-  .buttton-3 {
-    padding: 3px 3px;
+  .span-1{
+    font-size: 8px;padding-left: 5px;
+  }
+  .span-2{
+    font-size: 8px;padding-left: 5px;
+  }
+  .buttton-person {
+    width: 20px;
+    height: 20px;
     text-align: center;
     cursor: pointer;
     outline: none;
@@ -1278,12 +1303,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
     top: 107px;
     background-color: #FFD15B;
     border: none;
-    border-radius: 15px;
+    border-radius: 5px;
     font-weight: bold;
     font-size: 8px;
   }
-  .buttton-4 {
-    padding: 3px 3px;
+  .buttton-car {
+    width: 20px;
+    height: 20px;
     text-align: center;
     cursor: pointer;
     outline: none;
@@ -1293,7 +1319,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     top: 107px;
     background-color: #FFD15B;
     border: none;
-    border-radius: 15px;
+    border-radius: 5px;
     font-weight: bold;
     font-size: 8px;
   }
@@ -1729,7 +1755,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     font-size: 8px;
     bottom: 10px;
   }
-  .buttton-3 {
+  .buttton-person {
     padding: 3px 3px;
     text-align: center;
     cursor: pointer;
@@ -1744,7 +1770,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     font-weight: bold;
     font-size: 8px;
   }
-  .buttton-4 {
+  .buttton-car {
     padding: 3px 3px;
     text-align: center;
     cursor: pointer;
