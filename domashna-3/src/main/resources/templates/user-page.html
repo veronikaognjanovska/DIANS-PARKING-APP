@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,9 +18,7 @@
                 <img class="carpin-black" src="images/carpin-black.png">
                 Мој профил
             </div>
-            <div>
-                <a th:href="@{/}">Почетна</a>
-            </div>
+
             <div class="navbar-header navbar-right">
                 <img class="carpin-black" src="https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8184.jpg?size=626&ext=jpg" style="border-radius: 50%">
                 <a href="javascript: document.logoutForm.submit()" role="menuitem" style="color:white"> Одјави се</a>
@@ -41,10 +39,21 @@
             <img src="https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8184.jpg?size=626&ext=jpg" style="width: 150px; border-radius: 50%; height: 150px">
         </div>
         <br>
-        <h3>Корисничко име</h3>
-        <h3>E-mail</h3>
-        <button class="promena"><span>Промени лозинка</span></button>
+        <h3>Корисничко име</h3> <h3 th:text="${user.getName()}"><b></b></h3>
+        <br>
+        <h3>E-mail</h3><h3 th:text="${user.getEmail()}"><b></b></h3>
+        <br>
+        <a class="promena" th:href="@{/user-update}"><span>Промени лозинка</span></a>
+        <br>
+
+        <div>
+            <br>
+            <a class="promena" th:href="@{/}">Почетна</a>
+        </div>
+
     </div>
+
+
 
     <div class="korisnik-2">
         <dl>
