@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="icon" th:href="@{'/static/images/transparent-logo.png'}">
+    <link rel="stylesheet" th:href="@{'/static/css/bootstrap.min.css'}">
+    <link rel="stylesheet" th:href="@{'/static/css/style.css'}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Мој профил</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-inverse" style="background-color: #272727; height: 85px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <img class="carpin-black" src="/static/images/carpin-black.png">
+                Мој профил
+            </div>
+            <div>
+                <a th:href="@{/}">Почетна</a>
+            </div>
+            <div class="navbar-header navbar-right">
+                <img class="carpin-black" src="https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8184.jpg?size=626&ext=jpg" style="border-radius: 50%">
+                <a href="javascript: document.logoutForm.submit()" role="menuitem" style="color:white"> Одјави се</a>
+
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Одјави се"/>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<div class="korisnik">
+
+    <div style="float: left">
+        <div style="padding-left: 15%">
+            <img src="https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8184.jpg?size=626&ext=jpg" style="width: 150px; border-radius: 50%; height: 150px">
+        </div>
+        <br>
+        <h3>Корисничко име</h3>
+        <h3>E-mail</h3>
+        <button class="promena"><span>Промени лозинка</span></button>
+    </div>
+
+    <div class="korisnik-2">
+        <dl>
+            <dt><h2>Историја на 5 <br>последни пребарувања</h2></dt>
+            <dd>Локација 1</dd>
+            <dd>Локација 2</dd>
+            <dd>Локација 3</dd>
+            <dd>Локација 4</dd>
+            <dd>Локација 5</dd>
+        </dl>
+    </div>
+</div>
+
+</body>
+</html>

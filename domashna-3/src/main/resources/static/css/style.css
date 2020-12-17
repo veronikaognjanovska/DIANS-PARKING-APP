@@ -1,0 +1,1791 @@
+#map {
+  position: absolute;
+  top:85px;
+  bottom: 120px;
+  left:0;
+  right: 0;
+}
+main {
+  width: 800px;
+  margin: auto !important;
+}
+.carpin-black{
+  width: 70px;
+  height: 70px;
+}
+.p-ruta{
+  text-align: center;padding-left: 10px;padding-right: 10px; padding-top: 10px;padding-bottom: 10px;
+}
+
+.input_line{
+  position: absolute;
+  color: black;
+  bottom: 130px;
+  width: 900px;
+  position: fixed;
+  height: 100px;
+  background-color: #272727;
+  z-index:600;
+  border-radius: 25px;
+  left: 20%;
+}
+.one-input{
+  position: relative;
+  top: 5px;
+  left: 75px;
+  border-radius: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: white;
+  z-index:600;
+  font-weight: bold;
+}
+.two-input{
+  position: relative;
+  top: 5px;
+  left: 250px;
+  border-radius: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-weight: bold;
+}
+
+.buttton {
+  padding: 5px 5px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  margin-left: 55px;
+  margin-top: 10px;
+  background-color: #FFD15B;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+.buttton:hover {background-color: #EBC74A}
+
+.buttton:active {
+  background-color: #008b8b;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.buttton-2 {
+  padding: 5px 5px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  margin-left: 75px;
+  margin-top: 20px;
+  top: 107px;
+  background-color: #FFD15B;
+  border: none;
+  border-radius: 15px;
+  /*box-shadow: 0 9px #999;*/
+  font-weight: bold;
+}
+
+.buttton-2:hover {background-color: #EBC74A}
+
+.buttton-2:active {
+  background-color: #008b8b;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.buttton-3 {
+  padding: 5px 5px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  margin-left: 75px;
+  margin-top: 20px;
+  top: 107px;
+  background-color: #FFD15B;
+  border: none;
+  border-radius: 15px;
+  /*box-shadow: 0 7px #999;*/
+  font-weight: bold;
+}
+
+.buttton-3:hover {background-color: #EBC74A}
+
+.buttton-3:active {
+  background-color: #008b8b;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.buttton-4 {
+  padding: 5px 5px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  margin-left: 5px;
+  margin-top: 20px;
+  top: 107px;
+  background-color: #FFD15B;
+  border: none;
+  border-radius: 15px;
+  /*box-shadow: 0 9px #999;*/
+  font-weight: bold;
+}
+
+.buttton-4:hover {background-color: #EBC74A}
+
+.buttton-4:active {
+  background-color: #008b8b;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.select-1{
+  padding: 5px 5px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  margin-left: 45px;
+  margin-top: 20px;
+  top: 107px;
+  background-color: #FFD15B;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+}
+.select-2{
+  padding: 5px 5px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  margin-left: 55px;
+  margin-top: 20px;
+  top: 107px;
+  background-color: #FFD15B;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+}
+footer{
+  position: absolute;
+  color: white;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  height: 120px;
+  background-color: #272727;
+}
+.footer-style{
+  padding-left: 10px; padding-top: 35px; font-size: 20px;
+}
+.info-la{
+  color: white;
+}
+.street{
+  position: absolute;
+  color: white;
+  background-color: #272727;
+  top: 200px;
+  width: auto;
+  position: fixed;
+  height: auto;
+  z-index:600;
+  border-radius: 25px;
+  left: 50px;
+}
+
+.registerbtn {
+  background-color: #008b8b;
+  color: white;
+  padding:16px 20px;
+  margin: 8px 0;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  border-radius: 10px;
+  border: 5px solid #272727;
+  font-weight: bold;
+  margin-left: 240px;
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.registerbtn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.registerbtn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.registerbtn:hover span {
+  padding-right: 25px;
+}
+
+.registerbtn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.input_korisnichko_ime, .input_password {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 5px solid #272727;
+}
+.input_ime{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 5px solid #272727;
+}
+.input_detali {
+  width: 200%;
+  padding: 7px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 5px solid #272727;
+}
+.table-detali{
+  margin-left: 100px;
+}
+.input_submit {
+  background-color: #008b8b;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+  border: 5px solid #272727;
+  font-weight: bold;
+}
+
+.input_submit:hover {
+  opacity: 0.8;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 0 0;
+  padding-top: 5px;
+}
+
+.container {
+  padding: 16px;
+  width: 500px;
+}
+.container-detali {
+  padding: 16px;
+  width: 700px;
+}
+.pole{
+  position: relative;
+  background-color: white;
+  height: 630px;
+  width: 600px;
+  margin: auto;
+  border-radius: 25px;
+}
+.pole-detali{
+  position: relative;
+  background-color: white;
+  height: 1000px;
+  width: 800px;
+  margin: auto;
+  border-radius: 25px;
+}
+.img-detali{
+  max-width:200px;
+}
+.najava{
+  text-align: center;
+  font-weight: bold;
+}
+.labela{
+  font-weight: bold;
+}
+
+.registerbtn-detali {
+  background-color: #008b8b;
+  color: white;
+  padding:16px 20px;
+  margin: 8px 0;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  border-radius: 10px;
+  border: 5px solid #272727;
+  font-weight: bold;
+  margin-left: 340px;
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.registerbtn-detali span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.registerbtn-detali span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.registerbtn-detali:hover span {
+  padding-right: 25px;
+}
+
+.registerbtn-detali:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.promena {
+  background-color: #008b8b;
+  color: white;
+  padding:3px 10px;
+  margin: 8px 0;
+  cursor: pointer;
+  width: 220px;
+  opacity: 0.9;
+  border-radius: 10px;
+  border: 5px solid #272727;
+  font-weight: bold;
+  margin-left: 0px;
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.promena span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.promena span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.promena:hover span {
+  padding-right: 25px;
+}
+
+.promena:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.detali-home {
+  background-color: #FFD15B;
+  color: #272727;
+  padding:3px 3px;
+  margin: 3px 0;
+  cursor: pointer;
+  width: 300px;
+  opacity: 0.9;
+  border-radius: 10px;
+  border: 5px solid #272727;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.5s;
+}
+
+.detali-home span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.detali-home span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.detali-home:hover span {
+  padding-right: 25px;
+}
+
+.detali-home:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.korisnik{
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 5%;
+}
+.korisnik-2{
+  float: right;
+}
+
+
+
+
+/*--------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 1025px) {
+  .pole{
+    position: relative;
+    background-color: white;
+    height: 630px;
+    width: 450px;
+    margin: auto;
+    border-radius: 25px;
+  }
+  .img-detali{
+    max-width:150px;
+  }
+  .pole-detali{
+    position: relative;
+    background-color: white;
+    height: 1000px;
+    width: 540px;
+    margin: auto;
+    border-radius: 25px;
+  }
+  .table-detali{
+    margin-left: 0px;
+  }
+  .input_detali {
+    width: 180%;
+    padding: 5px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .input_korisnichko_ime, .input_password {
+    width: 89%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .input_submit {
+    background-color: #008b8b;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 89%;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+  }
+  .registerbtn {
+    background-color: #008b8b;
+    color: white;
+    padding:16px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    margin-left: 40%;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .registerbtn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .registerbtn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .registerbtn:hover span {
+    padding-right: 25px;
+  }
+
+  .registerbtn:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  .registerbtn-detali {
+    background-color: #008b8b;
+    color: white;
+    padding:16px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    margin-left: 40%;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .registerbtn-detali span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .registerbtn-detali span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .registerbtn-detali:hover span {
+    padding-right: 25px;
+  }
+
+  .registerbtn-detali:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  .input_ime{
+    width: 89%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .input_line{
+    position: absolute;
+    color: black;
+    bottom: 130px;
+    width: 900px;
+    position: fixed;
+    height: 100px;
+    background-color: #272727;
+    z-index:600;
+    border-radius: 25px;
+    left: 5%;
+  }
+  .one-input{
+    position: relative;
+    top: 5px;
+    left: 75px;
+    border-radius: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: white;
+    z-index:600;
+    font-weight: bold;
+  }
+  .two-input{
+    position: relative;
+    top: 5px;
+    left: 250px;
+    border-radius: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: bold;
+  }
+
+  .buttton-2 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 155px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .buttton {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 15px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 15px;
+    bottom: 10px;
+  }
+  .buttton-3 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 15px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .buttton-4 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 15px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .select-1 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 15px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .select-2 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 15px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 15px;
+  }
+}
+
+/*--------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 700px) {
+  .pole{
+    position: relative;
+    background-color: white;
+    height: 630px;
+    width: 350px;
+    margin: auto;
+    border-radius: 25px;
+  }
+  .input_korisnichko_ime, .input_password {
+    width: 68%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .input_submit {
+    background-color: #008b8b;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 68%;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+  }
+  .registerbtn {
+    background-color: #008b8b;
+    color: white;
+    padding:16px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    margin-left: 120px;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .registerbtn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .registerbtn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .registerbtn:hover span {
+    padding-right: 25px;
+  }
+
+  .registerbtn:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  .input_ime{
+    width: 68%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .img-detali{
+    max-width:150px;
+  }
+  .pole-detali{
+    position: relative;
+    background-color: white;
+    height: 900px;
+    width: 390px;
+    margin: auto;
+    border-radius: 25px;
+  }
+  .table-detali{
+    margin-left: 0px;
+  }
+  .input_detali {
+    width: 110%;
+    padding: 5px 10px;
+    margin: 5px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .registerbtn-detali {
+    background-color: #008b8b;
+    color: white;
+    padding:10px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    margin-left: 37%;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .registerbtn-detali span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .registerbtn-detali span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .registerbtn-detali:hover span {
+    padding-right: 25px;
+  }
+
+  .registerbtn-detali:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  .input_line{
+    position: absolute;
+    color: black;
+    bottom: 110px;
+    width: 320px;
+    position: fixed;
+    height: 80px;
+    background-color: #272727;
+    z-index:600;
+    border-radius: 15px;
+    left: 10%;
+  }
+  .one-input{
+    position: relative;
+    top: 2px;
+    left: 5px;
+    border-radius: 10px;
+    padding-top:2px;
+    padding-bottom: 2px;
+    padding-left: 15px;
+    padding-right: 0px;
+    background-color: white;
+    z-index:600;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  .two-input{
+    position: relative;
+    top: 2px;
+    left: 5px;
+    border-radius: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 15px;
+    padding-right: 0px;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  .buttton-2 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 5px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .buttton {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+    bottom: 8px;
+  }
+  .buttton-3 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .buttton-4 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .select-1 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .select-2 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .street{
+    position: absolute;
+    color: white;
+    background-color: #272727;
+    top: 100px;
+    width: auto;
+    position: fixed;
+    height: auto;
+    z-index:600;
+    border-radius: 25px;
+    left: 20px;
+  }
+  #map {
+    position: absolute;
+    top:85px;
+    bottom: 100px;
+    left:0;
+    right: 0;
+  }
+  footer{
+    position: absolute;
+    color: white;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    height: 100px;
+    background-color: #272727;
+    font-size: 10px;
+  }
+  .footer-style{
+    padding-left: 10px;
+    padding-top: 20px;
+    font-size: 15px;
+  }
+  .detali-home {
+    background-color: #FFD15B;
+    color: #272727;
+    padding:3px 3px;
+    margin: 3px 0;
+    cursor: pointer;
+    width: 300px;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.5s;
+    font-size: 12px;
+  }
+}
+/*----------------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 378px) {
+  .pole{
+    position: relative;
+    background-color: white;
+    height: 630px;
+    width: 350px;
+    margin: auto;
+    border-radius: 25px;
+  }
+  .input_korisnichko_ime, .input_password {
+    width: 68%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .input_submit {
+    background-color: #008b8b;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 68%;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+  }
+  .registerbtn {
+    background-color: #008b8b;
+    color: white;
+    padding:16px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    margin-left: 120px;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .registerbtn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .registerbtn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .registerbtn:hover span {
+    padding-right: 25px;
+  }
+
+  .registerbtn:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  .input_ime{
+    width: 68%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .img-detali{
+    max-width:150px;
+  }
+  .pole-detali{
+    position: relative;
+    background-color: white;
+    height: 820px;
+    width: 350px;
+    margin: auto;
+    border-radius: 25px;
+  }
+  .table-detali{
+    margin-left: 0px;
+  }
+  .input_detali {
+    width: 95%;
+    padding: 5px 10px;
+    margin: 4px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .registerbtn-detali {
+    background-color: #008b8b;
+    color: white;
+    padding:10px 20px;
+    margin: 4px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    margin-left: 37%;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .registerbtn-detali span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .registerbtn-detali span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .registerbtn-detali:hover span {
+    padding-right: 25px;
+  }
+
+  .registerbtn-detali:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+}
+
+/*--------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 367px) {
+  .input_line{
+    position: absolute;
+    color: black;
+    bottom: 110px;
+    width: 320px;
+    position: fixed;
+    height: 80px;
+    background-color: #272727;
+    z-index:600;
+    border-radius: 15px;
+    left: 5%;
+  }
+  .one-input{
+    position: relative;
+    top: 2px;
+    left: 5px;
+    border-radius: 10px;
+    padding-top:2px;
+    padding-bottom: 2px;
+    padding-left: 15px;
+    padding-right: 0px;
+    background-color: white;
+    z-index:600;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  .two-input{
+    position: relative;
+    top: 2px;
+    left: 5px;
+    border-radius: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 15px;
+    padding-right: 0px;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  .buttton-2 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 5px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .buttton {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+    bottom: 10px;
+  }
+  .buttton-3 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .buttton-4 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .select-1 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .select-2 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .street{
+    position: absolute;
+    color: white;
+    background-color: #272727;
+    top: 100px;
+    width: auto;
+    position: fixed;
+    height: auto;
+    z-index:600;
+    border-radius: 25px;
+    left: 20px;
+  }
+  #map {
+    position: absolute;
+    top:85px;
+    bottom: 100px;
+    left:0;
+    right: 0;
+  }
+  footer{
+    position: absolute;
+    color: white;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    height: 100px;
+    background-color: #272727;
+    font-size: 10px;
+  }
+  .footer-style{
+    padding-left: 10px;
+    padding-top: 20px;
+    font-size: 15px;
+  }
+  .detali-home {
+    background-color: #FFD15B;
+    color: #272727;
+    padding:3px 3px;
+    margin: 3px 0;
+    cursor: pointer;
+    width: 300px;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.5s;
+    font-size: 12px;
+  }
+  .pole{
+    position: relative;
+    background-color: white;
+    height: 610px;
+    width: 330px;
+    margin: auto;
+    border-radius: 25px;
+  }
+  .input_korisnichko_ime, .input_password {
+    width: 65%;
+    padding: 9px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .input_submit {
+    background-color: #008b8b;
+    color: white;
+    padding: 11px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 65%;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+  }
+  .input_ime{
+       width: 65%;
+       padding: 9px 20px;
+       margin: 8px 0;
+       display: inline-block;
+       box-sizing: border-box;
+       border-radius: 10px;
+       border: 5px solid #272727;
+     }
+  .registerbtn {
+    background-color: #008b8b;
+    color: white;
+    padding:16px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    margin-left: 110px;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .registerbtn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .registerbtn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .registerbtn:hover span {
+    padding-right: 25px;
+  }
+
+  .registerbtn:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  .img-detali{
+    max-width:120px;
+  }
+  .pole-detali{
+    position: relative;
+    background-color: white;
+    height: 810px;
+    width: 340px;
+    margin: auto;
+    border-radius: 25px;
+  }
+  .table-detali{
+    margin-left: 0px;
+  }
+  .input_detali {
+    width: 90%;
+    padding: 5px 10px;
+    margin: 5px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .registerbtn-detali {
+    background-color: #008b8b;
+    color: white;
+    padding:10px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    margin-left: 37%;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .registerbtn-detali span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .registerbtn-detali span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .registerbtn-detali:hover span {
+    padding-right: 25px;
+  }
+
+  .registerbtn-detali:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+}
+
+
+/*--------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 325px) {
+
+  body {font-family: Arial, Helvetica, sans-serif;font-size: 15px;}
+  .pole{
+    position: relative;
+    background-color: white;
+    height: 535px;
+    width: 300px;
+    margin: auto;
+    border-radius: 25px;
+  }
+  .input_korisnichko_ime, .input_password {
+    width: 58%;
+    padding: 5px 20px;
+    margin: 2px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .input_submit {
+    background-color: #008b8b;
+    color: white;
+    padding: 7px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 58%;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+  }
+  .input_ime{
+    width: 58%;
+    padding: 5px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .registerbtn {
+    background-color: #008b8b;
+    color: white;
+    padding:7px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    margin-left: 100px;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .registerbtn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .registerbtn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .registerbtn:hover span {
+    padding-right: 25px;
+  }
+
+  .registerbtn:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  .img-detali{
+    max-width:110px;
+  }
+  .pole-detali{
+    position: relative;
+    background-color: white;
+    height: 750px;
+    width: 300px;
+    margin: auto;
+    border-radius: 25px;
+  }
+  .table-detali{
+    margin-left: 0px;
+  }
+  .input_detali {
+    width: 85%;
+    padding: 3px 10px;
+    margin: 5px 0;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 5px solid #272727;
+  }
+  .registerbtn-detali {
+    background-color: #008b8b;
+    color: white;
+    padding:10px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+    border: 5px solid #272727;
+    font-weight: bold;
+    margin-left: 37%;
+    text-align: center;
+    transition: all 0.5s;
+  }
+
+  .registerbtn-detali span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .registerbtn-detali span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .registerbtn-detali:hover span {
+    padding-right: 25px;
+  }
+
+  .registerbtn-detali:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  .input_line{
+    position: absolute;
+    color: black;
+    bottom: 110px;
+    width: 300px;
+    position: fixed;
+    height: 80px;
+    background-color: #272727;
+    z-index:600;
+    border-radius: 15px;
+    left: 3%;
+  }
+  .one-input{
+    position: relative;
+    top: 2px;
+    left: 5px;
+    border-radius: 10px;
+    padding-top:2px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 0px;
+    background-color: white;
+    z-index:600;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  .two-input{
+    position: relative;
+    top: 2px;
+    left: 5px;
+    border-radius: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 0px;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  .buttton-2 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 5px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .buttton {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+    bottom: 10px;
+  }
+  .buttton-3 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 0;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .buttton-4 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .select-1 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 2px;
+    margin-top: 20px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .select-2 {
+    padding: 3px 3px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    margin-left: 0px;
+    top: 107px;
+    background-color: #FFD15B;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 8px;
+  }
+}
