@@ -37,10 +37,6 @@ class UserServiceTest {
     @BeforeEach
     public void init(){
         when(userRepository.findByEmail(anyString())).thenReturn(java.util.Optional.of(new User()));
-
-        when(passwordEncoder.encode(any())).thenReturn("proba");
-
-        when(userRepository.save(any())).thenReturn(new User());
     }
 
 
@@ -66,6 +62,10 @@ class UserServiceTest {
 
     @Test
     public void shouldSignUpUser(){
+
+        when(passwordEncoder.encode(any())).thenReturn("proba");
+
+        when(userRepository.save(any())).thenReturn(new User());
 
         //slucaj 1 - pozitiven
         User user = new User();
