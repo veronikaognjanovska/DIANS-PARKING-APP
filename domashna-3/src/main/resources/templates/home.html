@@ -25,9 +25,13 @@
                 <!--<a class="navbar-brand">Balloon Shop App</a>-->
             </div>
             <div class="navbar-header navbar-right meni">
-                <a  class="p-2" th:href="@{/register}" style="color: white;font-weight: bold;">Регистрирај се!</a>
-                <a th:href="@{/sign-in}" style="color: white;font-weight: bold;">Најава</a>&nbsp;
-                <a th:href="@{/user-details}" style="color: white;font-weight: bold;">Профил</a>
+                <a  class="p-2" th:href="@{/register}" sec:authorize="hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Регистрирај се!</a>
+                <a th:href="@{/sign-in}" sec:authorize="hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Најава</a>&nbsp;
+                <a th:href="@{/user-details}" sec:authorize="!hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Профил</a>
+
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true" >
+                    <input type="submit" value="Одјави се"/>
+                </form>
             </div>
         </div>
     </nav>
