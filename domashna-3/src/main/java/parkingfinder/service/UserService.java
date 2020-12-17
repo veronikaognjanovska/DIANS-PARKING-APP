@@ -22,8 +22,8 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final PasswordEncoder passwordEncoder;
+
 
     public UserService(UserRepository userRepository,PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -39,18 +39,16 @@ public class UserService implements UserDetailsService {
 
     }
 
-    public void signUpUser(User user) throws InvalidArgumentsException{
+    public boolean signUpUser(User user) throws InvalidArgumentsException{
 
-//        final String encryptedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-//        user.setPassword(encryptedPassword);
-//        final User createdUser = userRepository.save(user);
-
-        if(this.userRepository.findByEmail(user.getEmail()).isPresent()) {
+        if(!this.userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new InvalidArgumentsException();
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserRole(UserRole.USER);
         userRepository.save(user);
+
+        return true;
 
     }
 

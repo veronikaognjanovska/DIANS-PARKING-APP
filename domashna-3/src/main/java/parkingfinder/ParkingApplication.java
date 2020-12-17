@@ -17,10 +17,7 @@ public class ParkingApplication {
         SpringApplication.run(ParkingApplication.class, args);
     }
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
-    }
+
 
 
     @Bean
