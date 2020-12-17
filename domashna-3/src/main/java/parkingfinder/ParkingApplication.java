@@ -6,6 +6,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @ServletComponentScan
@@ -15,9 +17,12 @@ public class ParkingApplication {
         SpringApplication.run(ParkingApplication.class, args);
     }
 
+
+
+
     @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
 }
