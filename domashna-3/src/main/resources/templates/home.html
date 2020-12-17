@@ -4,10 +4,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" th:href="@{'/static/css/bootstrap.min.css'}">
-    <link rel="stylesheet" th:href="@{'/static/css/style.css'}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="icon" th:href="@{'/static/images/transparent-logo.png'}">
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="icon" th:href="@{/images/transparent-logo.png}">
     <meta charset="UTF-8" />
     <meta content="application/xhtml+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,7 @@
     <nav class="navbar navbar-inverse" style="background-color: #272727; height: 85px;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <img class="carpin-black" src="/static/images/carpin-black.png">
+                <img class="carpin-black" src="/images/carpin-black.png">
                 <!--<a class="navbar-brand">Balloon Shop App</a>-->
             </div>
             <div class="navbar-header navbar-right meni">
@@ -75,7 +75,7 @@
     var user_markers=[];
     var routes = [];
     var redIcon = L.icon({
-        iconUrl: '/static/images/marker-icon-red.png',
+        iconUrl: 'images/marker-icon-red.png',
         iconSize:     [25, 41], // size of the icon
         iconAnchor:   [12, 41], // point of the icon which will correspond to marker's location
         popupAnchor:  [1, -34] // point from which the popup should open relative to the iconAnchor
@@ -84,8 +84,9 @@
     $(document).ready(function(){
         var error = $("#error");
         error.hide();
-        var parkingpots = JSON.parse(document.getElementById("parkings").innerHTML);
+        var parkingpots =document.getElementById("parkings").innerHTML;
         console.log(parkingpots);
+        parkingpots=JSON.parse(parkingpots);
 
         var map = L.map('map').setView([42.006510, 21.421958], 13);
 

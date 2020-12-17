@@ -44,7 +44,7 @@ public class UserService implements UserDetailsService {
 
     public boolean signUpUser(User user) throws InvalidArgumentsException{
 
-        if(!this.userRepository.findByEmail(user.getEmail()).isPresent()) {
+        if(this.userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new InvalidArgumentsException();
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));

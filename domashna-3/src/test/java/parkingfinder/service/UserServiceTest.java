@@ -63,27 +63,29 @@ class UserServiceTest {
     @Test
     public void shouldSignUpUser(){
 
-        when(passwordEncoder.encode(any())).thenReturn("proba");
-
-        when(userRepository.save(any())).thenReturn(new User());
-
-        //slucaj 1 - pozitiven
         User user = new User();
         user.setEmail("user@gmail.com");
 
+        when(passwordEncoder.encode(any())).thenReturn("proba");
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
+        when(userRepository.save(any())).thenReturn(new User());
 
+        Exception exception = assertThrows(InvalidArgumentsException.class, () -> {
+            userService.signUpUser(user);
+        });
+        //slucaj 1 - pozitiven
+
+
+
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
         Boolean b = userService.signUpUser(user);
         assertTrue(b);
 
 
 
         //slucaj 2 - negativen
-        when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
 
-        Exception exception = assertThrows(InvalidArgumentsException.class, () -> {
-            userService.signUpUser(user);
-        });
+
 
     }
 

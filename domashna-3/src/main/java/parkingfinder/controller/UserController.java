@@ -74,7 +74,6 @@ public class UserController {
 
     @PostMapping("/register")
     String signUp(User user) {
-
         try{
             userService.signUpUser(user);
             return "redirect:/sign-in";
