@@ -45,7 +45,7 @@ class ParkingSpotDataLoaderTest {
         when(mockParkingSpotRepository.findAll())
                 .thenReturn(staticList);
         parkingSpotDataLoader.readDataFromRepository();
-        
+
         //assert
         int loadedParkingSpots = parkingSpotDataLoader.getParkingSpotsCount();
         assertTrue(loadedParkingSpots>0);
