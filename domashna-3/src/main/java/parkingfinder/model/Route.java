@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import java.time.ZonedDateTime;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +30,8 @@ public class Route{
 
     @ManyToMany
     private Set<StreetName> streetNames;
+
+    private ZonedDateTime timestamp;
 
     public Route() {
         this.points=new LinkedList<>();

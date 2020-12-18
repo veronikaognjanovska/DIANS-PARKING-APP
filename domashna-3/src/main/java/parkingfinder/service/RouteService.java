@@ -18,6 +18,7 @@ import parkingfinder.repository.RouteRepository;
 import parkingfinder.repository.StreetNameRepository;
 import parkingfinder.repository.UserRepository;
 
+import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -82,6 +83,7 @@ public class RouteService {
                 pointRepository.save(point);
                 route.getPoints().add(point);
             }
+            route.setTimestamp(ZonedDateTime.now());
             routeRepository.save(route);
 
 
