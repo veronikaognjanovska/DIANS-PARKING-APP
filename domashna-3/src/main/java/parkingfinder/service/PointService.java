@@ -3,7 +3,6 @@ package parkingfinder.service;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -41,11 +40,12 @@ public class PointService {
 
     public Point getPointFromName(String q) {
 
-        String url = "https://nominatim.openstreetmap.org/search?q=%22+q+%22&limit=1&format=json";
+        String url = "https://nominatim.openstreetmap.org/search?q="+q+"&limit=1&format=json";
         JSONArray json=sentRequestArray(url);
 
-        Point point = new Point();
+        Point point = null;
         try {
+            point = new Point();
             if(!json.isEmpty()){
 
                 JSONObject j1=(JSONObject)json.get(0);
