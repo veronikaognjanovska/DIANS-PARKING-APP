@@ -243,7 +243,7 @@
 
                 $.ajax({
                     method: "GET",
-                    url: "http://localhost:8080/api/route/" + transport_type + "/" + "?lng1=" + parking_lat + "&lan1=" + parking_lng + "&lng2=" + user_lat + "&lan2=" + user_lng + "",
+                    url: "http://localhost:8080/route/" + transport_type + "/" + "?lng1=" + parking_lat + "&lan1=" + parking_lng + "&lng2=" + user_lat + "&lan2=" + user_lng + "",
                     headers: {
                         "Content-type" : "application/json",
                         "Access-Control-Allow-Origin": "*",
