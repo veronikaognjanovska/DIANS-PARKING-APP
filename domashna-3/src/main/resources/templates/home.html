@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="icon" th:href="@{/images/transparent-logo.png}">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="icon" href="images/transparent-logo.png">-->
+    <!--<link rel="stylesheet" type="text/css"  href="bootstrap.min.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+    <meta charset="UTF-8" />
+    <meta content="application/xhtml+xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-inverse" style="background-color: #272727; height: 85px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <img class="carpin-black" src="/images/carpin-black.png">
+                <!--<a class="navbar-brand">Balloon Shop App</a>-->
+            </div>
+            <div class="navbar-header navbar-right meni">
+                <a  class="p-2" th:href="@{/register}" sec:authorize="hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Регистрирај се!</a>
+                <a th:href="@{/sign-in}" sec:authorize="hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Најава</a>&nbsp;
+                <a th:href="@{/user-details}" sec:authorize="!hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Профил</a>
+
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true" >
+                    <input type="submit" value="Одјави се"/>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div id="map"></div>
+<div class="input_line">
+    <input id="paddress" class="one-input" type="text" name="fname" style="color:black" placeholder="Паркинг адреса" value="" disabled>
+    <input id="address" class="two-input" type="text" name="fname" placeholder="Моментална локација" value="">
+    <input id="coordinates" class="buttton-2" type="button" value="Коoрдинати">
+    <input id="route" class="buttton" type="button" value="Рута"><br/>
+    <!--<input id="kola" class="buttton-3" type="button" value="Автомобил">-->
+    <!--<input id="covek" class="buttton-4" type="button" value="Пеш">-->
+    <span class="span-1">Тип на транспорт:</span>
+    <button id="person" class="outline-none buttton-person" type="button" >
+        <i class="fa fa-user outline-none" aria-hidden="true" ></i>
+    </button>
+    <button id="car" class="outline-none buttton-car"  type="button">
+        <i class="fa fa-car outline-none" aria-hidden="true" ></i>
+    </button>
+
+    <span class="span-2">Филтрирај паркинг според:</span>
+    <select  class="select-1" id="tip" name="tip">
+        <option value="tip">Пристап</option>
+        <option value="private">private</option>
+        <option value="public">public</option>
+    </select>
+    <select class="select-2" id="fukcija" name="fukcija">
+        <option value="default">Тип</option>
+        <option value="surface">surface</option>
+        <option value="mutli-storey">mutli-storey</option>
+        <option value="underground">underground</option>
+    </select>
+</div>
+<div class="street">
+    <h3 class="p-ruta">Рута:</h3>
+    <br>
+    <p class="input-address" style="padding-left: 5px; padding-right: 5px;padding-top: 10px;padding-bottom: 10px;"></p>
+</div>
+<div id="error">
+    <span id="error-span" style="color:red">Ве молиме изберете паркинг место и ваша локација!</span>
+</div>
+<footer>
+    <p class="footer-style">За повеќе детали за паркингот:  <button id="more" class="detali-home"><span>Повеќе детали</span></button></p>
+    <div class="footer-copyright text-center py-3">
+        <h1></h1>
+        <p class="info-la" id="info"></p>
+    </div>
+</footer>
+
+<span id="parkings" style="display: none;" th:text="${allParkings}"></span>
+</body>
+<script>
+    var parking_lat=undefined;
+    var parking_lng=undefined;
+    var user_lat=undefined;
+    var user_lng=undefined;
+    var map;
+    var selected_parking=undefined;
+    var user_markers=[];
+    var routes = [];
+    var markersLayer = new L.LayerGroup();
+    var transport='car';
+    var redIcon = L.icon({
+        iconUrl: 'images/marker-icon-red.png',
+        iconSize:     [25, 41], // size of the icon
+        iconAnchor:   [12, 41], // point of the icon which will correspond to marker's location
+        popupAnchor:  [1, -34] // point from which the popup should open relative to the iconAnchor
+    });
+
+    function drawPoints(parkingpots){
+        for(var i=0;i<parkingpots.length;i++)
+        {
+            var marker;
+            var name=parkingpots[i].name;
+            var capacity=parkingpots[i].capacity;
+            var access=parkingpots[i].access;
+            var lat = parkingpots[i].lat;
+            var lng = parkingpots[i].lng;
+            marker = L.marker([parkingpots[i].lat, parkingpots[i].lng])
+                .bindPopup("<p>" + "Име: " + name + "<br>" + "Капацитет: " + capacity + "<br>" + "Пристап: " + access +
+                    "<br>" + "<a href='/parking?id=" + parkingpots[i].id + "'>Детали</a><br>"
+                    +"<button data-lat='" + lat + "' data-lng='" + lng + "'" +
+                    " data-id='" + parkingpots[i].id + "'"
+                     + "' name='" + name
+                    + "' class='choose' type='button' ><span>Избери</span></button></p>")
+                .openPopup();
+            markersLayer.addLayer(marker);
+        }
+        markersLayer.addTo(map);
+    }
+
+    $(document).ready(function(){
+        var error = $("#error");
+        error.hide();
+        var parkingpots =document.getElementById("parkings").innerHTML;
+        parkingpots=JSON.parse(parkingpots);
+
+        map = L.map('map').setView([42.006510, 21.421958], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        drawPoints(parkingpots);
+
+        $(document).on('click', '.choose', function () {
+            var btn = $(this);
+            parking_lat=btn.attr("data-lat");
+            parking_lng=btn.attr("data-lng");
+            $('#paddress').val(btn.attr("name"));
+            selected_parking = btn.attr("data-id");
+        });
+
+        $('#more').click(function(){
+            console.log(selected_parking);
+            if(selected_parking!==undefined){
+            console.log('/parking?id='+selected_parking);
+                window.location.replace('/parking?id='+selected_parking);
+            }
+        });
+
+        $('#tip').change(function(){
+            var value = $('#tip').val();
+            console.log(value);
+            $.ajax({
+                method: "GET",
+                url: "http://localhost:8080/parking/filter/access?q=" + value + "",
+                headers: {
+                    "Content-type" : "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods":"GET",
+                    "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
+                },
+                success: function(data){
+                    markersLayer.clearLayers()
+                    drawPoints(data);
+                }
+            });
+        });
+
+        $('#fukcija').change(function(){
+            var value = $('#fukcija').val();
+            console.log(value);
+            $.ajax({
+                method: "GET",
+                url: "http://localhost:8080/parking/filter/type?q=" + value + "",
+                headers: {
+                    "Content-type" : "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods":"GET",
+                    "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
+                },
+                success: function(data){
+                    markersLayer.clearLayers();
+                    drawPoints(data);
+                }
+            });
+        });
+
+        $('#car').click(function(){
+            transport='car';
+        });
+
+        $('#person').click(function(){
+            transport='person';
+        });
+
+        $('#coordinates').click(function(){
+            var address = $("#address").val();
+            if(address !== undefined && address!==''){
+            $.ajax({
+                method: "GET",
+                url: "http://localhost:8080/api/name?q=" + address + "",
+                headers: {
+                    "Content-type" : "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods":"GET",
+                    "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
+                },
+                success: function(data){
+
+                    if (data !== undefined){
+                        for (var marker in user_markers){
+                            user_markers[marker].remove();
+                        }
+                        user_lat = data.lat;
+                        user_lng=data.lng;
+                        var marker = L.marker([data.lat, data.lng], {
+                            icon: redIcon
+                        }).addTo(map);
+                        var latLngs = [ marker.getLatLng() ];
+                        var markerBounds = L.latLngBounds(latLngs);
+                        map.fitBounds(markerBounds);
+                        map.setZoom(13);
+                        user_markers.push(marker);
+                    }
+                }
+            });
+            }
+        });
+
+
+
+        $('#route').click(function(){
+            var transport_type = 'drive';
+
+            if(transport==='person'){
+                transport_type='walk';
+            }
+
+            if(parking_lat!==undefined && parking_lng!==undefined && user_lat!=undefined && user_lng!=undefined){
+
+                $.ajax({
+                    method: "GET",
+                    url: "http://localhost:8080/route/" + transport_type + "/" + "?lng1=" + parking_lat + "&lan1=" + parking_lng + "&lng2=" + user_lat + "&lan2=" + user_lng + "",
+                    headers: {
+                        "Content-type" : "application/json",
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods":"GET",
+                        "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
+                    },
+                    success: function(data){
+                        for (var route in routes){
+                            routes[route].remove();
+                        }
+                        if (data !== undefined){
+                            var latlng = []
+                            var streets = ""
+                            for (ind in data.points){
+                                latlng.push([
+                                    data.points[ind].lat,
+                                    data.points[ind].lng
+                                ]);
+                                for (st in data.streetNames){
+                                    streets += data.streetNames[st].streetName + "<br>";
+                                }
+
+                            }
+                            console.log(latlng);
+                            console.log(parking_lat);
+                            console.log(parking_lng);
+                            var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
+                            map.fitBounds(polyline.getBounds());
+                            console.log(streets);
+                            routes.push(polyline);
+                            $('#input-address').text(streets);
+                        }}
+                });
+            }else{
+                $("#error").show();
+            }
+        });
+    });
+
+</script>
+</html>

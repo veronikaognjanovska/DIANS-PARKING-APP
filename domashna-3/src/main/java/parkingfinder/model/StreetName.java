@@ -1,9 +1,8 @@
 package parkingfinder.model;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,15 +12,13 @@ import javax.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor
-public class Point {
+public class StreetName {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer ID;
 
-    @NonNull
-    private Double lat;
-    @NonNull
-    private Double lng;
+    private String streetName;
+
 
 }
