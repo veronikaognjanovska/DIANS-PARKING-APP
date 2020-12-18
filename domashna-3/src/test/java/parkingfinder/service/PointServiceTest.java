@@ -47,15 +47,22 @@ class PointServiceTest {
         assertEquals(-14.7067141,p1.getLat());
         assertEquals(-75.1308498,p1.getLng());
 
-//        String s2 ="[{'lat': '-14.7067141','lon': '-75.1308498'}]";
-//
-//        ResponseEntity<Object> rs=new ResponseEntity<>(s1,HttpStatus.OK);
-//        when(restTemplate.getForEntity(anyString(),any())).thenReturn(rs);
-//        Point p1=pointService.getPointFromName("Pintija");
-//        assertNotNull(p1);
-//
-//        assertEquals(-14.7067141,p1.getLat());
-//        assertEquals(-75.1308498,p1.getLng());
+        String s2 ="[{'lat': ' ','lon': ' '}]";
+
+        ResponseEntity<Object> rs2=new ResponseEntity<>(s2,HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(),any())).thenReturn(rs2);
+
+
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            pointService.getPointFromName("sfhajfshs");
+        });
+
+        String s3 ="[]";
+
+        ResponseEntity<Object> rs3=new ResponseEntity<>(s3,HttpStatus.OK);
+        when(restTemplate.getForEntity(anyString(),any())).thenReturn(rs3);
+        Point p3=pointService.getPointFromName("Pintija");
+        assertNotNull(p3);
 
     }
 
