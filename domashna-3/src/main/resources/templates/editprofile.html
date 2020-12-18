@@ -4,304 +4,49 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--    <link rel="icon" href="images/transparent-logo.png">-->
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+<!--    <link rel="stylesheet" href="bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="style.css">-->
     <link rel="icon" th:href="@{'/static/images/transparent-logo.png'}">
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <style>
+        .poleuredi{
+            position: relative;
+            background-color: white;
+            height: 750px;
+            width: 600px;
+            margin: auto;
+            border-radius: 25px;
+        }
+        @media only screen and (max-width: 1025px) {
+            .poleuredi {
+                width: 450px;
+            }
+        }
+    </style>
+
 </head>
-<style>
-    .imgcontainer1 {
-        text-align: center;
-        margin: 40px 0 0 0;
-        padding-top: 5px;
-    }
-    .edit{
-        text-align: center;
-        font-weight: bold;
-    }
-    .container
-    {
-        padding: 16px;
-        width: 500px;
-    }
-
-    .changebtn {
-        background-color: #008b8b;
-        color: white;
-        padding:4px 20px;
-        margin: 18px 0;
-        cursor: pointer;
-        width: 100%;
-        opacity: 0.9;
-        border-radius: 10px;
-        border: 4px solid #272727;
-        font-weight: bold;
-        margin-left: 347px;
-        text-align: center;
-        transition: all 0.5s;
-    }
-    .input_email, .input_password1, .input_username {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        box-sizing: border-box;
-        border-radius: 10px;
-        border: 5px solid #272727;
-    }
-    .start
-    {
-        margin-left: 40%;
-        background-color: #008b8b;
-        color: white;
-        padding:3px 3px;
-        border: 1px solid #272727;
-        border-radius: 5px;
-    }
-
-
-    /*  -------------------------------------------------------- */
-    @media only screen and (max-width: 1025px)
-    {
-        .input_email, .input_password1, .input_username
-        {
-            width: 89%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 5px solid #272727;
-        }
-        .changebtn {
-            background-color: #008b8b;
-            color: white;
-            padding:10px 20px;
-            margin: 8px 0;
-            cursor: pointer;
-            width: 100%;
-            opacity: 0.9;
-            border-radius: 10px;
-            border: 5px solid #272727;
-            font-weight: bold;
-            margin-left: 295px;
-            text-align: center;
-            transition: all 0.5s;
-        }
-
-    }
-    @media only screen and (max-width: 700px)
-    {
-
-        .input_email, .input_password1, .input_username
-        {
-            width: 68%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 5px solid #272727;
-        }
-        .changebtn
-        {
-            background-color: #008b8b;
-            color: white;
-            padding:10px 20px;
-            margin: 8px 0;
-            cursor: pointer;
-            width: 100%;
-            opacity: 0.9;
-            border-radius: 10px;
-            border: 5px solid #272727;
-            font-weight: bold;
-            margin-left: 195px;
-            text-align: center;
-            transition: all 0.5s;
-        }
-        .input_username{
-            width: 68%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 5px solid #272727;
-        }
-
-        .start
-        {
-            margin-left: 110px;
-            background-color: #008b8b;
-            color: white;
-            padding:3px 3px;
-            border: 1px solid #272727;
-            border-radius: 5px;
-        }
-    }
-    @media only screen and (max-width: 378px)
-    {
-        .input_email, .input_password1, .input_username
-        {
-            width: 68%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 5px solid #272727;
-        }
-
-        .changebtn
-        {
-            background-color: #008b8b;
-            color: white;
-            padding:10px 20px;
-            margin: 8px 0;
-            cursor: pointer;
-            width: 100%;
-            opacity: 0.9;
-            border-radius: 10px;
-            border: 5px solid #272727;
-            font-weight: bold;
-            margin-left: 195px;
-            text-align: center;
-            transition: all 0.5s;
-        }
-        .input_username
-        {
-            width: 68%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 5px solid #272727;
-        }
-
-
-    }
-    @media only screen and (max-width: 367px) {
-        .input_email, .input_password1, .input_username {
-            width: 65%;
-            padding: 9px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 5px solid #272727;
-        }
-
-        .input_username {
-            width: 65%;
-            padding: 9px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 5px solid #272727;
-        }
-
-        .changebtn {
-            background-color: #008b8b;
-            color: white;
-            padding: 10px 19px;
-            margin: 8px 0;
-            cursor: pointer;
-            width: 100%;
-            opacity: 0.9;
-            border-radius: 10px;
-            border: 5px solid #272727;
-            font-weight: bold;
-            margin-left: 185px;
-            text-align: center;
-            transition: all 0.5s;
-        }
-        .start
-        {
-            margin-left: 100px;
-            background-color: #008b8b;
-            color: white;
-            padding:3px 3px;
-            border: 1px solid #272727;
-            border-radius: 5px;
-        }
-    }
-    @media only screen and (max-width: 325px)
-    {
-        .input_email, .input_password1, .input_username
-        {
-            width: 58%;
-            padding: 5px 20px;
-            margin: 2px 0;
-            display: inline-block;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 5px solid #272727;
-        }
-        .input_username{
-            width: 58%;
-            padding: 5px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            box-sizing: border-box;
-            border-radius: 10px;
-            border: 5px solid #272727;
-        }
-        .changebtn {
-            background-color: #008b8b;
-            color: white;
-            padding:3px 20px;
-            margin: 8px 0;
-            cursor: pointer;
-            width: 100%;
-            opacity: 0.9;
-            border-radius: 10px;
-            border: 5px solid #272727;
-            font-weight: bold;
-            margin-left: 170px;
-            text-align: center;
-            transition: all 0.5s;
-        }
-        .container {
-            padding: 3px;
-            width: 500px;
-        }
-
-        .start
-        {
-            margin-right: 300px;
-        }
-    }
-
-
-</style>
 <body style="background-color: #272727">
-<!-- vajda nema da bide register!! -->
-<form role="form" th:action="@{/update}" th:method="post" th:object="${user}" class="pole">
-    <div class="imgcontainer1">
+
+<form role="form" th:action="@{/update}" th:method="post" th:object="${user}" class="poleuredi">
+    <div class="imgcontainer">
         <img src="images/carpin-white.png" alt="Avatar" style="max-width:200px">
     </div>
-    <h2 class="edit">Уреди го профилот</h2>
+    <h2 class="najava">Уреди го профилот</h2>
     <div class="container">
-        <input class="input_username" type="text" id="ime" name="ime" placeholder="Корисничко име" th:field="*{name}"> <br/>
+        <input class="input_ime" type="text" id="ime" name="ime" placeholder="Корисничко име" th:field="*{name}"> <br/>
         <p style="color:red" th:if="${#fields.hasErrors('name')}">Невалидно корисничко име</p>
 
-
-
-
-        <input class="input_email" type="text" id="email" name="email" placeholder="Email адреса" th:field="*{email}"><br/>
+        <input class="input_korisnichko_ime" type="text" id="email" name="email" placeholder="Email адреса" th:field="*{email}"><br/>
         <p style="color:red" th:if="${#fields.hasErrors('email')}">Невалидна e-mail адреса</p>
 
-
-
-        <input class="input_password1" type="password" id="password" name="password" placeholder="Лозинка" th:field="*{password}"> <br/>
+        <input class="input_password" type="password" id="password" name="password" placeholder="Лозинка" th:field="*{password}"> <br/>
         <p style="color:red" th:if="${#fields.hasErrors('password')}">Невалидна лозинка</p>
-        <button type="submit" class="changebtn"><span>Промени</span></button>
 
-        <a class="start" th:href="@{/}"><span>Почетна</span></a>
-
+        <button type="submit" class="input_submit"><span>Промени</span></button>
 
     </div>
+    <a class="registerbtn" th:href="@{/}"><span>Почетна</span></a>
 
 </form>
 
