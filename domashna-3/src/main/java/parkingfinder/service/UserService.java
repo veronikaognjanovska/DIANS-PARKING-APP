@@ -4,7 +4,9 @@ package parkingfinder.service;
 
 
 
+import com.sun.imageio.plugins.common.SingleTileRenderedImage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,6 +35,18 @@ public class UserService implements UserDetailsService {
        // this.userRepository=userRepository;
     //}
 
+
+    public boolean updateUser(User user) throws InvalidArgumentsException
+    {
+            String email= SecurityContextHolder.getContext().getAuthentication().getName();
+            if(!this.userRepository.findByEmail(email).isPresent()) {
+            throw new InvalidArgumentsException();
+        }
+        userRepository.updateUserById(user.getName(),user.getEmail(),passwordEncoder.encode(user.getPassword()));
+
+
+        return true;
+    }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
