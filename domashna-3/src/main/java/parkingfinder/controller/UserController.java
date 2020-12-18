@@ -5,7 +5,6 @@ package parkingfinder.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -16,16 +15,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import parkingfinder.config.CustomUsernamePasswordAuthenticationProvider;
+import parkingfinder.model.Route;
 import parkingfinder.model.User;
 import parkingfinder.model.exception.InvalidArgumentsException;
+import parkingfinder.service.RouteService;
 import parkingfinder.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import java.util.List;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
@@ -34,13 +35,18 @@ public class UserController {
 
     @Autowired
     private final UserService userService;
+
     @Autowired
     private final CustomUsernamePasswordAuthenticationProvider authenticate ;
 
+    @Autowired
+    private final RouteService routeService;
 
-    public UserController(UserService userService, CustomUsernamePasswordAuthenticationProvider authenticate) {
+
+    public UserController(UserService userService, CustomUsernamePasswordAuthenticationProvider authenticate, RouteService routeService) {
         this.userService = userService;
         this.authenticate = authenticate;
+        this.routeService = routeService;
     }
 
 
@@ -77,8 +83,9 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         User user = (User) userService.loadUserByUsername(email);
+        List<Route> routes = routeService.findHistoryRoutes(email);
 
-
+        model.addAttribute("routes", routes);
         model.addAttribute("user", user);
 
         return "user-page";
