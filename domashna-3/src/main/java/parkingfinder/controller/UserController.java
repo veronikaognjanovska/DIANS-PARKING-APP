@@ -111,5 +111,29 @@ public class UserController {
         }
     }
 
+    @PostMapping("/update")
+    String updateUser(User user)
+    {
+
+        try{
+
+            userService.updateUser(user);
+            return "redirect:/user-details";
+        } catch (InvalidArgumentsException exception) {
+            return "redirect:/update?error=" + exception.getMessage();
+        }
+
+    }
+
+    @GetMapping("/update")
+    String updateUp(Model model) {
+
+        User principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) userService.loadUserByUsername(principal.getEmail());
+        model.addAttribute("user", new User());
+        return "editprofile";
+    }
+
+
 }
 
