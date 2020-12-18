@@ -20,7 +20,7 @@
             </div>
 
             <div class="navbar-header navbar-right">
-                <img class="carpin-black" src="https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8184.jpg?size=626&ext=jpg" style="border-radius: 50%">
+                <img class="carpin-black" src="images/user.png" style="border-radius: 50%; background-color: white;">
                 <a href="javascript: document.logoutForm.submit()" role="menuitem" style="color:white"> Одјави се</a>
 
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
@@ -36,7 +36,7 @@
 
     <div style="float: left">
         <div style="padding-left: 15%">
-            <img src="https://img.freepik.com/free-photo/abstract-surface-textures-white-concrete-stone-wall_74190-8184.jpg?size=626&ext=jpg" style="width: 150px; border-radius: 50%; height: 150px">
+            <img src="images/user.png" style="width: 150px; border-radius: 50%; height: 150px;background-color: white;">
         </div>
         <br>
         <h3>Корисничко име</h3> <h3 th:text="${user.getName()}"><b></b></h3>
