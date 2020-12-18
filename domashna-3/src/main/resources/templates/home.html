@@ -205,7 +205,7 @@
             if(address !== undefined && address!==''){
             $.ajax({
                 method: "GET",
-                url: "http://localhost:8080/api/name?q=" + address + "",
+                url: "http://localhost:8080/point?q=" + address + "",
                 headers: {
                     "Content-type" : "application/json",
                     "Access-Control-Allow-Origin": "*",
@@ -214,6 +214,7 @@
                 },
                 success: function(data){
 
+                    console.log(data);
                     if (data !== undefined){
                         for (var marker in user_markers){
                             user_markers[marker].remove();

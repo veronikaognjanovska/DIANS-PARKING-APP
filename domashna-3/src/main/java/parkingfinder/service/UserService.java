@@ -4,7 +4,7 @@ package parkingfinder.service;
 
 
 
-import com.sun.imageio.plugins.common.SingleTileRenderedImage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
