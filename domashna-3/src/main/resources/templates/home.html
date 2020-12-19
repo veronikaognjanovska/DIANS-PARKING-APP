@@ -23,6 +23,10 @@
             <div class="navbar-header">
                 <img class="carpin-black" src="/images/carpin-black.png">
                 <!--<a class="navbar-brand">Balloon Shop App</a>-->
+                <button id="searchbtn" class="outline-none buttton-person" type="button" >
+                    <i class="fa fa-search outline-none" aria-hidden="true" ></i>
+                </button>
+                <input id="search" class="two-input" type="text" name="fname" placeholder="Пребарај паркинг" value="">
             </div>
             <div class="navbar-header navbar-right meni">
                 <a  class="p-2" th:href="@{/register}" sec:authorize="hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Регистрирај се!</a>
@@ -47,7 +51,7 @@
     <!--<input id="covek" class="buttton-4" type="button" value="Пеш">-->
     <span class="span-1">Тип на транспорт:</span>
     <button id="person" class="outline-none buttton-person" type="button" >
-        <i class="fa fa-user outline-none" aria-hidden="true" ></i>
+        <i class="fa fa-child outline-none" aria-hidden="true" ></i>
     </button>
     <button id="car" class="outline-none buttton-car"  type="button">
         <i class="fa fa-car outline-none" aria-hidden="true" ></i>
@@ -68,8 +72,7 @@
 </div>
 <div class="street">
     <h3 class="p-ruta">Рута:</h3>
-    <br>
-    <p class="input-address" style="padding-left: 5px; padding-right: 5px;padding-top: 10px;padding-bottom: 10px;"></p>
+    <p class="input-address" style="color:white;padding-left: 5px; padding-right: 5px;padding-top: 10px;padding-bottom: 10px;"></p>
 </div>
 <div id="error">
     <span id="error-span" style="color:red">Ве молиме изберете паркинг место и ваша локација!</span>
@@ -117,7 +120,7 @@
                     +"<button data-lat='" + lat + "' data-lng='" + lng + "'" +
                     " data-id='" + parkingpots[i].id + "'"
                      + "' name='" + name
-                    + "' class='choose' type='button' ><span>Избери</span></button></p>")
+                    + "' class='choose buttton-izberi' type='button' ><span>Избери</span></button></p>")
                 .openPopup();
             markersLayer.addLayer(marker);
         }
@@ -205,7 +208,7 @@
             if(address !== undefined && address!==''){
             $.ajax({
                 method: "GET",
-                url: "http://localhost:8080/api/name?q=" + address + "",
+                url: "http://localhost:8080/point?q=" + address + "",
                 headers: {
                     "Content-type" : "application/json",
                     "Access-Control-Allow-Origin": "*",
@@ -214,6 +217,7 @@
                 },
                 success: function(data){
 
+                    console.log(data);
                     if (data !== undefined){
                         for (var marker in user_markers){
                             user_markers[marker].remove();
@@ -247,7 +251,7 @@
 
                 $.ajax({
                     method: "GET",
-                    url: "http://localhost:8080/route/" + transport_type + "/" + "?lng1=" + parking_lat + "&lan1=" + parking_lng + "&lng2=" + user_lat + "&lan2=" + user_lng + "",
+                    url: "http://localhost:8080/route/" + transport_type  + "?lng1=" + parking_lng + "&lan1=" + parking_lat + "&lng2=" + user_lng + "&lan2=" + user_lat + "",
                     headers: {
                         "Content-type" : "application/json",
                         "Access-Control-Allow-Origin": "*",
@@ -255,6 +259,7 @@
                         "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
                     },
                     success: function(data){
+                        console.log(data);
                         for (var route in routes){
                             routes[route].remove();
                         }
@@ -263,13 +268,12 @@
                             var streets = ""
                             for (ind in data.points){
                                 latlng.push([
-                                    data.points[ind].lat,
-                                    data.points[ind].lng
+                                    data.points[ind].lng,
+                                    data.points[ind].lat
                                 ]);
-                                for (st in data.streetNames){
-                                    streets += data.streetNames[st].streetName + "<br>";
-                                }
-
+                            }
+                            for (st in data.streetNames){
+                                streets += data.streetNames[st].streetName + "<br>";
                             }
                             console.log(latlng);
                             console.log(parking_lat);
@@ -278,13 +282,36 @@
                             map.fitBounds(polyline.getBounds());
                             console.log(streets);
                             routes.push(polyline);
-                            $('#input-address').text(streets);
+                            $( ".input-address" ).first().html( streets );
+                            // $('.input-address').innerHTML=streets;
                         }}
                 });
             }else{
                 $("#error").show();
             }
         });
+        $("#searchbtn").click(function () {
+            // var parking =  parkingpots.filter(function(parking) {
+            //     return parking.name.toString().indexOf($("#search").text()) !== -1;
+            // });
+            var parking=[];
+            for(var i=0;i<parkingpots.length;i++)
+            {
+                if(parkingpots[i].name.toString().search($("#search").val()) !== -1){
+                    for(var index in markersLayer._layers)
+                    {
+                        if(parkingpots[i].lat===markersLayer._layers[index]._latlng.lat && parkingpots[i].lng===markersLayer._layers[index]._latlng.lng)
+                        {
+                            markersLayer._layers[index].openPopup();
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            console.log($("#search").val());
+
+        })
     });
 
 </script>
