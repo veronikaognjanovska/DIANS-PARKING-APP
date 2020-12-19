@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import parkingfinder.config.CustomUsernamePasswordAuthenticationProvider;
 import parkingfinder.model.Route;
@@ -112,25 +113,28 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    String updateUser(User user)
+    String updateUser(
+            @Valid User user, BindingResult bindingResult, Model model)
     {
+        if (bindingResult.hasErrors()) {
+            return "editprofile";
+        }
 
         try{
-
             userService.updateUser(user);
             return "redirect:/user-details";
         } catch (InvalidArgumentsException exception) {
-            return "redirect:/update?error=" + exception.getMessage();
+            model.addAttribute("emailExists", true);
+            return "editprofile";
         }
 
     }
 
     @GetMapping("/update")
     String updateUp(Model model) {
-
         User principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) userService.loadUserByUsername(principal.getEmail());
-        model.addAttribute("user", new User());
+        model.addAttribute("user", user);
         return "editprofile";
     }
 

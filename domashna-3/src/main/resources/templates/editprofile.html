@@ -34,16 +34,19 @@
     </div>
     <h2 class="najava">Уреди го профилот</h2>
     <div class="container">
-        <input class="input_ime" type="text" id="ime" name="ime" placeholder="Корисничко име" th:field="*{name}"> <br/>
+        <input type="hidden" th:field="*{ID}">
+        <input class="input_ime" type="text" id="name" name="name" placeholder="Корисничко име" th:field="*{name}" > <br/>
         <p style="color:red" th:if="${#fields.hasErrors('name')}">Невалидно корисничко име</p>
 
-        <input class="input_korisnichko_ime" type="text" id="email" name="email" placeholder="Email адреса" th:field="*{email}"><br/>
+        <input class="input_korisnichko_ime" type="text" id="email" name="email" placeholder="Email адреса" th:value="*{email}" ><br/>
         <p style="color:red" th:if="${#fields.hasErrors('email')}">Невалидна e-mail адреса</p>
 
-        <input class="input_password" type="password" id="password" name="password" placeholder="Лозинка" th:field="*{password}"> <br/>
+        <input class="input_password" type="password" id="password" name="password" placeholder="Лозинка"  th:field="*{password}"> <br/>
         <p style="color:red" th:if="${#fields.hasErrors('password')}">Невалидна лозинка</p>
 
-        <button type="submit" class="input_submit"><span>Промени</span></button>
+        <input type="submit" class="input_submit" value="Промени">
+
+        </input>
 
     </div>
     <a class="registerbtn" th:href="@{/}"><span>Почетна</span></a>

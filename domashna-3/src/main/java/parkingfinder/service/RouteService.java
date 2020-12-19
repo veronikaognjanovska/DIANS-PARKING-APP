@@ -4,6 +4,7 @@ import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -83,8 +84,13 @@ public class RouteService {
                 pointRepository.save(point);
                 route.getPoints().add(point);
             }
-            route.setTimestamp(ZonedDateTime.now());
-            routeRepository.save(route);
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+            Optional<User> user = userRepository.findByEmail(email);
+            if (user.isPresent()){
+                route.setUserId(user.get());
+                route.setTimestamp(ZonedDateTime.now());
+                routeRepository.save(route);
+            }
 
 
         }catch(Exception e){
