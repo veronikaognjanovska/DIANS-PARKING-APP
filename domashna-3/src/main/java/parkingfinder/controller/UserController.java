@@ -27,7 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
@@ -42,6 +44,8 @@ public class UserController {
 
     @Autowired
     private final RouteService routeService;
+
+    private final Comparator<Route> routeComparator = Comparator.comparing(Route::getTimestamp).reversed();
 
 
     public UserController(UserService userService, CustomUsernamePasswordAuthenticationProvider authenticate, RouteService routeService) {
@@ -84,8 +88,11 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         User user = (User) userService.loadUserByUsername(email);
-        List<Route> routes = routeService.findHistoryRoutes(email);
-
+        List<Route> routes = routeService.findHistoryRoutes(email)
+                .stream()
+                .limit(5)
+                .sorted(routeComparator)
+                .collect(Collectors.toList());
         model.addAttribute("routes", routes);
         model.addAttribute("user", user);
 

@@ -10,6 +10,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.web.client.RootUriTemplateHandler;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.client.RestTemplate;
 import parkingfinder.model.*;
 import parkingfinder.model.exception.RouteNotFoundException;
@@ -17,6 +21,7 @@ import parkingfinder.model.exception.UserNotFoundException;
 import parkingfinder.repository.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -31,14 +36,19 @@ public class RouteServiceTest {
 
     @Mock
     private RestTemplate restTemplate;
+
     @Mock
     private PointRepository pointRepository;
+
     @Mock
     private RouteRepository routeRepository;
+
     @Mock
     private StreetNameRepository streetNameRepository;
+
     @Mock
     private UserRepository userRepository;
+
     @InjectMocks
     private RouteService routeService;
 
@@ -49,6 +59,52 @@ public class RouteServiceTest {
         String s ="{waypoints: [{name: Методија Шаторов - Шарло},{name: Методија Шаторов}]," +
                 "routes: [{geometry: {coordinates: [[21.455617, 41.986311],[ 21.454922,41.986401]] }} ] }";
         when(restTemplate.getForObject(anyString(),any())).thenReturn(s);
+        SecurityContextHolder.setContext(new SecurityContext() {
+            @Override
+            public Authentication getAuthentication() {
+                return new Authentication() {
+                    @Override
+                    public Collection<? extends GrantedAuthority> getAuthorities() {
+                        return null;
+                    }
+
+                    @Override
+                    public Object getCredentials() {
+                        return null;
+                    }
+
+                    @Override
+                    public Object getDetails() {
+                        return null;
+                    }
+
+                    @Override
+                    public Object getPrincipal() {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean isAuthenticated() {
+                        return false;
+                    }
+
+                    @Override
+                    public void setAuthenticated(boolean b) throws IllegalArgumentException {
+
+                    }
+
+                    @Override
+                    public String getName() {
+                        return "email";
+                    }
+                };
+            }
+
+            @Override
+            public void setAuthentication(Authentication authentication) {
+
+            }
+        });
         Route r1=routeService.findRoute("walking",21.455617, 41.986311,21.455617, 41.986311);
         assertNotNull(r1);
         assertEquals(2,r1.getPoints().size());

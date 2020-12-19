@@ -3,7 +3,6 @@ package parkingfinder.service;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -31,7 +30,6 @@ public class RouteService {
     private final PointRepository pointRepository;
     private final StreetNameRepository streetNameRepository;
     private final UserRepository userRepository;
-
     private final RestTemplate restTemplate ;
 
 
@@ -91,7 +89,6 @@ public class RouteService {
                 route.setTimestamp(ZonedDateTime.now());
                 routeRepository.save(route);
             }
-
 
         }catch(Exception e){
             //
