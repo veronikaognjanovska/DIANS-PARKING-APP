@@ -218,7 +218,7 @@
                 success: function(data){
 
                     console.log(data);
-                    if (data !== undefined){
+                    if (data !== undefined && data && data.lat && data.lng){
                         for (var marker in user_markers){
                             user_markers[marker].remove();
                         }
@@ -275,14 +275,12 @@
                             for (st in data.streetNames){
                                 streets += data.streetNames[st].streetName + "<br>";
                             }
-                            console.log(latlng);
-                            console.log(parking_lat);
-                            console.log(parking_lng);
-                            var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
-                            map.fitBounds(polyline.getBounds());
-                            console.log(streets);
-                            routes.push(polyline);
-                            $( ".input-address" ).first().html( streets );
+                            if (latlng.length!=0){
+                                var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
+                                map.fitBounds(polyline.getBounds());
+                                routes.push(polyline);
+                                $( ".input-address" ).first().html( streets );
+                            }
                             // $('.input-address').innerHTML=streets;
                         }}
                 });
