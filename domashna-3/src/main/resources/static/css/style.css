@@ -6,6 +6,20 @@
   right: 0;
 }
 
+.buttton-izberi {
+  width: auto;
+  height: auto;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  margin-left: 20%;
+  top: 107px;
+  background-color: #FFD15B;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
 main {
   width: 800px;
   margin: auto !important;
