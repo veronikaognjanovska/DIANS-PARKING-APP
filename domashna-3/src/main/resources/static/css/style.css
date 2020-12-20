@@ -1,25 +1,18 @@
-#map {
+.map1 {
   position: absolute;
   top:85px;
   bottom: 120px;
   left:0;
   right: 0;
 }
-
-.buttton-izberi {
-  width: auto;
-  height: auto;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: black;
-  margin-left: 20%;
-  top: 107px;
-  background-color: #FFD15B;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
+.map2{
+  position: absolute;
+  top:-45px;
+  bottom: 120px;
+  left:0;
+  right: 0;
 }
+
 main {
   width: 800px;
   margin: auto !important;
@@ -58,6 +51,17 @@ main {
   font-weight: bold;
 }
 .two-input{
+  position: relative;
+  top: 2px;
+  left: 50px;
+  border-radius: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-weight: bold;
+}
+.search-input{
   position: relative;
   top: 2px;
   left: 50px;
@@ -122,6 +126,22 @@ main {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
+.buttton-izberi {
+  width: auto;
+  height: auto;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: black;
+  margin-left: 20%;
+  top: 107px;
+  background-color: #FFD15B;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
 
 .buttton-person {
   width: 30px;
@@ -219,6 +239,7 @@ footer{
 .street{
   position: absolute;
   color: white;
+  background-color: #272727;
   background-color: #272727;
   top: 200px;
   width: auto;
@@ -486,6 +507,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 .korisnik-2{
   float: right;
+
 }
 
 
@@ -553,6 +575,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
     padding-right: 0px;
     font-size: 12px;
   }
+  .search-input{
+    left: 40px;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 12px;
+  }
   .buttton-2 {
     padding: 3px 3px;
     width: 95px;
@@ -590,14 +623,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
   .select-1 {
     padding: 3px 3px;
     margin-left: 5px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 12px;
     width: 80px;
   }
   .select-2 {
     padding: 3px 3px;
     margin-left: 5px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 12px;
     width: 80px;
   }
@@ -605,6 +638,11 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 /*--------------------------------------------------------------------------------------------------*/
 @media only screen and (max-width: 700px) {
+  .carpin-black{
+    width: 60px;
+    height: 60px;
+    margin-left: -20px;
+  }
   .pole{
     width: 350px;
   }
@@ -640,7 +678,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
     margin-left: 37%;
   }
   header{
-    font-size: 15px;
+    font-size: 7px;
+
   }
   .input_line{
     bottom: 110px;
@@ -661,6 +700,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
     font-size: 8px;
   }
   .two-input{
+    left: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 110px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 8px;
+  }
+  .search-input{
     left: 10px;
     border-radius: 5px;
     text-align: center;
@@ -709,14 +759,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
   .select-1 {
     padding: 3px 3px;
     margin-left: 0px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 8px;
     width: 60px;
   }
   .select-2 {
     padding: 3px 3px;
     margin-left: 0px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 8px;
     width: 42px;
   }
@@ -724,7 +774,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
     top: 100px;
     left: 20px;
   }
-  #map {
+  .map1 {
     bottom: 100px;
   }
   footer{
@@ -739,11 +789,19 @@ body {font-family: Arial, Helvetica, sans-serif;}
   .detali-home {
     font-size: 12px;
   }
+  .korisnik-2{
+    top:110px;
+  }
 }
 /*----------------------------------------------------------------------------------------------------------*/
 @media only screen and (max-width: 378px) {
   header{
-    font-size: 10px;
+    font-size: 4px;
+  }
+  .carpin-black{
+    width: 60px;
+    height: 60px;
+    margin-left: -20px;
   }
   .input_line{
     bottom: 110px;
@@ -768,6 +826,16 @@ body {font-family: Arial, Helvetica, sans-serif;}
     border-radius: 5px;
     padding-top: 2px;
     width: 100px;
+    padding-bottom: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 8px;
+  }
+  .search-input{
+    left: 0px;
+    border-radius: 5px;
+    padding-top: 2px;
+    width: 80px;
     padding-bottom: 2px;
     padding-left: 0px;
     padding-right: 0px;
@@ -811,14 +879,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
   .select-1 {
     padding: 3px 3px;
     margin-left: 0px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 8px;
     width: 60px;
   }
   .select-2 {
     padding: 3px 3px;
     margin-left: 0px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 8px;
     width: 42px;
   }
@@ -857,13 +925,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
     margin: 4px 0;
     margin-left: 37%;
   }
+  .korisnik-2{
+    top:110px;
+  }
 }
 
 /*--------------------------------------------------------------------------------------------------*/
 @media only screen and (max-width: 367px) {
   header{
-    font-size: 10px;
+    font-size: 7px;
   }
+
   .input_line{
     bottom: 110px;
     width: 330px;
@@ -888,6 +960,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
     text-align: center;
     padding-top: 2px;
     width: 100px;
+    padding-bottom: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 8px;
+  }
+  .search-input{
+    left: 0px;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 2px;
+    width: 70px;
     padding-bottom: 2px;
     padding-left: 0px;
     padding-right: 0px;
@@ -931,14 +1014,14 @@ body {font-family: Arial, Helvetica, sans-serif;}
   .select-1 {
     padding: 3px 3px;
     margin-left: 0px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 8px;
     width: 60px;
   }
   .select-2 {
     padding: 3px 3px;
     margin-left: 0px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: 8px;
     width: 42px;
   }
@@ -946,9 +1029,10 @@ body {font-family: Arial, Helvetica, sans-serif;}
     top: 100px;
     left: 20px;
   }
-  #map {
+  .map1 {
     bottom: 100px;
   }
+
   footer{
     height: 100px;
     font-size: 10px;
@@ -999,6 +1083,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
     padding:10px 20px;
     margin-left: 37%;
   }
+  .korisnik-2{
+    top:110px;
+  }
 }
 
 
@@ -1006,6 +1093,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 @media only screen and (max-width: 325px) {
 
   body {font-size: 15px;}
+  .korisnik-2{
+    top:110px;
+  }
   .pole{
     height: 535px;
     width: 300px;
@@ -1075,6 +1165,17 @@ body {font-family: Arial, Helvetica, sans-serif;}
     width: 100px;
     font-size: 8px;
   }
+  .search-input{
+    left: 5px;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100px;
+    font-size: 8px;
+  }
   .buttton-2 {
     padding: 3px 3px;
     width: 55px;
@@ -1092,31 +1193,35 @@ body {font-family: Arial, Helvetica, sans-serif;}
     bottom: 10px;
   }
   .span-1{
-    font-size: 7px;padding-left: 5px;
+    font-size: 7px;padding-left: 0px;
   }
   .span-2{
     font-size: 7px;padding-left: 0px;
   }
   .buttton-person {
-    width: 20px;
+    width: 15px;
     height: 15px;
     margin-left: 0px;
     border-radius: 5px;
     font-size: 8px;
+    /*width: 1.5em !important;*/
+    /*height: 1.5em !important;*/
   }
   .buttton-car {
-    width: 20px;
+    width: 15px;
     height: 15px;
     margin-left: 0px;
     border-radius: 5px;
     font-size: 8px;
+    /*width: 1.5em !important;*/
+    /*height: 1.5em !important;*/
   }
   .select-1 {
     padding: 3px 3px;
     margin-left: 0px;
     border-radius: 5px;
     font-size: 8px;
-    width: 60px;
+    width: 48px;
   }
   .select-2 {
     padding: 3px 3px;
@@ -1125,4 +1230,53 @@ body {font-family: Arial, Helvetica, sans-serif;}
     font-size: 8px;
     width: 42px;
   }
+  .search-input{
+    left: 0px;
+    width: 75px;
+  }
+  header{
+    font-size:  4px;
+  }
+
+  .carpin-black{
+    width: 60px;
+    height: 60px;
+    margin-left: -20px;
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  -----   */
+.p-0{
+  padding: 0px;
+}
+.w-h-1-5{
+  width: 1.5em;
+  height: 1.5em;
+}
+

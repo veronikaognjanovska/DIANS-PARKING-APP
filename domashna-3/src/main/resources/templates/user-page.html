@@ -17,12 +17,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Мој профил</title>
     <style>
-        #map, .leaflet-pane, .leaflet-map-pane, .leaflet-control-container, .leaflet-top, .leaflet-left, .leaflet-control-zoom, .leaflet-bar, .leaflet-control, .leaflet-control-attribution, .leaflet-control{
-            position:static !important;
-        }
-        .leaflet-control-zoom, .leaflet-bar, .leaflet-control{
-            z-index:1000;
-        }
+        /*.map2{*/
+            /*position: absolute;*/
+            /*top:85px;*/
+            /*bottom: 120px;*/
+            /*left:0;*/
+            /*right: 0;*/
+        /*}*/
+        /*.map2, .leaflet-pane, .leaflet-map-pane, .leaflet-control-container, .leaflet-top, .leaflet-left, .leaflet-control-zoom, .leaflet-bar, .leaflet-control, .leaflet-control-attribution, .leaflet-control{*/
+            /*position:static !important;*/
+        /*}*/
+        /*.leaflet-control-zoom, .leaflet-bar, .leaflet-control{*/
+            /*z-index:1000;*/
+        /*}*/
 
     </style>
 </head>
@@ -31,12 +38,12 @@
     <nav class="navbar navbar-inverse" style="background-color: #272727; height: 85px;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <img class="carpin-black" src="images/carpin-black.png">
+                <img class="carpin-black" src="/images/carpin-black.png">
                 Мој профил
             </div>
 
             <div class="navbar-header navbar-right">
-                <img class="carpin-black" src="images/user.png" style="border-radius: 50%; background-color: white;">
+                <img class="carpin-black" src="/images/user.png" style="border-radius: 50%; background-color: white;">
                 <a href="javascript: document.logoutForm.submit()" role="menuitem" style="color:white"> Одјави се</a>
 
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
@@ -52,7 +59,7 @@
 
     <div style="float: left" class="col-md-4">
         <div style="padding-left: 15%">
-            <img src="images/user.png" style="width: 150px; border-radius: 50%; height: 150px;background-color: white;">
+            <img src="/images/user.png" style="width: 150px; border-radius: 50%; height: 150px;background-color: white;">
         </div>
         <br>
         <h3>Корисничко име</h3> <h3 th:text="${user.getName()}"><b></b></h3>
@@ -69,8 +76,8 @@
 
     </div>
     <div class="col-md-4">
-        <h3>Последна пребарана рута</h3>
-        <div id="map"  style="margin: 50px 5px;position:static !important;height:100%"></div>
+        <h3>Последни пребарани рути</h3>
+        <div class='map2' id="map"  style="margin: 50px 5px;position:static !important;height:100%"></div>
     </div>
 
     <div class="korisnik-2 col-md-4">
