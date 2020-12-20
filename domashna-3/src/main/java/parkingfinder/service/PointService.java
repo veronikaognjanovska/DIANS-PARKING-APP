@@ -39,8 +39,8 @@ public class PointService {
     // http://localhost:8080/api/name?q=New York City
 
     public Point getPointFromName(String q) {
-
-        String url = "https://nominatim.openstreetmap.org/search?q="+q+"&limit=1&format=json";
+        String search = q.replace(" ","-");
+        String url = "https://nominatim.openstreetmap.org/search?q="+search+"&limit=1&format=json";
         JSONArray json=sentRequestArray(url);
 
         Point point = null;
