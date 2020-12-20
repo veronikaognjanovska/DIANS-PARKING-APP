@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import parkingfinder.config.CustomUsernamePasswordAuthenticationProvider;
 import parkingfinder.model.Route;
@@ -26,7 +27,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
@@ -41,6 +44,8 @@ public class UserController {
 
     @Autowired
     private final RouteService routeService;
+
+    private final Comparator<Route> routeComparator = Comparator.comparing(Route::getTimestamp).reversed();
 
 
     public UserController(UserService userService, CustomUsernamePasswordAuthenticationProvider authenticate, RouteService routeService) {
@@ -83,8 +88,11 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         User user = (User) userService.loadUserByUsername(email);
-        List<Route> routes = routeService.findHistoryRoutes(email);
-
+        List<Route> routes = routeService.findHistoryRoutes(email)
+                .stream()
+                .limit(5)
+                .sorted(routeComparator)
+                .collect(Collectors.toList());
         model.addAttribute("routes", routes);
         model.addAttribute("user", user);
 
@@ -112,25 +120,28 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    String updateUser(User user)
+    String updateUser(
+            @Valid User user, BindingResult bindingResult, Model model)
     {
+        if (bindingResult.hasErrors()) {
+            return "editprofile";
+        }
 
         try{
-
             userService.updateUser(user);
             return "redirect:/user-details";
         } catch (InvalidArgumentsException exception) {
-            return "redirect:/update?error=" + exception.getMessage();
+            model.addAttribute("emailExists", true);
+            return "editprofile";
         }
 
     }
 
     @GetMapping("/update")
     String updateUp(Model model) {
-
         User principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) userService.loadUserByUsername(principal.getEmail());
-        model.addAttribute("user", new User());
+        model.addAttribute("user", user);
         return "editprofile";
     }
 

@@ -212,35 +212,35 @@
         $('#coordinates').click(function(){
             var address = $("#address").val();
             if(address !== undefined && address!==''){
-                $.ajax({
-                    method: "GET",
-                    url: "http://localhost:8080/point?q=" + address + "",
-                    headers: {
-                        "Content-type" : "application/json",
-                        "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods":"GET",
-                        "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
-                    },
-                    success: function(data){
+            $.ajax({
+                method: "GET",
+                url: "http://localhost:8080/point?q=" + address + "",
+                headers: {
+                    "Content-type" : "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods":"GET",
+                    "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
+                },
+                success: function(data){
 
-                        console.log(data);
-                        if (data !== undefined && data && data.lat && data.lng){
-                            for (var marker in user_markers){
-                                user_markers[marker].remove();
-                            }
-                            user_lat = data.lat;
-                            user_lng=data.lng;
-                            var marker = L.marker([data.lat, data.lng], {
-                                icon: redIcon
-                            }).addTo(map);
-                            var latLngs = [ marker.getLatLng() ];
-                            var markerBounds = L.latLngBounds(latLngs);
-                            map.fitBounds(markerBounds);
-                            map.setZoom(13);
-                            user_markers.push(marker);
+                    console.log(data);
+                    if (data !== undefined && data && data.lat && data.lng){
+                        for (var marker in user_markers){
+                            user_markers[marker].remove();
                         }
+                        user_lat = data.lat;
+                        user_lng=data.lng;
+                        var marker = L.marker([data.lat, data.lng], {
+                            icon: redIcon
+                        }).addTo(map);
+                        var latLngs = [ marker.getLatLng() ];
+                        var markerBounds = L.latLngBounds(latLngs);
+                        map.fitBounds(markerBounds);
+                        map.setZoom(13);
+                        user_markers.push(marker);
                     }
-                });
+                }
+            });
             }
         });
 

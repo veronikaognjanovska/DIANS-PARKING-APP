@@ -7,7 +7,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import parkingfinder.model.Route;
+import parkingfinder.repository.PointRepository;
 import parkingfinder.repository.RouteRepository;
+import parkingfinder.repository.StreetNameRepository;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -24,6 +26,12 @@ class RouteEvictionServiceTest {
 
     @Mock
     RouteRepository mockRouteRepository;
+
+    @Mock
+    PointRepository mockPointRepository;
+
+    @Mock
+    StreetNameRepository mockStreetNameRepository;
 
     @InjectMocks
     RouteEvictionService routeEvictionService;
@@ -50,6 +58,7 @@ class RouteEvictionServiceTest {
 
     @Test
     public void shouldReturnNumberOfRoutesDeleted() {
+
         int deleted = routeEvictionService.evictOldRoutes();
         assertEquals(1, deleted);
 

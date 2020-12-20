@@ -25,10 +25,10 @@ public class Route{
      @ManyToOne
      private User userId;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Point> points;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<StreetName> streetNames;
 
     private ZonedDateTime timestamp;

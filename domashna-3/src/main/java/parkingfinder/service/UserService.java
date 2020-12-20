@@ -35,13 +35,20 @@ public class UserService implements UserDetailsService {
 
     public boolean updateUser(User user) throws InvalidArgumentsException
     {
-            String email= SecurityContextHolder.getContext().getAuthentication().getName();
-            if(!this.userRepository.findByEmail(email).isPresent()) {
+        String email= SecurityContextHolder.getContext().getAuthentication().getName();
+        User u = this.userRepository.findByEmail(email).get();
+        if(u!=null && !u.getID().equals(user.getID())) {
             throw new InvalidArgumentsException();
         }
-        userRepository.updateUserById(user.getName(),user.getEmail(),passwordEncoder.encode(user.getPassword()));
-
-
+        try {
+            User update = this.userRepository.findById(user.getID()).get();
+            update.setEmail(user.getEmail());
+            update.setPassword(passwordEncoder.encode(user.getPassword()));
+            update.setName(user.getName());
+            userRepository.save(update);
+        }catch (Exception e){
+            throw new InvalidArgumentsException();
+        }
         return true;
     }
     @Override

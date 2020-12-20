@@ -105,18 +105,18 @@
 </div>
 <script>
     $(document).ready(function(){
-        var map = L.map('map').setView([42.006510, 21.421958], 13);
+     var map = L.map('map').setView([42.006510, 21.421958], 13);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
         var colors = ["red", "green", "blue", "yellow", "pink"]
         $(".points").each(function( index ) {
-            var lats = []
-            var lngs = []
-            $(this).children("div").each(function(){$(this).children(".lat").each(function(ind){ lats.push($(this).text())})});
-            $(this).children("div").each(function(){$(this).children(".lng").each(function(ind){ lngs.push($(this).text())})});
-            var latlng = [];
+           var lats = []
+           var lngs = []
+           $(this).children("div").each(function(){$(this).children(".lat").each(function(ind){ lats.push($(this).text())})});
+           $(this).children("div").each(function(){$(this).children(".lng").each(function(ind){ lngs.push($(this).text())})});
+           var latlng = [];
             for (ind in lats){
                 latlng.push([
                     lngs[ind],
@@ -124,9 +124,9 @@
                 ]);
             }
 
-            var polyline = L.polyline(latlng, {colors: colors[index] }).addTo(map);
-            console.log(polyline);
-            map.fitBounds(polyline.getBounds());
+         var polyline = L.polyline(latlng, {colors: colors[index] }).addTo(map);
+         console.log(polyline);
+         map.fitBounds(polyline.getBounds());
         })
     });
 </script>
