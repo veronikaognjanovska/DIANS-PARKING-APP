@@ -301,7 +301,7 @@
             var parking=[];
             for(var i=0;i<parkingpots.length;i++)
             {
-                if(parkingpots[i].name.toString().toLowerCase().search($("#search").val()) !== -1){
+                if(parkingpots[i].name.toString().search($("#search").val()) !== -1){
                     for(var index in markersLayer._layers)
                     {
                         if(parkingpots[i].lat===markersLayer._layers[index]._latlng.lat && parkingpots[i].lng===markersLayer._layers[index]._latlng.lng)
