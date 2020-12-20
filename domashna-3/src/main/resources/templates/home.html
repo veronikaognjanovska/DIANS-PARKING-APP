@@ -26,22 +26,28 @@
                 <button id="searchbtn" class="outline-none buttton-person" type="button" >
                     <i class="fa fa-search outline-none" aria-hidden="true" ></i>
                 </button>
-                <input id="search" class="two-input" type="text" name="fname" placeholder="Пребарај паркинг" value="">
+                <input id="search" class="search-input" type="text" name="fname" placeholder="Пребарај паркинг" value="">
             </div>
             <div class="navbar-header navbar-right meni">
                 <a  class="p-2" th:href="@{/register}" sec:authorize="hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Регистрирај се!</a>
                 <a th:href="@{/sign-in}" sec:authorize="hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Најава</a>&nbsp;
                 <a th:href="@{/user-details}" sec:authorize="!hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Профил</a>
 
-                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true" >
-                    <input type="submit" value="Одјави се"/>
+                <div sec:authorize="!hasRole('ROLE_ANONYMOUS')">
+                <a href="javascript: document.logoutForm.submit()" role="menuitem" style="color:white"> Одјави се</a>
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Одјави се"/>
                 </form>
+                </div>
+                <!--<form name="logoutForm" th:action="@{/logout}" sec:authorize="!hasRole('ROLE_ANONYMOUS')" method="post" th:hidden="true" >-->
+                    <!--<input type="submit" value="Одјави се"/>-->
+                <!--</form>-->
             </div>
         </div>
     </nav>
 </header>
 
-<div id="map"></div>
+<div class='map1' id="map"></div>
 <div class="input_line">
     <input id="paddress" class="one-input" type="text" name="fname" style="color:black" placeholder="Паркинг адреса" value="" disabled>
     <input id="address" class="two-input" type="text" name="fname" placeholder="Моментална локација" value="">
@@ -119,7 +125,7 @@
                     "<br>" + "<a href='/parking?id=" + parkingpots[i].id + "'>Детали</a><br>"
                     +"<button data-lat='" + lat + "' data-lng='" + lng + "'" +
                     " data-id='" + parkingpots[i].id + "'"
-                     + "' name='" + name
+                    + "' name='" + name
                     + "' class='choose buttton-izberi' type='button' ><span>Избери</span></button></p>")
                 .openPopup();
             markersLayer.addLayer(marker);
@@ -152,7 +158,7 @@
         $('#more').click(function(){
             console.log(selected_parking);
             if(selected_parking!==undefined){
-            console.log('/parking?id='+selected_parking);
+                console.log('/parking?id='+selected_parking);
                 window.location.replace('/parking?id='+selected_parking);
             }
         });
@@ -206,35 +212,35 @@
         $('#coordinates').click(function(){
             var address = $("#address").val();
             if(address !== undefined && address!==''){
-            $.ajax({
-                method: "GET",
-                url: "http://localhost:8080/point?q=" + address + "",
-                headers: {
-                    "Content-type" : "application/json",
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods":"GET",
-                    "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
-                },
-                success: function(data){
+                $.ajax({
+                    method: "GET",
+                    url: "http://localhost:8080/point?q=" + address + "",
+                    headers: {
+                        "Content-type" : "application/json",
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods":"GET",
+                        "Access-Control-Allow-Headers": "Origin, Methods, Content-Type"
+                    },
+                    success: function(data){
 
-                    console.log(data);
-                    if (data !== undefined){
-                        for (var marker in user_markers){
-                            user_markers[marker].remove();
+                        console.log(data);
+                        if (data !== undefined && data && data.lat && data.lng){
+                            for (var marker in user_markers){
+                                user_markers[marker].remove();
+                            }
+                            user_lat = data.lat;
+                            user_lng=data.lng;
+                            var marker = L.marker([data.lat, data.lng], {
+                                icon: redIcon
+                            }).addTo(map);
+                            var latLngs = [ marker.getLatLng() ];
+                            var markerBounds = L.latLngBounds(latLngs);
+                            map.fitBounds(markerBounds);
+                            map.setZoom(13);
+                            user_markers.push(marker);
                         }
-                        user_lat = data.lat;
-                        user_lng=data.lng;
-                        var marker = L.marker([data.lat, data.lng], {
-                            icon: redIcon
-                        }).addTo(map);
-                        var latLngs = [ marker.getLatLng() ];
-                        var markerBounds = L.latLngBounds(latLngs);
-                        map.fitBounds(markerBounds);
-                        map.setZoom(13);
-                        user_markers.push(marker);
                     }
-                }
-            });
+                });
             }
         });
 
@@ -275,14 +281,12 @@
                             for (st in data.streetNames){
                                 streets += data.streetNames[st].streetName + "<br>";
                             }
-                            console.log(latlng);
-                            console.log(parking_lat);
-                            console.log(parking_lng);
-                            var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
-                            map.fitBounds(polyline.getBounds());
-                            console.log(streets);
-                            routes.push(polyline);
-                            $( ".input-address" ).first().html( streets );
+                            if (latlng.length!=0){
+                                var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
+                                map.fitBounds(polyline.getBounds());
+                                routes.push(polyline);
+                                $( ".input-address" ).first().html( streets );
+                            }
                             // $('.input-address').innerHTML=streets;
                         }}
                 });
@@ -297,7 +301,7 @@
             var parking=[];
             for(var i=0;i<parkingpots.length;i++)
             {
-                if(parkingpots[i].name.toString().search($("#search").val()) !== -1){
+                if(parkingpots[i].name.toString().toLowerCase().search($("#search").val()) !== -1){
                     for(var index in markersLayer._layers)
                     {
                         if(parkingpots[i].lat===markersLayer._layers[index]._latlng.lat && parkingpots[i].lng===markersLayer._layers[index]._latlng.lng)

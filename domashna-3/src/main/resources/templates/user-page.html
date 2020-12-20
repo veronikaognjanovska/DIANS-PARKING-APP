@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="icon" th:href="@{/images/transparent-logo.png}">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="icon" href="images/transparent-logo.png">-->
+    <!--<link rel="stylesheet" type="text/css"  href="bootstrap.min.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+    <meta charset="UTF-8" />
+    <meta content="application/xhtml+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="icon" th:href="@{'/images/transparent-logo.png'}">
-    <link rel="stylesheet" th:href="@{'/css/bootstrap.min.css'}">
-    <link rel="stylesheet" th:href="@{'/css/style.css'}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Мој профил</title>
+    <style>
+        /*.map2{*/
+            /*position: absolute;*/
+            /*top:85px;*/
+            /*bottom: 120px;*/
+            /*left:0;*/
+            /*right: 0;*/
+        /*}*/
+        /*.map2, .leaflet-pane, .leaflet-map-pane, .leaflet-control-container, .leaflet-top, .leaflet-left, .leaflet-control-zoom, .leaflet-bar, .leaflet-control, .leaflet-control-attribution, .leaflet-control{*/
+            /*position:static !important;*/
+        /*}*/
+        /*.leaflet-control-zoom, .leaflet-bar, .leaflet-control{*/
+            /*z-index:1000;*/
+        /*}*/
+
+    </style>
 </head>
 <body>
 <header>
     <nav class="navbar navbar-inverse" style="background-color: #272727; height: 85px;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <img class="carpin-black" src="images/carpin-black.png">
+                <img class="carpin-black" src="/images/carpin-black.png">
                 Мој профил
             </div>
 
             <div class="navbar-header navbar-right">
-                <img class="carpin-black" src="images/user.png" style="border-radius: 50%; background-color: white;">
+                <img class="carpin-black" src="/images/user.png" style="border-radius: 50%; background-color: white;">
                 <a href="javascript: document.logoutForm.submit()" role="menuitem" style="color:white"> Одјави се</a>
 
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
@@ -32,18 +55,18 @@
 </header>
 
 
-<div class="korisnik">
+<div class="korisnik row">
 
-    <div style="float: left">
+    <div style="float: left" class="col-md-4">
         <div style="padding-left: 15%">
-            <img src="images/user.png" style="width: 150px; border-radius: 50%; height: 150px;background-color: white;">
+            <img src="/images/user.png" style="width: 150px; border-radius: 50%; height: 150px;background-color: white;">
         </div>
         <br>
         <h3>Корисничко име</h3> <h3 th:text="${user.getName()}"><b></b></h3>
         <br>
         <h3>E-mail</h3><h3 th:text="${user.getEmail()}"><b></b></h3>
         <br>
-        <a class="promena" th:href="@{/user-update}"><span>Уреди профил</span></a>
+        <a class="promena" th:href="@{/update}"><span>Уреди профил</span></a>
         <br>
 
         <div>
@@ -52,26 +75,60 @@
         </div>
 
     </div>
+    <div class="col-md-4">
+        <h3>Последна пребарана рута</h3>
+        <div class='map2' id="map"  style="margin: 50px 5px;position:static !important;height:100%"></div>
+    </div>
 
-
-
-    <div class="korisnik-2">
-        <h2>Историја на 5 <br>последни пребарувања</h2>
-<!--            <dd>Локација 1</dd>-->
-<!--            <dd>Локација 2</dd>-->
-<!--            <dd>Локација 3</dd>-->
-<!--            <dd>Локација 4</dd>-->
-<!--            <dd>Локација 5</dd>-->
+    <div class="korisnik-2 col-md-4">
+        <h2>Историја на 5 <br>последни пребарувања</h2> <br>
+        <!--            <dd>Локација 1</dd>-->
+        <!--            <dd>Локација 2</dd>-->
+        <!--            <dd>Локација 3</dd>-->
+        <!--            <dd>Локација 4</dd>-->
+        <!--            <dd>Локација 5</dd>-->
 
         <div th:each="route: ${routes}">
             <h3>РУТА: </h3>
             <ul th:each="name:${route.streetNames}">
                 <li th:text="${name.streetName}" />
+                <div class="points">
+                    <div hidden th:each="point: ${route.points}">
+                        <p class="lat" th:text="${point.lat}" hidden></p>
+                        <p class="lng" th:text="${point.lng}" hidden></p>
+                    </div>
+                </div>
             </ul>
         </div>
 
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        var map = L.map('map').setView([42.006510, 21.421958], 13);
 
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        var colors = ["red", "green", "blue", "yellow", "pink"]
+        $(".points").each(function( index ) {
+            var lats = []
+            var lngs = []
+            $(this).children("div").each(function(){$(this).children(".lat").each(function(ind){ lats.push($(this).text())})});
+            $(this).children("div").each(function(){$(this).children(".lng").each(function(ind){ lngs.push($(this).text())})});
+            var latlng = [];
+            for (ind in lats){
+                latlng.push([
+                    lngs[ind],
+                    lats[ind]
+                ]);
+            }
+
+            var polyline = L.polyline(latlng, {colors: colors[index] }).addTo(map);
+            console.log(polyline);
+            map.fitBounds(polyline.getBounds());
+        })
+    });
+</script>
 </body>
 </html>
