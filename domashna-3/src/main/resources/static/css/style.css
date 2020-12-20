@@ -1167,31 +1167,35 @@ body {font-family: Arial, Helvetica, sans-serif;}
     bottom: 10px;
   }
   .span-1{
-    font-size: 7px;padding-left: 5px;
+    font-size: 7px;padding-left: 0px;
   }
   .span-2{
     font-size: 7px;padding-left: 0px;
   }
   .buttton-person {
-    width: 20px;
+    width: 15px;
     height: 15px;
     margin-left: 0px;
     border-radius: 5px;
     font-size: 8px;
+    /*width: 1.5em !important;*/
+    /*height: 1.5em !important;*/
   }
   .buttton-car {
-    width: 20px;
+    width: 15px;
     height: 15px;
     margin-left: 0px;
     border-radius: 5px;
     font-size: 8px;
+    /*width: 1.5em !important;*/
+    /*height: 1.5em !important;*/
   }
   .select-1 {
     padding: 3px 3px;
     margin-left: 0px;
     border-radius: 5px;
     font-size: 8px;
-    width: 60px;
+    width: 48px;
   }
   .select-2 {
     padding: 3px 3px;
@@ -1215,3 +1219,38 @@ body {font-family: Arial, Helvetica, sans-serif;}
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  -----   */
+.p-0{
+  padding: 0px;
+}
+.w-h-1-5{
+  width: 1.5em;
+  height: 1.5em;
+}
+
