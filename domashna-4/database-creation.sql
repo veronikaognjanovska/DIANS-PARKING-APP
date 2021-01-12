@@ -1,0 +1,2 @@
+CREATE DATABASE routedb;
+CREATE DATABASE userdb;
