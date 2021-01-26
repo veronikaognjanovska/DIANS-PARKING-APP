@@ -79,7 +79,7 @@ public class ParkingSpotDataLoader implements Subject, DataLoader {
 
     /**
     * Method that returns a list of all the parking spots read from database
-    * @return List<ParkingSpot> - list of all parking spots
+    * @return List - list of all parking spots
     * */
     public List<ParkingSpot> getParkingSpotsAll() {
         return this.parkingSpotsAll;

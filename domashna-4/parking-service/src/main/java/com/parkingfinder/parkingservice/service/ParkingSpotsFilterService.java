@@ -45,7 +45,7 @@ public class ParkingSpotsFilterService implements Observer {
 
     /**
     * Method that returns a list of all the parking spots stored in memory
-    * @return List<ParkingSpots> - list of all parking spots
+    * @return List - list of all parking spots
     * */
     public List<ParkingSpot> getParkingSpotsAll(){
         return parkingSpotsAll;
@@ -54,7 +54,7 @@ public class ParkingSpotsFilterService implements Observer {
     /**
     * Method that returns a list of all parking spots that match a requested access level
     * @param access - string representing the required access level
-    * @return List<ParkingSpot> - list of parking spots matching access level
+    * @return List - list of parking spots matching access level
     * */
     public List<ParkingSpot> getParkingSpotsByAccess(String access) {
         return parkingSpotsByAccess.getOrDefault(access, parkingSpotsAll);
@@ -63,7 +63,7 @@ public class ParkingSpotsFilterService implements Observer {
     /**
      * Method that returns a list of all parking spots that match a requested parking type
      * @param type - string representing the required parking type
-     * @return List<ParkingSpot> - list of parking spots matching parking type
+     * @return List - list of parking spots matching parking type
      * */
     public List<ParkingSpot> getParkingSpotsByType(String type) {
         return parkingSpotsByType.getOrDefault(type, parkingSpotsAll);

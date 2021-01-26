@@ -34,7 +34,7 @@ public class ParkingSpotsFilterController {
     * Method that returns a filtered result of parking
     * spots based on a user requested access level
     * @param accessLevel - string that represents the user requested access level
-    * @return List<ParkingSpots> - a list of all parking spots
+    * @return List - a list of all parking spots
     * matching the requested access level
     * */
     @GetMapping("/access")
@@ -46,7 +46,7 @@ public class ParkingSpotsFilterController {
      * Method that returns a filtered result of parking
      * spots based on a user requested parking type
      * @param parkingType - string that represents the user requested parking type
-     * @return List<ParkingSpots> - a list of all parking spots
+     * @return List - a list of all parking spots
      * matching the requested parking type
      * */
     @GetMapping("/type")
