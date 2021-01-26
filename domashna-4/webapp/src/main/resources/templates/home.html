@@ -65,7 +65,7 @@
 
     <span class="span-2">Филтрирај паркинг според:</span>
     <select  class="select-1" id="tip" name="tip">
-        <option value="tip">Пристап</option>
+        <option value="default">Пристап</option>
         <option value="private">private</option>
         <option value="public">public</option>
     </select>
@@ -173,7 +173,7 @@
 
         $('#tip').change(function(){
             var value = $('#tip').val();
-            console.log(value);
+            $('#fukcija').val("default");
             $.ajax({
                 method: "GET",
                 url: parkingBaseUrl + "access?accessLevel=" + value + "",
@@ -192,7 +192,7 @@
 
         $('#fukcija').change(function(){
             var value = $('#fukcija').val();
-            console.log(value);
+            $('#tip').val("default");
             $.ajax({
                 method: "GET",
                 url: parkingBaseUrl + "type?parkingType=" + value + "",
@@ -303,13 +303,10 @@
             }
         });
         $("#searchbtn").click(function () {
-            // var parking =  parkingpots.filter(function(parking) {
-            //     return parking.name.toString().indexOf($("#search").text()) !== -1;
-            // });
             var parking=[];
             for(var i=0;i<parkingpots.length;i++)
             {
-                if(parkingpots[i].name.toString().search($("#search").val()) !== -1){
+                if(parkingpots[i].name.toString().toLowerCase().search($("#search").val()) !== -1){
                     for(var index in markersLayer._layers)
                     {
                         if(parkingpots[i].lat===markersLayer._layers[index]._latlng.lat && parkingpots[i].lng===markersLayer._layers[index]._latlng.lng)

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.parkingfinder.webapp.dtos.ParkingDto;
 import com.parkingfinder.webapp.service.ParkingSpotsFetchService;
 import com.parkingfinder.webapp.util.LocalBaseUrls;
-import com.parkingfinder.webapp.util.URLPaths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,10 +33,10 @@ public class HomeController {
     public String home(Model model){
 
         ObjectMapper objectMapper = new ObjectMapper();
-        List<ParkingDto> parkingSpotList = parkingSpotsFetchService.getParkingSpotsAll();
         try {
+            List<ParkingDto> parkingSpotList = parkingSpotsFetchService.getParkingSpotsAll();
             model.addAttribute("allParkings", objectMapper.writeValueAsString(parkingSpotList));
-        } catch (JsonProcessingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         model.addAttribute("parkingBaseUrl", localBaseUrls.getParkingService());

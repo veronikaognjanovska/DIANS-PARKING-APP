@@ -44,17 +44,19 @@ public class ParkingSpotDataLoader implements Subject, DataLoader {
     public void loadDataFromDatabase() {
         parkingSpotsAll = parkingSpotRepository.findAll().stream()
                 .filter(parkingSpot -> !checkEmptyStringOrNull(parkingSpot.getName()))
-                .map(parkingSpot -> {
-                    if(checkEmptyStringOrNull(parkingSpot.getParking_type())){
-                        parkingSpot.setParking_type(Constants.DEFAULT_PARKING_TYPE);
-                    }
-                    if(checkEmptyStringOrNull(parkingSpot.getAccess())){
-                        parkingSpot.setAccess(Constants.DEFAULT_ACCESS_LEVEL);
-                    }
-                    return parkingSpot;
-                })
+                .map(this::mapParkingSpotWithDefaultValues)
                 .collect(Collectors.toList());
         notifyObservers();
+    }
+
+    private ParkingSpot mapParkingSpotWithDefaultValues(ParkingSpot parkingSpot) {
+        if(checkEmptyStringOrNull(parkingSpot.getParking_type())){
+            parkingSpot.setParking_type(Constants.DEFAULT_PARKING_TYPE);
+        }
+        if(checkEmptyStringOrNull(parkingSpot.getAccess())){
+            parkingSpot.setAccess(Constants.DEFAULT_ACCESS_LEVEL);
+        }
+        return parkingSpot;
     }
 
     private boolean checkEmptyStringOrNull(String string) {
