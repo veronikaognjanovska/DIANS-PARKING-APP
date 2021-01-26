@@ -1,6 +1,7 @@
 package com.parkingfinder.webapp.service;
 
 import com.parkingfinder.webapp.dtos.ParkingDto;
+import com.parkingfinder.webapp.util.URLPaths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ParkingSpotsFetchService {
      * */
     public List<ParkingDto> getParkingSpotsAll() {
         return Arrays.asList(Objects.requireNonNull(
-                restTemplate.exchange("http://PARKING-SERVICE/parking/filter/all",
+                restTemplate.exchange(URLPaths.PARKING_SERVICE_BASE_URL + URLPaths.PARKING_FILTER_ALL,
                 HttpMethod.GET, null, ParkingDto[].class).getBody()));
     }
 
@@ -35,7 +36,8 @@ public class ParkingSpotsFetchService {
      * @return ParkingDto - parking spot data transfer object matching requested id or null if not present
      * */
     public ParkingDto findById(String id) {
-        return restTemplate.exchange("http://PARKING-SERVICE/parking/filter/single?id=" + id,
+        return restTemplate.exchange(URLPaths.PARKING_SERVICE_BASE_URL
+                        + URLPaths.PARKING_FILTER_SINGLE + id,
                 HttpMethod.GET, null, ParkingDto.class).getBody();
     }
 
@@ -47,7 +49,8 @@ public class ParkingSpotsFetchService {
      * */
     public List<ParkingDto> getParkingByAccessLevel(String access) {
         return Arrays.asList(Objects.requireNonNull(
-                restTemplate.exchange("http://PARKING-SERVICE/parking/filter/access?accessLevel=" + access,
+                restTemplate.exchange(URLPaths.PARKING_SERVICE_BASE_URL
+                                + URLPaths.PARKING_FILTER_BY_ACCESS + access,
                         HttpMethod.GET, null, ParkingDto[].class).getBody()));
     }
 
@@ -59,7 +62,8 @@ public class ParkingSpotsFetchService {
      * */
     public List<ParkingDto> getParkingByType(String type) {
         return Arrays.asList(Objects.requireNonNull(
-                restTemplate.exchange("http://PARKING-SERVICE/parking/filter/type?parkingType=" + type,
+                restTemplate.exchange(URLPaths.PARKING_SERVICE_BASE_URL
+                                + URLPaths.PARKING_FILTER_BY_TYPE + type,
                         HttpMethod.GET, null, ParkingDto[].class).getBody()));
     }
 

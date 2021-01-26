@@ -68,7 +68,7 @@ public class UserController {
      * */
     @PostMapping("/sign-in-post")
     public void login(HttpServletRequest req, String user, String pass) {
-        Authentication auth = userService.signInUser(req, user, pass);
+        Authentication auth = userService.signInUser(user, pass);
         if (auth!=null) {
             authenticate(req, auth);
         }

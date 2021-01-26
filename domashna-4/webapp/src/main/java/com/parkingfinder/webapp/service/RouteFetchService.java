@@ -1,6 +1,7 @@
 package com.parkingfinder.webapp.service;
 
 import com.parkingfinder.webapp.dtos.RouteDto;
+import com.parkingfinder.webapp.util.URLPaths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -27,7 +28,8 @@ public class RouteFetchService {
     * */
     public List<RouteDto> findHistoryRoutes(String email) {
         return Arrays.asList(Objects.requireNonNull(
-                restTemplate.exchange("http://ROUTE-SERVICE/route/history",
+                restTemplate.exchange(URLPaths.ROUTE_SERVICE_BASE_URL
+                                + URLPaths.ROUTE_SERVICE_HISTORY,
                 HttpMethod.POST, new HttpEntity<>(email),
                         RouteDto[].class).getBody()));
     }

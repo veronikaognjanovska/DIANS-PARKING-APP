@@ -1,6 +1,7 @@
 package com.parkingfinder.webapp.service;
 
 import com.parkingfinder.webapp.dtos.UserDto;
+import com.parkingfinder.webapp.util.URLPaths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -9,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Service for communicating with external user microservice
@@ -31,7 +30,7 @@ public class UserFetchService {
         UserDto userDto = new UserDto();
         userDto.setEmail(email);
         userDto.setPassword(pass);
-        return restTemplate.exchange("http://USER-SERVICE/user/sing-in",
+        return restTemplate.exchange(URLPaths.USER_SERVICE_BASE_URL + URLPaths.USER_SIGN_IN,
                 HttpMethod.POST, new HttpEntity<>(userDto), Authentication.class).getBody();
     }
 
@@ -41,7 +40,7 @@ public class UserFetchService {
      * @return UserDto - user data transfer object
      * */
     public UserDto loadUserByUsername(String email) {
-        return restTemplate.exchange("http://USER-SERVICE/user/user-details",
+        return restTemplate.exchange(URLPaths.USER_SERVICE_BASE_URL + URLPaths.USER_DETAILS,
                 HttpMethod.POST, new HttpEntity<>(email), UserDto.class).getBody();
     }
 
@@ -51,7 +50,8 @@ public class UserFetchService {
      * @return HttpStatus - the received http status code
      * */
     public HttpStatus register(UserDto user) {
-        ResponseEntity entity = restTemplate.exchange("http://USER-SERVICE/user/user-details",
+        ResponseEntity entity = restTemplate.exchange(URLPaths.USER_SERVICE_BASE_URL
+                        + URLPaths.USER_REGISTER,
                 HttpMethod.POST, new HttpEntity<>(user), ResponseEntity.class).getBody();
         return entity.getStatusCode();
     }
@@ -62,7 +62,8 @@ public class UserFetchService {
      * @return HttpStatus - the received http status code
      * */
     public HttpStatus updateUser(UserDto user) {
-        ResponseEntity entity = restTemplate.exchange("http://USER-SERVICE/user/user-details",
+        ResponseEntity entity = restTemplate.exchange(URLPaths.USER_SERVICE_BASE_URL
+                + URLPaths.USER_UPDATE,
                 HttpMethod.POST, new HttpEntity<>(user), ResponseEntity.class).getBody();
         return entity.getStatusCode();
     }

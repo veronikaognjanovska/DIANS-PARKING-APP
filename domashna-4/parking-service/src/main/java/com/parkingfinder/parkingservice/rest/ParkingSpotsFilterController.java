@@ -3,6 +3,7 @@ package com.parkingfinder.parkingservice.rest;
 import com.parkingfinder.parkingservice.model.ParkingSpot;
 import com.parkingfinder.parkingservice.service.ParkingSpotsFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import java.util.List;
 * */
 @RestController
 @RequestMapping("/parking/filter")
+@CrossOrigin
 public class ParkingSpotsFilterController {
 
     @Autowired

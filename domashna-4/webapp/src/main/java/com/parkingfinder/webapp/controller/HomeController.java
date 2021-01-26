@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.parkingfinder.webapp.dtos.ParkingDto;
 import com.parkingfinder.webapp.service.ParkingSpotsFetchService;
+import com.parkingfinder.webapp.util.LocalBaseUrls;
+import com.parkingfinder.webapp.util.URLPaths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +21,10 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    ParkingSpotsFetchService parkingSpotsFetchService;
+    private ParkingSpotsFetchService parkingSpotsFetchService;
+
+    @Autowired
+    private LocalBaseUrls localBaseUrls;
 
     /**
      * Returns the html page for the front map
@@ -35,6 +40,9 @@ public class HomeController {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        model.addAttribute("parkingBaseUrl", localBaseUrls.getParkingService());
+        model.addAttribute("routeBaseUrl", localBaseUrls.getRouteService());
+        model.addAttribute("pointBaseUrl", localBaseUrls.getPointService());
         return "home";
     }
 
