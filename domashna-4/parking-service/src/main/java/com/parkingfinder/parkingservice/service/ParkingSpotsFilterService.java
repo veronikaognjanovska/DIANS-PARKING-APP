@@ -85,6 +85,5 @@ public class ParkingSpotsFilterService implements Observer {
         ParkingSpotDataLoader dataLoader = (ParkingSpotDataLoader) subject;
         this.setParkingSpotsAll(dataLoader.getParkingSpotsAll());
         loadData();
-        parkingSpotsAll.stream().map(ParkingSpot::getName).forEach(System.out::println);
     }
 }

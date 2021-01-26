@@ -41,7 +41,7 @@ public class ParkingSpotDataLoader implements Subject, DataLoader {
     * Replaces empty values with default constants
     * */
     @Async
-    @Scheduled(fixedDelay = 15000)
+    @Scheduled(fixedDelay = 1800000)
     public void loadDataFromDatabase() {
         parkingSpotsAll = parkingSpotRepository.findAll().stream()
                 .filter(parkingSpot -> !checkEmptyStringOrNull(parkingSpot.getName()))
