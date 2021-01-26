@@ -1,0 +1,7 @@
+com.parkingfinder.parkingservice
+com.parkingfinder.parkingservice.config
+com.parkingfinder.parkingservice.model
+com.parkingfinder.parkingservice.repository
+com.parkingfinder.parkingservice.rest
+com.parkingfinder.parkingservice.service
+com.parkingfinder.parkingservice.util
