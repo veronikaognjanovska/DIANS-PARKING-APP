@@ -2,8 +2,12 @@ package com.parkingfinder.webapp.dtos;
 
 import lombok.Data;
 
+/**
+ * Simple data transfer object for parking spots
+ * */
 @Data
 public class ParkingDto {
+    private String id;
     private double lat;
     private double lng;
     private String name;

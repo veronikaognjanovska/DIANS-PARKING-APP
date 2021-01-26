@@ -6,6 +6,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * Simple data transfer object for user with included validation
+ * */
 @Data
 public class UserDto {
 

@@ -8,6 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Simple data transfer object for Route
+ * */
 @Data
 public class RouteDto {
 
