@@ -3,6 +3,7 @@ package com.parkingfinder.parkingservice.rest;
 import com.parkingfinder.parkingservice.model.ParkingSpot;
 import com.parkingfinder.parkingservice.service.ParkingSpotsFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import java.util.List;
 * */
 @RestController
 @RequestMapping("/parking/filter")
+@CrossOrigin
 public class ParkingSpotsFilterController {
 
     @Autowired
@@ -54,4 +56,15 @@ public class ParkingSpotsFilterController {
         return parkingSpotsFilterService.getParkingSpotsByType(parkingType);
     }
 
+    /**
+     * Method that returns a filtered result of parking
+     * spots based on a user requested parking type
+     * @param id - string that represents the user requested parking with id
+     * @return ParkingSpot - a parking spot matching id parameter or null
+     * if it doesn't exist
+     * */
+    @GetMapping("/single")
+    public ParkingSpot findParkingSpotById(@RequestParam String id) {
+        return parkingSpotsFilterService.findById(id);
+    }
 }

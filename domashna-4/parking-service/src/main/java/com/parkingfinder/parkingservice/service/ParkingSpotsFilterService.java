@@ -27,6 +27,7 @@ public class ParkingSpotsFilterService implements Observer {
     private List<ParkingSpot> parkingSpotsAll = new ArrayList<>();
     private Map<String, List<ParkingSpot>> parkingSpotsByAccess = new HashMap<>();
     private Map<String, List<ParkingSpot>> parkingSpotsByType = new HashMap<>();
+    private Map<String, ParkingSpot> parkingSpotsById = new HashMap<>();
 
     @Autowired
     private Subject parkingSpotDataLoader;
@@ -41,6 +42,8 @@ public class ParkingSpotsFilterService implements Observer {
                 .collect(groupingBy(ParkingSpot::getAccess));
         parkingSpotsByType = parkingSpotsAll.stream()
                 .collect(groupingBy(ParkingSpot::getParking_type));
+        parkingSpotsAll.forEach(parkingSpot ->
+                parkingSpotsById.put(parkingSpot.getId(), parkingSpot));
     }
 
     /**
@@ -85,5 +88,14 @@ public class ParkingSpotsFilterService implements Observer {
         ParkingSpotDataLoader dataLoader = (ParkingSpotDataLoader) subject;
         this.setParkingSpotsAll(dataLoader.getParkingSpotsAll());
         loadData();
+    }
+
+    /**
+     * Method that returns a parking spot based on its id
+     * @param id - string representing the requested parking spot's id
+     * @return ParkingSpot - parking spots matching id parameter or null if not found
+     * */
+    public ParkingSpot findById(String id) {
+        return parkingSpotsById.get(id);
     }
 }
