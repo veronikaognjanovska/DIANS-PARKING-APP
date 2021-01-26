@@ -54,4 +54,15 @@ public class ParkingSpotsFilterController {
         return parkingSpotsFilterService.getParkingSpotsByType(parkingType);
     }
 
+    /**
+     * Method that returns a filtered result of parking
+     * spots based on a user requested parking type
+     * @param id - string that represents the user requested parking with id
+     * @return ParkingSpot - a parking spot matching id parameter or null
+     * if it doesn't exist
+     * */
+    @GetMapping("/single")
+    public ParkingSpot findParkingSpotById(@RequestParam String id) {
+        return parkingSpotsFilterService.findById(id);
+    }
 }
