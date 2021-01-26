@@ -1,0 +1,39 @@
+package com.parkingfinder.parkingservice.model;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+/*
+* Parking Spot database model
+* Model for retrieving and persisting parking spots to database
+* */
+@Entity
+@Table(name = "parking")
+@Data
+@NoArgsConstructor
+public class ParkingSpot {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private String id;
+    @NonNull
+    private double lat;
+    @NonNull
+    private double lng;
+    private String name;
+    private Integer capacity;
+    private String access;
+    private String fee;
+    private String operator;
+    private String website;
+    private String supervised;
+    private String parking_type;
+
+}
