@@ -31,14 +31,9 @@ public class ParkingSpotDataLoader implements Subject, DataLoader {
     @Autowired
     ParkingSpotRepository parkingSpotRepository;
 
-    private List<Observer> observers;
+    private final List<Observer> observers = new ArrayList<>();
 
     private List<ParkingSpot> parkingSpotsAll = new ArrayList<>();
-
-    @PostConstruct
-    private void init(){
-        this.observers = new ArrayList<>();
-    }
 
     /*
     * Asynchronous scheduled job
@@ -73,6 +68,14 @@ public class ParkingSpotDataLoader implements Subject, DataLoader {
     * */
     protected int getParkingSpotsCount() {
        return parkingSpotsAll.size();
+    }
+
+    /*
+     * Method that returns the number of observers to the data loader
+     * @return int - number of observers
+     * */
+    protected int getObserversCount() {
+        return observers.size();
     }
 
     /*
