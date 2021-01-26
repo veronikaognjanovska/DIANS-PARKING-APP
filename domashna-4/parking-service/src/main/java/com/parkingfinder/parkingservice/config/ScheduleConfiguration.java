@@ -5,7 +5,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 /*
 * Schedule configuration class
-* Contains defauld configuration setting from SpringBoot
+* Contains default configuration setting from SpringBoot
 * */
 @Configuration
 @EnableScheduling
