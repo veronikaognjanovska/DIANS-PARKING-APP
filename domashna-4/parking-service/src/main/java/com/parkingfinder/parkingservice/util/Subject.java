@@ -1,6 +1,6 @@
 package com.parkingfinder.parkingservice.util;
 
-/*
+/**
 * Subject utility interface for implementing observer pattern
 * */
 public interface Subject {

@@ -12,12 +12,11 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/*
+/**
 * Component with scheduled job for reading database updates of parking spots
 * on a fixed delay.
 * Implements the Subject interface and notifies observers when new data has been
@@ -35,7 +34,7 @@ public class ParkingSpotDataLoader implements Subject, DataLoader {
 
     private List<ParkingSpot> parkingSpotsAll = new ArrayList<>();
 
-    /*
+    /**
     * Asynchronous scheduled job
     * Reads parking spots database every 30 minutes and loads all parking data
     * Replaces empty values with default constants
@@ -62,7 +61,7 @@ public class ParkingSpotDataLoader implements Subject, DataLoader {
         return string==null || string.isEmpty();
     }
 
-    /*
+    /**
     * Method that returns the number of parking spots read from database
     * @return int - number of parking spots
     * */
@@ -70,7 +69,7 @@ public class ParkingSpotDataLoader implements Subject, DataLoader {
        return parkingSpotsAll.size();
     }
 
-    /*
+    /**
      * Method that returns the number of observers to the data loader
      * @return int - number of observers
      * */
@@ -78,7 +77,7 @@ public class ParkingSpotDataLoader implements Subject, DataLoader {
         return observers.size();
     }
 
-    /*
+    /**
     * Method that returns a list of all the parking spots read from database
     * @return List<ParkingSpot> - list of all parking spots
     * */

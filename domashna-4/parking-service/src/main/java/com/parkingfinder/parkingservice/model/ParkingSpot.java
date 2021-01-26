@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-/*
+/**
 * Parking Spot database model
 * Model for retrieving and persisting parking spots to database
 * */

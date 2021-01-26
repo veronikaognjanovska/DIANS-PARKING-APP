@@ -15,7 +15,7 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.groupingBy;
 
-/*
+/**
 * In memory parking spots filter service
 * Stores in memory filtered data about parking spots based on access level and parking type
 * @author Milena Trajanoska
@@ -43,7 +43,7 @@ public class ParkingSpotsFilterService implements Observer {
                 .collect(groupingBy(ParkingSpot::getParking_type));
     }
 
-    /*
+    /**
     * Method that returns a list of all the parking spots stored in memory
     * @return List<ParkingSpots> - list of all parking spots
     * */
@@ -51,7 +51,7 @@ public class ParkingSpotsFilterService implements Observer {
         return parkingSpotsAll;
     }
 
-    /*
+    /**
     * Method that returns a list of all parking spots that match a requested access level
     * @param access - string representing the required access level
     * @return List<ParkingSpot> - list of parking spots matching access level
@@ -60,16 +60,16 @@ public class ParkingSpotsFilterService implements Observer {
         return parkingSpotsByAccess.getOrDefault(access, parkingSpotsAll);
     }
 
-    /*
-     * Method that returns a list of all parking spots that match a requested access level
-     * @param access - string representing the required access level
-     * @return List<ParkingSpot> - list of parking spots matching access level
+    /**
+     * Method that returns a list of all parking spots that match a requested parking type
+     * @param type - string representing the required parking type
+     * @return List<ParkingSpot> - list of parking spots matching parking type
      * */
     public List<ParkingSpot> getParkingSpotsByType(String type) {
         return parkingSpotsByType.getOrDefault(type, parkingSpotsAll);
     }
 
-    /*
+    /**
     * Method for setting in memory parking spots
     * @param parkingSpots - list of ParkingSpot objects to be set
     * */
