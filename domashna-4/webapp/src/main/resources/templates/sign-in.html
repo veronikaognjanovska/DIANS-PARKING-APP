@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="mk">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" th:href="@{'/images/transparent-logo.png'}">
+    <link rel="stylesheet" th:href="@{'/css/bootstrap.min.css'}">
+    <link rel="stylesheet" th:href="@{'/css/style.css'}">
+    <meta content="text/html">
+</head>
+<body style="background-color: #272727;">
+
+<form  role="form" th:action="@{/sign-in-post}" th:method="post" class="pole">
+    <div class="imgcontainer">
+        <img src="images/carpin-white.png" alt="Avatar" style="max-width:200px">
+    </div>
+    <h2 class="najava">Најава</h2>
+
+    <div class="container">
+        <label for="username"><b>Еmail адреса:</b></label><br/>
+        <input class="input_korisnichko_ime" type="text" placeholder="Корисничко име" id="username" name="username" required><br/>
+        <lable><b>Лозинка:</b></lable><br/>
+        <input class="input_password" type="password" id="password" name="password" required>
+        <span th:if="${loginError}" style="color:red">Погрешно корисничко име или лозинка</span>
+        <br/>
+
+        <input class="input_submit" type="submit" value="Најави се!"><br/>
+    </div>
+    <a class="registerbtn" th:href="@{/}"><span>Почетна</span></a>
+</form>
+
+</body>
+</html>
