@@ -23,7 +23,7 @@ public class ParkingSpotsFilterController {
 
     /**
     * Method that returns all available parking spots from the database
-    * @return List<ParkingSpot> - list of all the parking spots available
+    * @return List - list of all the parking spots available
     * */
     @GetMapping("/all")
     public List<ParkingSpot> filterParkingsAll() {
