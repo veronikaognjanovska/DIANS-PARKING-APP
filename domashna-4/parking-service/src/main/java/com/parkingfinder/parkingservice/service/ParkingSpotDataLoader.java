@@ -2,6 +2,7 @@ package com.parkingfinder.parkingservice.service;
 
 import com.parkingfinder.parkingservice.model.ParkingSpot;
 import com.parkingfinder.parkingservice.repository.ParkingSpotRepository;
+import com.parkingfinder.parkingservice.util.Constants;
 import com.parkingfinder.parkingservice.util.DataLoader;
 import com.parkingfinder.parkingservice.util.Observer;
 import com.parkingfinder.parkingservice.util.Subject;
@@ -10,7 +11,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -52,10 +52,10 @@ public class ParkingSpotDataLoader implements Subject, DataLoader {
                 .filter(parkingSpot -> !checkEmptyStringOrNull(parkingSpot.getName()))
                 .map(parkingSpot -> {
                     if(checkEmptyStringOrNull(parkingSpot.getParking_type())){
-                        parkingSpot.setParking_type("surface");
+                        parkingSpot.setParking_type(Constants.DEFAULT_PARKING_TYPE);
                     }
                     if(checkEmptyStringOrNull(parkingSpot.getAccess())){
-                        parkingSpot.setAccess("public");
+                        parkingSpot.setAccess(Constants.DEFAULT_ACCESS_LEVEL);
                     }
                     return parkingSpot;
                 })
