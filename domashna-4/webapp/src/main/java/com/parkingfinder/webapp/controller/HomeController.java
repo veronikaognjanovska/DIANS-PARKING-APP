@@ -37,6 +37,7 @@ public class HomeController {
             List<ParkingDto> parkingSpotList = parkingSpotsFetchService.getParkingSpotsAll();
             model.addAttribute("allParkings", objectMapper.writeValueAsString(parkingSpotList));
         } catch (Exception e) {
+            model.addAttribute("serviceError", e.getMessage());
             e.printStackTrace();
         }
         model.addAttribute("parkingBaseUrl", localBaseUrls.getParkingService());
@@ -52,10 +53,15 @@ public class HomeController {
      * */
     @GetMapping("/parking")
     public String parkingDetails(String id, Model model) {
-        ParkingDto parkingSpot = parkingSpotsFetchService.findById(id);
-        if(parkingSpot != null) {
-            model.addAttribute("parking", parkingSpot);
-            return "parking-details";
+        try {
+            ParkingDto parkingSpot = parkingSpotsFetchService.findById(id);
+            if(parkingSpot != null) {
+                model.addAttribute("parking", parkingSpot);
+                return "parking-details";
+            }
+        } catch (Exception e){
+            model.addAttribute("invalidId", e.getMessage());
+            e.printStackTrace();
         }
         return "home";
     }

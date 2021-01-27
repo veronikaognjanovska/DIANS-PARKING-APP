@@ -80,6 +80,8 @@
     <h3 class="p-ruta">Рута:</h3>
     <p class="input-address" style="color:white;padding-left: 5px; padding-right: 5px;padding-top: 10px;padding-bottom: 10px;"></p>
 </div>
+<span th:if="${serviceError}" style="color:red">Сервисот моментално е недостапен. Обидете се подоцна.</span>
+<span th:if="${invalidId}" style="color:red">Невалиден избран паркинг. Обидете се повторно.</span>
 <div id="error">
     <span id="error-span" style="color:red">Ве молиме изберете паркинг место и ваша локација!</span>
 </div>

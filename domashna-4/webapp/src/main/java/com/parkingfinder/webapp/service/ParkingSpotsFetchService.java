@@ -25,9 +25,7 @@ public class ParkingSpotsFetchService {
      * @return List - list of parking spot data transfer objects
      * */
     public List<ParkingDto> getParkingSpotsAll() {
-        return Arrays.asList(Objects.requireNonNull(
-                restTemplate.exchange(URLPaths.PARKING_SERVICE_BASE_URL + URLPaths.PARKING_FILTER_ALL,
-                HttpMethod.GET, null, ParkingDto[].class).getBody()));
+        return getParkingList(URLPaths.PARKING_SERVICE_BASE_URL + URLPaths.PARKING_FILTER_ALL);
     }
 
     /**
@@ -48,10 +46,8 @@ public class ParkingSpotsFetchService {
      * @return List - list of parking spot data transfer objects
      * */
     public List<ParkingDto> getParkingByAccessLevel(String access) {
-        return Arrays.asList(Objects.requireNonNull(
-                restTemplate.exchange(URLPaths.PARKING_SERVICE_BASE_URL
-                                + URLPaths.PARKING_FILTER_BY_ACCESS + access,
-                        HttpMethod.GET, null, ParkingDto[].class).getBody()));
+        return getParkingList(URLPaths.PARKING_SERVICE_BASE_URL
+                + URLPaths.PARKING_FILTER_BY_ACCESS + access);
     }
 
     /**
@@ -61,10 +57,13 @@ public class ParkingSpotsFetchService {
      * @return List - list of parking spot data transfer objects
      * */
     public List<ParkingDto> getParkingByType(String type) {
-        return Arrays.asList(Objects.requireNonNull(
-                restTemplate.exchange(URLPaths.PARKING_SERVICE_BASE_URL
-                                + URLPaths.PARKING_FILTER_BY_TYPE + type,
-                        HttpMethod.GET, null, ParkingDto[].class).getBody()));
+        return getParkingList(URLPaths.PARKING_SERVICE_BASE_URL
+                + URLPaths.PARKING_FILTER_BY_TYPE + type);
     }
 
+    private List<ParkingDto> getParkingList(String url) {
+        return Arrays.asList(Objects.requireNonNull(
+                restTemplate.exchange(url, HttpMethod.GET,
+                        null, ParkingDto[].class).getBody()));
+    }
 }
