@@ -50,10 +50,8 @@ public class UserFetchService {
      * @return HttpStatus - the received http status code
      * */
     public HttpStatus register(UserDto user) {
-        ResponseEntity entity = restTemplate.exchange(URLPaths.USER_SERVICE_BASE_URL
-                        + URLPaths.USER_REGISTER,
-                HttpMethod.POST, new HttpEntity<>(user), ResponseEntity.class).getBody();
-        return entity.getStatusCode();
+        return getHttpStatusCodeFromRequest(URLPaths.USER_SERVICE_BASE_URL
+                + URLPaths.USER_REGISTER, user);
     }
 
     /**
@@ -62,9 +60,13 @@ public class UserFetchService {
      * @return HttpStatus - the received http status code
      * */
     public HttpStatus updateUser(UserDto user) {
-        ResponseEntity entity = restTemplate.exchange(URLPaths.USER_SERVICE_BASE_URL
-                + URLPaths.USER_UPDATE,
-                HttpMethod.POST, new HttpEntity<>(user), ResponseEntity.class).getBody();
+        return getHttpStatusCodeFromRequest(URLPaths.USER_SERVICE_BASE_URL
+                + URLPaths.USER_UPDATE, user);
+    }
+
+    private HttpStatus getHttpStatusCodeFromRequest(String url, UserDto user) {
+        ResponseEntity entity = restTemplate.exchange(url, HttpMethod.POST,
+                new HttpEntity<>(user), ResponseEntity.class).getBody();
         return entity.getStatusCode();
     }
 }

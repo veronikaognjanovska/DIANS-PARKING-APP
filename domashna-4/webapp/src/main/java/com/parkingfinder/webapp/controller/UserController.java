@@ -87,11 +87,15 @@ public class UserController {
      * */
     @GetMapping("/user-details")
     String details(Model model) {
+        try{
         UserDto user = fetchCurrentlyLoggedInUser();
-        if (user!=null) {
-            model.addAttribute("routes", findRoutesForUser(user.getEmail()));
-            model.addAttribute("user", user);
-            return "user-page";
+            if (user!=null) {
+                model.addAttribute("routes", findRoutesForUser(user.getEmail()));
+                model.addAttribute("user", user);
+                return "user-page";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return "/error/404";
     }
@@ -127,21 +131,8 @@ public class UserController {
     * */
     @PostMapping("/register")
     String signUp(@ModelAttribute @Valid UserDto user, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "register";
-        }
-        HttpStatus status = userService.register(user);
-        if(status.equals(HttpStatus.OK)){
-               return "redirect:/sign-in";
-        }
-        else if (status.equals(HttpStatus.CONFLICT)){
-            model.addAttribute("emailExists", true);
-            return "register";
-        }
-        else {
-            model.addAttribute("invalidArgs", true);
-            return "register";
-        }
+        return checkBindingResult(user, bindingResult, model,
+                "register", "redirect:/sign-in");
     }
 
     /**
@@ -153,20 +144,26 @@ public class UserController {
     @PostMapping("/update")
     String updateUser(@Valid UserDto user, BindingResult bindingResult, Model model)
     {
+        return checkBindingResult(user, bindingResult, model,
+                "editprofile", "redirect:/user-details");
+    }
+
+    private String checkBindingResult(UserDto user, BindingResult bindingResult, Model model, String url, String redirect) {
         if (bindingResult.hasErrors()) {
-            return "editprofile";
+            return url;
         }
-        HttpStatus status = userService.updateUser(user);
-        if (status.equals(HttpStatus.OK)){
-            return "redirect:/user-details";
-        } else if (status.equals(HttpStatus.CONFLICT)){
-            model.addAttribute("emailExists", true);
-            return "editprofile";
+        try {
+            HttpStatus status = userService.updateUser(user);
+            if (status.equals(HttpStatus.OK)){
+                return redirect;
+            } else if (status.equals(HttpStatus.CONFLICT)){
+                model.addAttribute("emailExists", true);
+                return url;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
         }
-        else {
-            model.addAttribute("invalidArgs", true);
-            return "editprofile";
-        }
+        return "error/404";
     }
 
     /**
@@ -175,8 +172,12 @@ public class UserController {
     @GetMapping("/update")
     String updateUp(Model model) {
         Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDto user = (UserDto) userService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", user);
+        try {
+            UserDto user = (UserDto) userService.loadUserByUsername(principal.getName());
+            model.addAttribute("user", user);
+        }catch (Exception e) {
+            return "error/404";
+        }
         return "editprofile";
     }
 }
