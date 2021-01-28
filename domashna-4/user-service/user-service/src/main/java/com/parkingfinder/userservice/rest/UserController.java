@@ -37,6 +37,14 @@ public class UserController {
     @Autowired
     private CustomUsernamePasswordAuthenticationProvider customUsernamePasswordAuthenticationProvider;
 
+    private void setAuthAttribute(Authentication auth, HttpServletRequest req){
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(auth);
+
+        HttpSession session = req.getSession(true);
+        session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
+    }
+
     /**
      * Method that enables the login of users with authentication
      * @param req - a Http Servlet request
@@ -49,10 +57,7 @@ public class UserController {
         UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(user, pass);
         Authentication auth = customUsernamePasswordAuthenticationProvider.authenticate(authReq);
 
-        SecurityContext sc = SecurityContextHolder.getContext();
-        sc.setAuthentication(auth);
-        HttpSession session = req.getSession(true);
-        session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
+        setAuthAttribute(auth,req);
 
         return auth;
     }
