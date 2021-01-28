@@ -45,12 +45,12 @@ public class User implements UserDetails {
     private UserRole userRole = UserRole.USER;
 
     /**
-     * Method that represents a default constructor for the User class
+     * Default constructor for the User class
      */
     public User() {}
 
     /**
-     * Method that represents a constructor with arguments for the User class
+     * Constructor with arguments for the User class
      * @param name - string that represents the name of the user
      * @param email - string that represents the email of the user
      * @param password - string that represents the password of the user
