@@ -40,16 +40,7 @@ public class UserService implements UserDetailsService {
         userRepository.save(update);
     }
 
-    /**
-     * Method that updates the user
-     * @param user - object that represents the user
-     * @return true - if the user is successfully updated
-     * @throws InvalidArgumentsException - throws the exception if the details of the user are not valid
-     */
-    public boolean updateUser(User user) throws InvalidArgumentsException
-    {
-        String email= SecurityContextHolder.getContext().getAuthentication().getName();
-        User u = this.userRepository.findByEmail(email).get();
+    private boolean checkUser(User u, User user) throws InvalidArgumentsException{
         if(u!=null && !u.getID().equals(user.getID())) {
             throw new InvalidArgumentsException();
         }
@@ -59,6 +50,21 @@ public class UserService implements UserDetailsService {
             throw new InvalidArgumentsException();
         }
         return true;
+    }
+
+    /**
+     * Method that updates the user
+     * @param user - object that represents the user
+     * @return boolean - true if the user is successfully updated
+     * @throws InvalidArgumentsException - throws the exception if the details of the user are not valid
+     */
+    public boolean updateUser(User user) throws InvalidArgumentsException
+    {
+        String email= SecurityContextHolder.getContext().getAuthentication().getName();
+        User u = this.userRepository.findByEmail(email).get();
+
+        return checkUser(u,user);
+
     }
 
     /**
