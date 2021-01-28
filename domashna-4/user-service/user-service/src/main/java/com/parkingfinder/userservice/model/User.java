@@ -12,6 +12,11 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * User database model
+ * Model for User management in database
+ * @author Anastasija Petrovska
+ */
 
 @Entity
 @Table(name="`User`")
@@ -36,13 +41,21 @@ public class User implements UserDetails {
 
     private boolean enabled = true;
 
-    //    @Builder.Default
     @Enumerated()
     private UserRole userRole = UserRole.USER;
 
-    //@OneToMany
-    //private List<RouteMatcher.Route> lastFiveLocations;
+    /**
+     * Method that represents a default constructor for the User class
+     */
     public User() {}
+
+    /**
+     * Method that represents a constructor with arguments for the User class
+     * @param name - string that represents the name of the user
+     * @param email - string that represents the email of the user
+     * @param password - string that represents the password of the user
+     * @param role - UserRole that represents the role of the user
+     */
     public User(String name,String email,String password,UserRole role) {
         this.name=name;
         this.email=email;
@@ -50,14 +63,19 @@ public class User implements UserDetails {
         this.userRole=role;
     }
 
-
-
+    /**
+     * Method that returns a list of authorities
+     * @return List - a list of user roles
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(userRole.name());
         return Collections.singletonList(userRole);
     }
 
+    /**
+     * A method that returns the username of a user
+     * @return email - the email of the user
+     */
     @Override
     public String getUsername() {
         return email;
@@ -69,21 +87,37 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired=true;
     private boolean isEnabled=true;
 
+    /**
+     * Method that returns if the user's account is not expired, or if it is expired
+     * @return isAccountNonExpired - a boolean type which is true if the account is non expired
+     */
     @Override
     public boolean isAccountNonExpired() {
         return isAccountNonExpired;
     }
 
+    /**
+     * Method that returns if the user's account is not locked, or if it is locked
+     * @return isAccountNonLocked - a boolean type which is true if the account is not locked
+     */
     @Override
     public boolean isAccountNonLocked() {
         return isAccountNonLocked;
     }
 
+    /**
+     * Method that returns if the credentials of the user's account are not expired
+     * @return isCredentialNonExpired - a boolean type which is true if the credentials are not expired
+     */
     @Override
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
     }
 
+    /**
+     * Method which returns if the user has been enabled
+     * @return isEnabled - a boolean type which is true if the user is enabled
+     */
     @Override
     public boolean isEnabled() {
         return isEnabled;
