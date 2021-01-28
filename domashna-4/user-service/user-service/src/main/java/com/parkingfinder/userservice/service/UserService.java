@@ -17,6 +17,12 @@ import com.parkingfinder.userservice.model.User;
 import java.text.MessageFormat;
 import java.util.Optional;
 
+/**
+ * Service for User details manipulation
+ * Implements the UserDetailsService interface
+ * @author Anastasija Petrovska
+ */
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -34,6 +40,12 @@ public class UserService implements UserDetailsService {
         userRepository.save(update);
     }
 
+    /**
+     * Method that updates the user
+     * @param user - object that represents the user
+     * @return true - if the user is successfully updated
+     * @throws InvalidArgumentsException - throws the exception if the details of the user are not valid
+     */
     public boolean updateUser(User user) throws InvalidArgumentsException
     {
         String email= SecurityContextHolder.getContext().getAuthentication().getName();
@@ -48,6 +60,13 @@ public class UserService implements UserDetailsService {
         }
         return true;
     }
+
+    /**
+     * Method that loads the user by its username
+     * @param email - string that represents the email of the user which is also it's username
+     * @return user - optional, returns a user only if the user is loaded and found
+     * @throws UsernameNotFoundException - throws the exception if the user is not found by the username
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -57,6 +76,12 @@ public class UserService implements UserDetailsService {
 
     }
 
+    /**
+     * Method that signs up the new user
+     * @param user - object that represents the user
+     * @return true - if the sign up has been made successfully
+     * @throws InvalidArgumentsException - throws the exception if the details of the user are not valid
+     */
     public boolean signUpUser(User user) throws InvalidArgumentsException{
 
         if(this.userRepository.findByEmail(user.getEmail()).isPresent()) {
