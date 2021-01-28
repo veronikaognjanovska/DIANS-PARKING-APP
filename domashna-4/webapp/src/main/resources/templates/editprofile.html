@@ -3,46 +3,28 @@
 <html  xmlns:th="http://www.thymeleaf.org" lang="mk">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--    <link rel="icon" href="images/transparent-logo.png">-->
-<!--    <link rel="stylesheet" href="bootstrap.min.css">-->
-<!--    <link rel="stylesheet" href="style.css">-->
     <link rel="icon" th:href="@{'/static/images/transparent-logo.png'}">
     <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <style>
-        .poleuredi{
-            position: relative;
-            background-color: white;
-            height: 750px;
-            width: 600px;
-            margin: auto;
-            border-radius: 25px;
-        }
-        @media only screen and (max-width: 1025px) {
-            .poleuredi {
-                width: 450px;
-            }
-        }
-    </style>
 
 </head>
-<body style="background-color: #272727">
+<body class="body-color">
 
 <form role="form" th:action="@{/update}" th:method="post" th:object="${user}" class="poleuredi">
     <div class="imgcontainer">
-        <img src="images/carpin-white.png" alt="Avatar" style="max-width:200px">
+        <img src="images/carpin-white.png" alt="Avatar" class="imgcontainer-img">
     </div>
     <h2 class="najava">Уреди го профилот</h2>
     <div class="container">
         <input type="hidden" th:field="*{ID}">
         <input class="input_ime" type="text" id="name" name="name" placeholder="Корисничко име" th:field="*{name}" > <br/>
-        <p style="color:red" th:if="${#fields.hasErrors('name')}">Невалидно корисничко име</p>
+        <p class="span-red" th:if="${#fields.hasErrors('name')}">Невалидно корисничко име</p>
 
         <input class="input_korisnichko_ime" type="text" id="email" name="email" placeholder="Email адреса" th:value="*{email}" ><br/>
-        <p style="color:red" th:if="${#fields.hasErrors('email')}">Невалидна e-mail адреса</p>
+        <p class="span-red" th:if="${#fields.hasErrors('email')}">Невалидна e-mail адреса</p>
 
         <input class="input_password" type="password" id="password" name="password" placeholder="Лозинка"  th:field="*{password}"> <br/>
-        <p style="color:red" th:if="${#fields.hasErrors('password')}">Невалидна лозинка</p>
+        <p class="span-red" th:if="${#fields.hasErrors('password')}">Невалидна лозинка</p>
 
         <input type="submit" class="input_submit" value="Промени">
 

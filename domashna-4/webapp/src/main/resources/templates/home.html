@@ -9,16 +9,13 @@
     <link rel="icon" th:href="@{/images/transparent-logo.png}">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!--<link rel="icon" href="images/transparent-logo.png">-->
-    <!--<link rel="stylesheet" type="text/css"  href="bootstrap.min.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
     <meta charset="UTF-8" />
     <meta content="application/xhtml+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-inverse" style="background-color: #272727; height: 85px;">
+    <nav class="navbar navbar-inverse nb">
         <div class="container-fluid">
             <div class="navbar-header">
                 <img class="carpin-black" src="/images/carpin-black.png">
@@ -29,12 +26,12 @@
                 <input id="search" class="search-input" type="text" name="fname" placeholder="Пребарај паркинг" value="">
             </div>
             <div class="navbar-header navbar-right meni">
-                <a  class="p-2" th:href="@{/register}" sec:authorize="hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Регистрирај се!</a>
-                <a th:href="@{/sign-in}" sec:authorize="hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Најава</a>&nbsp;
-                <a th:href="@{/user-details}" sec:authorize="!hasRole('ROLE_ANONYMOUS')" style="color: white;font-weight: bold;">Профил</a>
+                <a  class="p-2 as" th:href="@{/register}" sec:authorize="hasRole('ROLE_ANONYMOUS')" >Регистрирај се!</a>
+                <a class="as" th:href="@{/sign-in}" sec:authorize="hasRole('ROLE_ANONYMOUS')" >Најава</a>&nbsp;
+                <a class="as" th:href="@{/user-details}" sec:authorize="!hasRole('ROLE_ANONYMOUS')" >Профил</a>
 
                 <div sec:authorize="!hasRole('ROLE_ANONYMOUS')">
-                <a href="javascript: document.logoutForm.submit()" role="menuitem" style="color:white"> Одјави се</a>
+                <a class="as" href="javascript: document.logoutForm.submit()" role="menuitem" > Одјави се</a>
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                     <input hidden type="submit" value="Одјави се"/>
                 </form>
@@ -49,7 +46,7 @@
 
 <div class='map1' id="map"></div>
 <div class="input_line">
-    <input id="paddress" class="one-input" type="text" name="fname" style="color:black" placeholder="Паркинг адреса" value="" disabled>
+    <input id="paddress" class="one-input" type="text" name="fname"  placeholder="Паркинг адреса" value="" disabled>
     <input id="address" class="two-input" type="text" name="fname" placeholder="Моментална локација" value="">
     <input id="coordinates" class="buttton-2" type="button" value="Коoрдинати">
     <input id="route" class="buttton" type="button" value="Рута"><br/>
@@ -78,12 +75,12 @@
 </div>
 <div class="street">
     <h3 class="p-ruta">Рута:</h3>
-    <p class="input-address" style="color:white;padding-left: 5px; padding-right: 5px;padding-top: 10px;padding-bottom: 10px;"></p>
+    <p class="input-address"></p>
 </div>
-<span th:if="${serviceError}" style="color:red">Сервисот моментално е недостапен. Обидете се подоцна.</span>
-<span th:if="${invalidId}" style="color:red">Невалиден избран паркинг. Обидете се повторно.</span>
+<span th:if="${serviceError}" class="span-red">Сервисот моментално е недостапен. Обидете се подоцна.</span>
+<span th:if="${invalidId}" class="span-red">Невалиден избран паркинг. Обидете се повторно.</span>
 <div id="error">
-    <span id="error-span" style="color:red">Ве молиме изберете паркинг место и ваша локација!</span>
+    <span id="error-span" class="span-red">Ве молиме изберете паркинг место и ваша локација!</span>
 </div>
 <footer>
     <p class="footer-style">За повеќе детали за паркингот:  <button id="more" class="detali-home"><span>Повеќе детали</span></button></p>
@@ -93,10 +90,10 @@
     </div>
 </footer>
 
-<span id="parkings" style="display: none;" th:text="${allParkings}"></span>
-<span id="pointBaseUrl" style="display: none;" th:text="${pointBaseUrl}"></span>
-<span id="parkingBaseUrl" style="display:none;" th:text="${parkingBaseUrl}"></span>
-<span id="routeBaseUrl" style="display:none;" th:text="${routeBaseUrl}"></span>
+<span id="parkings" class="dp-no"  th:text="${allParkings}"></span>
+<span id="pointBaseUrl" class="dp-no" th:text="${pointBaseUrl}"></span>
+<span id="parkingBaseUrl" class="dp-no" th:text="${parkingBaseUrl}"></span>
+<span id="routeBaseUrl" class="dp-no" th:text="${routeBaseUrl}"></span>
 </body>
 <script>
     var parking_lat=undefined;
