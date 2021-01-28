@@ -87,8 +87,7 @@ class UserServiceTest {
 
     }
 
-    @Test
-    public void shouldUpdateUser() {
+    private void setUp(){
         SecurityContextHolder.setContext(new SecurityContext() {
             @Override
             public Authentication getAuthentication() {
@@ -135,6 +134,12 @@ class UserServiceTest {
 
             }
         });
+    }
+
+    @Test
+    public void shouldUpdateUser() {
+
+        setUp();
 
         User user = new User();
         user.setID(1);
