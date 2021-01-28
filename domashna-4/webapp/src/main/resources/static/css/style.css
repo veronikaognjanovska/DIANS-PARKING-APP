@@ -1,115 +1,83 @@
-.map1 {
-  position: absolute;
-  top:85px;
-  bottom: 120px;
-  left:0;
-  right: 0;
-}
-.map2{
-  position: absolute;
-  top:-45px;
-  bottom: 120px;
-  left:0;
-  right: 0;
-}
-
+body {font-family: Arial, Helvetica, sans-serif;}
+.body-color {background-color: #272727;}
 main {
   width: 800px;
   margin: auto !important;
 }
+/*maps style*/
+.map1, .map2{
+  position: absolute;
+  bottom: 120px;
+  left:0;
+  right: 0;
+}
+.map1 {top:85px;}
+.map2{
+  top:-45px;
+  margin: 50px 5px;
+  position:static !important;
+  height:100%
+}
+/*color-black*/
+.input_line, .one-input, .buttton, .buttton-2, .buttton-izberi, .buttton-person, .buttton-car, .select-1, .select-2{color: black;}
+/*color-white*/
+footer, .info-la, .street, .registerbtn, .input_submit, .registerbtn-detali, .promena, .span-1, .span-2, .upa {color: white;}
+/*background-color*/
+footer, .input_line, .street{background-color: #272727;}
+/*logo*/
 .carpin-black{
   width: 70px;
   height: 70px;
+  margin-left: -20px;
 }
-.p-ruta{
-  text-align: center;padding-left: 10px;padding-right: 10px; padding-top: 10px;padding-bottom: 10px;
-}
-
+/*input pole*/
 .input_line{
   position: absolute;
-  color: black;
-  bottom: 130px;
-  width: 900px;
   position: fixed;
+  bottom: 130px;
+  left: 20%;
+  width: 900px;
   height: 100px;
-  background-color: #272727;
   z-index:600;
   border-radius: 25px;
-  left: 20%;
 }
-.one-input{
+.one-input, .two-input, .search-input{
   position: relative;
   top: 2px;
-  left: 45px;
+  left: 50px;
   border-radius: 10px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 6px 30px 6px 30px;
   background-color: white;
   z-index:600;
   font-weight: bold;
 }
-.two-input{
-  position: relative;
-  top: 2px;
-  left: 50px;
-  border-radius: 10px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  padding-left: 30px;
-  padding-right: 30px;
-  font-weight: bold;
-}
-.search-input{
-  position: relative;
-  top: 2px;
-  left: 50px;
-  border-radius: 10px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  padding-left: 30px;
-  padding-right: 30px;
-  font-weight: bold;
-}
-.span-1{
-  color:white; padding-left: 50px;
-}
-.span-2{
-  color:white; padding-left: 70px;
-}
-
-.buttton {
-  padding: 5px 5px;
+.span-1{padding-left: 50px;}
+.span-2{padding-left: 70px;}
+/*efect for input-buttons*/
+.buttton-izberi {
+  width: auto;
+  height: auto;
   text-align: center;
   cursor: pointer;
   outline: none;
-  color: black;
-  margin-left: 5px;
-  margin-top: 2px;
-  top: 10px;
+  margin-left: 20%;
+  top: 107px;
   background-color: #FFD15B;
   border: none;
   border-radius: 10px;
   font-weight: bold;
-  width: 110px;
 }
-
-.buttton:hover {background-color: #EBC74A}
-
-.buttton:active {
+.buttton-2:hover, .buttton:hover, .buttton-person:hover, .buttton-car:hover {background-color: #EBC74A}
+.buttton-2:active, .buttton:active, .buttton-person:active, .buttton-car:active {
   background-color: #008b8b;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-
-.buttton-2 {
+.buttton-2, .buttton {
   padding: 5px 5px;
   text-align: center;
   cursor: pointer;
   outline: none;
-  color: black;
-  margin-left: 75px;
   margin-top: 5px;
   top: 10px;
   background-color: #FFD15B;
@@ -118,38 +86,14 @@ main {
   font-weight: bold;
   width: 110px;
 }
-
-.buttton-2:hover {background-color: #EBC74A}
-
-.buttton-2:active {
-  background-color: #008b8b;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-.buttton-izberi {
-  width: auto;
-  height: auto;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: black;
-  margin-left: 20%;
-  top: 107px;
-  background-color: #FFD15B;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-}
-
-
-.buttton-person {
+.buttton-2 {margin-left: 75px;}
+.buttton {margin-left: 5px;}
+.buttton-person, .buttton-car {
   width: 30px;
   height: 30px;
   text-align: center;
   cursor: pointer;
   outline: none;
-  color: black;
   margin-left: 5px;
   margin-top: 20px;
   top: 107px;
@@ -158,45 +102,11 @@ main {
   border-radius: 10px;
   font-weight: bold;
 }
-
-.buttton-person:hover {background-color: #EBC74A}
-
-.buttton-person:active {
-  background-color: #008b8b;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-.buttton-car {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: black;
-  margin-left: 5px;
-  margin-top: 20px;
-  top: 107px;
-  background-color: #FFD15B;
-  border: none;
-  border-radius: 10px;
-  /*box-shadow: 0 9px #999;*/
-  font-weight: bold;
-}
-
-.buttton-car:hover {background-color: #EBC74A}
-
-.buttton-car:active {
-  background-color: #008b8b;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
-.select-1{
+.select-1, .select-2{
   padding: 5px 5px;
   text-align: center;
   cursor: pointer;
   outline: none;
-  color: black;
   margin-left: 90px;
   margin-top: 20px;
   top: 107px;
@@ -206,125 +116,59 @@ main {
   font-weight: bold;
   width: 110px;
 }
-.select-2{
-  padding: 5px 5px;
-  text-align: center;
-  cursor: pointer;
-  outline: none;
-  color: black;
-  margin-left: 10px;
-  margin-top: 20px;
-  top: 107px;
-  background-color: #FFD15B;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  width: 110px;
-}
+.select-1{margin-left: 90px;}
+.select-2{margin-left: 10px;}
+/*foother*/
 footer{
   position: absolute;
-  color: white;
   bottom: 0;
   width: 100%;
   position: fixed;
   height: 120px;
-  background-color: #272727;
 }
 .footer-style{
-  padding-left: 10px; padding-top: 35px; font-size: 20px;
+  padding-left: 10px;
+  padding-top: 35px;
+  font-size: 20px;
 }
-.info-la{
-  color: white;
+/*pole ruta*/
+.p-ruta{
+  text-align: center;
+  padding: 10px;
 }
 .street{
   position: absolute;
-  color: white;
-  background-color: #272727;
-  background-color: #272727;
-  top: 200px;
-  width: auto;
   position: fixed;
+  top: 200px;
+  left: 50px;
+  width: auto;
   height: auto;
   z-index:600;
   border-radius: 25px;
-  left: 50px;
+}
+.input-address{
+  color:white;
+  padding: 10px 5px 10px 5px;
 }
 
-.registerbtn {
-  background-color: #008b8b;
-  color: white;
-  padding:16px 20px;
-  margin: 8px 0;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-  border-radius: 10px;
-  border: 5px solid #272727;
-  font-weight: bold;
-  margin-left: 240px;
-  text-align: center;
-  transition: all 0.5s;
-}
-
-.registerbtn span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.registerbtn span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.registerbtn:hover span {
-  padding-right: 25px;
-}
-
-.registerbtn:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-body {font-family: Arial, Helvetica, sans-serif;}
-
-.input_korisnichko_ime, .input_password {
-  width: 100%;
-  padding: 12px 20px;
+.input_korisnichko_ime, .input_password, .input_ime, .input_detali {
   margin: 8px 0;
   display: inline-block;
   box-sizing: border-box;
   border-radius: 10px;
   border: 5px solid #272727;
 }
-.input_ime{
+.input_korisnichko_ime, .input_password, .input_ime {
   width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 5px solid #272727;
 }
 .input_detali {
   width: 200%;
   padding: 7px 10px;
-  margin: 8px 0;
-  display: inline-block;
-  box-sizing: border-box;
-  border-radius: 10px;
-  border: 5px solid #272727;
 }
-.table-detali{
-  margin-left: 100px;
-}
-.input_submit {
+.table-detali{margin-left: 100px;}
+.input_submit {/*sign-in button najavi se! */
   background-color: #008b8b;
-  color: white;
   padding: 14px 20px;
   margin: 8px 0;
   cursor: pointer;
@@ -333,157 +177,74 @@ body {font-family: Arial, Helvetica, sans-serif;}
   border: 5px solid #272727;
   font-weight: bold;
 }
-
 .input_submit:hover {
   opacity: 0.8;
 }
-
 .imgcontainer {
   text-align: center;
   margin: 24px 0 0 0;
   padding-top: 5px;
 }
-
-.container {
-  padding: 16px;
-  width: 500px;
-}
-.container-detali {
-  padding: 16px;
-  width: 700px;
+.imgcontainer-img{max-width:200px;}
+.container, .container-detali {padding: 16px;}
+.container {width: 500px;}
+.container-detali {width: 700px;}
+.pole, .pole-detali{
+  position: relative;
+  background-color: white;
+  margin: auto;
+  border-radius: 25px;
 }
 .pole{
-  position: relative;
-  background-color: white;
   height: 630px;
   width: 600px;
-  margin: auto;
-  border-radius: 25px;
 }
 .pole-detali{
-  position: relative;
-  background-color: white;
   height: 1000px;
   width: 800px;
-  margin: auto;
-  border-radius: 25px;
 }
-.img-detali{
-  max-width:200px;
-}
+.img-detali{max-width:200px;}
 .najava{
   text-align: center;
   font-weight: bold;
 }
-.labela{
-  font-weight: bold;
-}
-
-.registerbtn-detali {
-  background-color: #008b8b;
-  color: white;
-  padding:16px 20px;
-  margin: 8px 0;
+.labela{font-weight: bold;}
+.registerbtn, .registerbtn-detali, .promena, .detali-home {
   cursor: pointer;
-  width: 100%;
   opacity: 0.9;
   border-radius: 10px;
   border: 5px solid #272727;
   font-weight: bold;
-  margin-left: 340px;
   text-align: center;
   transition: all 0.5s;
 }
-
-.registerbtn-detali span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
+.registerbtn, .registerbtn-detali {
+  background-color: #008b8b;
+  padding:16px 20px;
+  width: 100%;
 }
-
-.registerbtn-detali span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.registerbtn-detali:hover span {
-  padding-right: 25px;
-}
-
-.registerbtn-detali:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
 .promena {
   background-color: #008b8b;
-  color: white;
   padding:3px 10px;
-  margin: 8px 0;
-  cursor: pointer;
+  margin: 8px 0 8px 0;
   width: 220px;
-  opacity: 0.9;
-  border-radius: 10px;
-  border: 5px solid #272727;
-  font-weight: bold;
-  margin-left: 0px;
-  text-align: center;
-  transition: all 0.5s;
 }
-
-.promena span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.promena span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.promena:hover span {
-  padding-right: 25px;
-}
-
-.promena:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
 .detali-home {
   background-color: #FFD15B;
   color: #272727;
   padding:3px 3px;
   margin: 3px 0;
-  cursor: pointer;
   width: 300px;
-  opacity: 0.9;
-  border-radius: 10px;
-  border: 5px solid #272727;
-  font-weight: bold;
-  text-align: center;
-  transition: all 0.5s;
-}
-
-.detali-home span {
+ }
+.registerbtn {margin: 8px 0 8px 240px;}
+.registerbtn-detali {margin: 8px 0 8px 340px;}
+.registerbtn span, .registerbtn-detali span, .promena span, .detali-home span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
-
-.detali-home span:after {
+.registerbtn span:after, .registerbtn-detali span:after, .promena span:after, .detali-home span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -491,787 +252,15 @@ body {font-family: Arial, Helvetica, sans-serif;}
   right: -20px;
   transition: 0.5s;
 }
-
-.detali-home:hover span {
+.registerbtn:hover span, .registerbtn-detali:hover span, .promena:hover span, .detali-home:hover span {
   padding-right: 25px;
 }
-
-.detali-home:hover span:after {
+.registerbtn:hover span:after, .registerbtn-detali:hover span:after, .promena:hover span:after, .detali-home:hover span:after {
   opacity: 1;
   right: 0;
 }
-.korisnik{
-  padding-left: 10%;
-  padding-right: 10%;
-  padding-top: 5%;
-}
-.korisnik-2{
-  float: right;
-
-}
-
-
-
-
-/*--------------------------------------------------------------------------------------------------*/
-@media only screen and (max-width: 1025px) {
-  .pole{
-    width: 450px;
-  }
-  .img-detali{
-    max-width:150px;
-  }
-  .pole-detali{
-    width: 540px;
-  }
-  .table-detali{
-    margin-left: 0px;
-  }
-  .input_detali {
-    width: 180%;
-    padding: 5px 10px;
-  }
-  .input_korisnichko_ime, .input_password {
-    width: 89%;
-  }
-  .input_submit {
-    width: 89%;
-  }
-  .registerbtn {
-    margin-left: 40%;
-  }
-  .registerbtn-detali {
-    margin-left: 40%;
-  }
-  .input_ime{
-    width: 89%;
-  }
-  .input_line{
-    bottom: 140px;
-    width: 730px;
-    height: 70px;
-    border-radius: 15px;
-    left: 15%;
-  }
-  .one-input{
-    left: 35px;
-    border-radius: 5px;
-    text-align: center;
-    padding-top:2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    width: 200px;
-    font-size: 12px;
-  }
-  .two-input{
-    left: 40px;
-    border-radius: 5px;
-    text-align: center;
-    width: 200px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 12px;
-  }
-  .search-input{
-    left: 40px;
-    border-radius: 5px;
-    text-align: center;
-    width: 200px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 12px;
-  }
-  .buttton-2 {
-    padding: 3px 3px;
-    width: 95px;
-    border-radius: 5px;
-    font-size: 12px;
-  }
-  .buttton {
-    padding: 3px 3px;
-    width: 75px;
-    margin-left: 5px;
-    border-radius: 5px;
-    font-size: 12px;
-    bottom: 10px;
-  }
-  .span-1{
-    font-size: 12px;padding-left: 50px;
-  }
-  .span-2{
-    font-size: 12px;padding-left: 80px;
-  }
-  .buttton-person {
-    width: 20px;
-    height: 15px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .buttton-car {
-    width: 20px;
-    height: 15px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .select-1 {
-    padding: 3px 3px;
-    margin-left: 5px;
-    border-radius: 5px;
-    font-size: 12px;
-    width: 80px;
-  }
-  .select-2 {
-    padding: 3px 3px;
-    margin-left: 5px;
-    border-radius: 5px;
-    font-size: 12px;
-    width: 80px;
-  }
-}
-
-/*--------------------------------------------------------------------------------------------------*/
-@media only screen and (max-width: 700px) {
-  .carpin-black{
-    width: 60px;
-    height: 60px;
-    margin-left: -20px;
-  }
-  .pole{
-    width: 350px;
-  }
-  .input_korisnichko_ime, .input_password {
-    width: 68%;
-  }
-  .input_submit {
-    width: 68%;
-  }
-  .registerbtn {
-    margin-left: 120px;
-  }
-  .input_ime{
-    width: 68%;
-  }
-  .img-detali{
-    max-width:150px;
-  }
-  .pole-detali{
-    height: 900px;
-    width: 390px;
-  }
-  .table-detali{
-    margin-left: 0px;
-  }
-  .input_detali {
-    width: 110%;
-    padding: 5px 10px;
-    margin: 5px 0;
-  }
-  .registerbtn-detali {
-    padding:10px 20px;
-    margin-left: 37%;
-  }
-  header{
-    font-size: 7px;
-
-  }
-  .input_line{
-    bottom: 110px;
-    width: 360px;
-    height: 70px;
-    border-radius: 15px;
-    left: 6%;
-  }
-  .one-input{
-    left: 10px;
-    border-radius: 5px;
-    text-align: center;
-    padding-top:2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    width: 100px;
-    font-size: 8px;
-  }
-  .two-input{
-    left: 10px;
-    border-radius: 5px;
-    text-align: center;
-    width: 110px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 8px;
-  }
-  .search-input{
-    left: 10px;
-    border-radius: 5px;
-    text-align: center;
-    width: 110px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 8px;
-  }
-  .buttton-2 {
-    padding: 3px 3px;
-    width: 55px;
-    margin-left: 20px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .buttton {
-    padding: 3px 3px;
-    width: 50px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    bottom: 10px;
-  }
-  .span-1{
-    font-size: 9px;padding-left: 5px;
-  }
-  .span-2{
-    font-size: 9px;padding-left: 0px;
-  }
-  .buttton-person {
-    width: 19px;
-    height: 15px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .buttton-car {
-    width: 19px;
-    height: 15px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .select-1 {
-    padding: 3px 3px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    width: 60px;
-  }
-  .select-2 {
-    padding: 3px 3px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    width: 42px;
-  }
-  .street{
-    top: 100px;
-    left: 20px;
-  }
-  .map1 {
-    bottom: 100px;
-  }
-  footer{
-    height: 100px;
-    font-size: 10px;
-  }
-  .footer-style{
-    padding-left: 10px;
-    padding-top: 20px;
-    font-size: 15px;
-  }
-  .detali-home {
-    font-size: 12px;
-  }
-  .korisnik-2{
-    top:110px;
-  }
-}
-/*----------------------------------------------------------------------------------------------------------*/
-@media only screen and (max-width: 378px) {
-  header{
-    font-size: 4px;
-  }
-  .carpin-black{
-    width: 60px;
-    height: 60px;
-    margin-left: -20px;
-  }
-  .input_line{
-    bottom: 110px;
-    width: 330px;
-    height: 70px;
-    border-radius: 15px;
-    left: 5%;
-  }
-  .one-input{
-    left: 5px;
-    border-radius: 5px;
-    text-align: center;
-    padding-top:2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    width: 100px;
-    font-size: 8px;
-  }
-  .two-input{
-    left: 5px;
-    border-radius: 5px;
-    padding-top: 2px;
-    width: 100px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 8px;
-  }
-  .search-input{
-    left: 0px;
-    border-radius: 5px;
-    padding-top: 2px;
-    width: 80px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 8px;
-  }
-  .buttton-2 {
-    padding: 3px 3px;
-    width: 55px;
-    margin-left: 5px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .buttton {
-    padding: 3px 3px;
-    width: 50px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    bottom: 10px;
-  }
-  .span-1{
-    font-size: 8px;padding-left: 5px;
-  }
-  .span-2{
-    font-size: 8px;padding-left: 0px;
-  }
-  .buttton-person {
-    width: 16px;
-    height: 15px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .buttton-car {
-    width: 18px;
-    height: 15px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .select-1 {
-    padding: 3px 3px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    width: 60px;
-  }
-  .select-2 {
-    padding: 3px 3px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    width: 42px;
-  }
-  .pole{
-    width: 350px;
-  }
-  .input_korisnichko_ime, .input_password {
-    width: 68%;
-  }
-  .input_submit {
-    width: 68%;
-  }
-  .registerbtn {
-    margin-left: 120px;
-  }
-  .input_ime{
-    width: 68%;
-  }
-  .img-detali{
-    max-width:150px;
-  }
-  .pole-detali{
-    height: 820px;
-    width: 350px;
-  }
-  .table-detali{
-    margin-left: 0px;
-  }
-  .input_detali {
-    width: 95%;
-    padding: 5px 10px;
-    margin: 4px 0;
-  }
-  .registerbtn-detali {
-    padding:10px 20px;
-    margin: 4px 0;
-    margin-left: 37%;
-  }
-  .korisnik-2{
-    top:110px;
-  }
-}
-
-/*--------------------------------------------------------------------------------------------------*/
-@media only screen and (max-width: 367px) {
-  header{
-    font-size: 7px;
-  }
-
-  .input_line{
-    bottom: 110px;
-    width: 330px;
-    height: 70px;
-    border-radius: 15px;
-    left: 5%;
-  }
-  .one-input{
-    left: 5px;
-    border-radius: 5px;
-    text-align: center;
-    padding-top:2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    width: 100px;
-    font-size: 8px;
-  }
-  .two-input{
-    left: 5px;
-    border-radius: 5px;
-    text-align: center;
-    padding-top: 2px;
-    width: 100px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 8px;
-  }
-  .search-input{
-    left: 0px;
-    border-radius: 5px;
-    text-align: center;
-    padding-top: 2px;
-    width: 70px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    font-size: 8px;
-  }
-  .buttton-2 {
-    padding: 3px 3px;
-    width: 55px;
-    margin-left: 5px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .buttton {
-    padding: 3px 3px;
-    width: 50px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    bottom: 10px;
-  }
-  .span-1{
-    font-size: 8px;padding-left: 5px;
-  }
-  .span-2{
-    font-size: 8px;padding-left: 0px;
-  }
-  .buttton-person {
-    width: 16px;
-    height: 15px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .buttton-car {
-    width: 17px;
-    height: 15px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .select-1 {
-    padding: 3px 3px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    width: 60px;
-  }
-  .select-2 {
-    padding: 3px 3px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    width: 42px;
-  }
-  .street{
-    top: 100px;
-    left: 20px;
-  }
-  .map1 {
-    bottom: 100px;
-  }
-
-  footer{
-    height: 100px;
-    font-size: 10px;
-  }
-  .footer-style{
-    padding-left: 10px;
-    padding-top: 20px;
-    font-size: 15px;
-  }
-  .detali-home {
-    font-size: 12px;
-  }
-  .pole{
-    height: 610px;
-    width: 330px;
-  }
-  .input_korisnichko_ime, .input_password {
-    width: 65%;
-    padding: 9px 20px;
-  }
-  .input_submit {
-    padding: 11px 20px;
-    width: 65%;
-  }
-  .input_ime{
-       width: 65%;
-       padding: 9px 20px;
-     }
-  .registerbtn {
-    margin-left: 110px;
-  }
-  .img-detali{
-    max-width:120px;
-  }
-  .pole-detali{
-    height: 810px;
-    width: 340px;
-  }
-  .table-detali{
-    margin-left: 0px;
-  }
-  .input_detali {
-    width: 90%;
-    padding: 5px 10px;
-    margin: 5px 0;
-  }
-  .registerbtn-detali {
-    padding:10px 20px;
-    margin-left: 37%;
-  }
-  .korisnik-2{
-    top:110px;
-  }
-}
-
-
-/*--------------------------------------------------------------------------------------------------*/
-@media only screen and (max-width: 325px) {
-
-  body {font-size: 15px;}
-  .korisnik-2{
-    top:110px;
-  }
-  .pole{
-    height: 535px;
-    width: 300px;
-  }
-  .input_korisnichko_ime, .input_password {
-    width: 58%;
-    padding: 5px 20px;
-    margin: 2px 0;
-  }
-  .input_submit {
-    padding: 7px 20px;
-    width: 58%;
-  }
-  .input_ime{
-    width: 58%;
-    padding: 5px 20px;
-  }
-  .registerbtn {
-    padding:7px 20px;
-    margin-left: 100px;
-  }
-  .img-detali{
-    max-width:110px;
-  }
-  .pole-detali{
-    height: 750px;
-    width: 300px;
-  }
-  .table-detali{
-    margin-left: 0;
-  }
-  .input_detali {
-    width: 85%;
-    padding: 3px 10px;
-    margin: 5px 0;
-  }
-  .registerbtn-detali {
-    padding:10px 20px;
-    margin-left: 37%;
-  }
-  .input_line{
-    bottom: 110px;
-    width: 315px;
-    height: 70px;
-    border-radius: 15px;
-    left: 1%;
-  }
-  .one-input{
-    left: 5px;
-    border-radius: 5px;
-    text-align: center;
-    padding-top:2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    width: 85px;
-    font-size: 8px;
-  }
-  .two-input{
-    left: 5px;
-    border-radius: 5px;
-    text-align: center;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    width: 100px;
-    font-size: 8px;
-  }
-  .search-input{
-    left: 5px;
-    border-radius: 5px;
-    text-align: center;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
-    width: 100px;
-    font-size: 8px;
-  }
-  .buttton-2 {
-    padding: 3px 3px;
-    width: 55px;
-    margin-left: 5px;
-    border-radius: 5px;
-    font-size: 8px;
-  }
-  .buttton {
-    padding: 3px 3px;
-    width: 50px;
-    margin-left: 0px;
-    top: 107px;
-    border-radius: 5px;
-    font-size: 8px;
-    bottom: 10px;
-  }
-  .span-1{
-    font-size: 7px;padding-left: 0px;
-  }
-  .span-2{
-    font-size: 7px;padding-left: 0px;
-  }
-  .buttton-person {
-    width: 15px;
-    height: 15px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    /*width: 1.5em !important;*/
-    /*height: 1.5em !important;*/
-  }
-  .buttton-car {
-    width: 15px;
-    height: 15px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    /*width: 1.5em !important;*/
-    /*height: 1.5em !important;*/
-  }
-  .select-1 {
-    padding: 3px 3px;
-    margin-left: 0px;
-    border-radius: 5px;
-    font-size: 8px;
-    width: 48px;
-  }
-  .select-2 {
-    padding: 3px 3px;
-    margin-left: 0px;
-    border-radius:5px;
-    font-size: 8px;
-    width: 42px;
-  }
-  .search-input{
-    left: 0px;
-    width: 75px;
-  }
-  header{
-    font-size:  4px;
-  }
-
-  .carpin-black{
-    width: 60px;
-    height: 60px;
-    margin-left: -20px;
-  }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*  -----   */
+.korisnik{padding: 5% 10% 0 10%;}
+.korisnik-2{float: right;}
 .p-0{
   padding: 0px;
 }
@@ -1279,4 +268,233 @@ body {font-family: Arial, Helvetica, sans-serif;}
   width: 1.5em;
   height: 1.5em;
 }
-
+.span-red{color:red;}
+.dp-no{display: none;}
+.nb{
+  background-color: #272727;
+  height: 85px;
+}
+.as{
+  color: white;
+  font-weight: bold;
+}
+.upi{
+  border-radius: 50%;
+  background-color: white;
+}
+.poleuredi{
+  position: relative;
+  background-color: white;
+  height: 750px;
+  width: 600px;
+  margin: auto;
+  border-radius: 25px;
+}
+.kori-div1{float: left;}
+.kori-div2{padding-left: 15%;}
+.kori-img{width: 150px; border-radius: 50%; height: 150px;background-color: white;}
+/*--------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 1025px) {
+  .pole{width: 450px;}
+  .img-detali{max-width:150px;}
+  .pole-detali{width: 540px;}
+  .table-detali{margin-left: 0px;}
+  .input_detali {
+    width: 180%;
+    padding: 5px 10px;
+  }
+  .input_korisnichko_ime, .input_password, .input_submit, .input_ime {width: 89%;}
+  .registerbtn, .registerbtn-detali {margin-left: 40%;}
+  .input_line{
+    bottom: 140px;
+    width: 730px;
+    height: 80px;/*70px*/
+    border-radius: 15px;
+    left: 15%;
+  }
+  .one-input, .two-input, .search-input{
+    left: 40px;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+    padding: 2px 0 2px 0;
+    font-size: 12px;
+  }
+  .buttton-2,.buttton {
+    padding: 3px 3px;
+    width: 95px;
+    border-radius: 5px;
+    font-size: 12px;
+    bottom: 10px;
+  }
+  .span-1{font-size: 12px; padding-left: 50px;}
+  .span-2{font-size: 12px; padding-left: 80px;}
+  .buttton-person, .buttton-car {
+    width: 20px;
+    height: 15px;
+    margin-left: 0px;
+    border-radius: 5px;
+    font-size: 8px;
+  }
+  .select-1, .select-2 {
+    padding: 3px 3px;
+    margin-left: 40px;
+    border-radius: 5px;
+    font-size: 12px;
+    width: 80px;
+  }
+  .poleuredi {width: 450px;}
+}
+/*--------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 700px) {
+  header{font-size: 8px;}
+  .carpin-black{
+    width: 60px;
+    height: 60px;
+  }
+  .pole{width: 350px;}
+  .input_korisnichko_ime, .input_password, .input_submit, .input_ime {width: 68%;}
+  .registerbtn {margin-left: 120px;}
+  .pole-detali{
+    height: 900px;
+    width: 390px;
+  }
+  .input_detali {
+    width: 110%;
+    margin: 5px 0;
+  }
+  .registerbtn-detali {
+    padding:10px 20px;
+    margin-left: 37%;
+  }
+  .input_line{
+    bottom: 110px;
+    width: 360px;
+    height: 70px;
+    left: 6%;
+  }
+  .one-input, .two-input, .search-input{
+    left: 10px;
+    width: 100px;
+    font-size: 8px;
+  }
+  .buttton-2, .buttton {
+    width: 55px;
+    font-size: 8px;
+  }
+  .buttton-2 {margin-left: 20px;}
+  .span-1{font-size: 9px;padding-left: 5px;}
+  .span-2{font-size: 9px;padding-left: 0px;}
+  .buttton-person, .buttton-car {width: 19px;}
+  .select-1, .select-2 {
+    margin-left: 0px;
+    font-size: 8px;
+  }
+  .select-1 {width: 60px;}
+  .select-2 {width: 42px;}
+  .street{
+    top: 100px;
+    left: 20px;
+  }
+  .map1 {bottom: 100px;}
+  footer{
+    height: 100px;
+    font-size: 10px;
+  }
+  .footer-style{
+    padding-left: 10px;
+    padding-top: 20px;
+    font-size: 15px;
+  }
+  .detali-home {font-size: 12px;}
+  .korisnik-2{top:110px;}
+}
+/*----------------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 378px) {
+  .input_line{
+    width: 330px;
+    left: 5%;
+  }
+  .one-input, .two-input, .search-input{left: 5px;}
+  .buttton-2 {margin-left: 5px;}
+  .buttton {margin-left: 0px;}
+  .span-1, .span-2{font-size: 8px;padding-left: 1px;}
+  .buttton-person, .buttton-car {width: 18px;}
+  .pole-detali{
+    height: 820px;
+    width: 350px;
+  }
+  .input_detali {
+    width: 95%;
+    margin: 4px 0;
+  }
+  .registerbtn-detali {margin: 4px 0 4px 37%;/*margin: 4px 0 0 37%;?*/}
+}
+/*--------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 367px) {
+  header{font-size: 7px;}
+  .one-input, .two-input, .search-input{left: 3px;}
+  .span-1{
+    padding-left: 5px;
+  }
+  .span-2{
+    padding-left: 0px;
+  }
+  .buttton-person, .buttton-car {width: 17px;}
+  .pole{
+    height: 610px;
+    width: 330px;
+  }
+  .input_korisnichko_ime, .input_password, .input_ime, .input_submit {
+    width: 65%;
+    padding: 9px 20px;
+  }
+  .registerbtn {margin-left: 110px;}
+  .img-detali{max-width:120px;}
+  .pole-detali{
+    height: 810px;
+    width: 340px;
+  }
+  .input_detali {
+    width: 90%;
+    margin: 5px 0;
+  }
+  .registerbtn-detali {margin-left: 37%;}
+}
+/*--------------------------------------------------------------------------------------------------*/
+@media only screen and (max-width: 325px) {
+  body {font-size: 15px;}
+  .pole{
+    height: 535px;
+    width: 300px;
+  }
+  .input_korisnichko_ime, .input_password, .input_ime, .input_submit {
+    width: 58%;
+    padding: 5px 20px;
+    margin: 2px 0;
+  }
+  .registerbtn {
+    padding:7px 20px;
+    margin-left: 100px;
+  }
+  .img-detali{max-width:110px;}
+  .pole-detali{
+    height: 750px;
+    width: 300px;
+  }
+  .input_detali {
+    width: 85%;
+    padding: 3px 10px;
+  }
+  .input_line{
+    width: 315px;
+    left: 1%;
+  }
+  .one-input, .two-input, .search-input{left: 5px;}
+  .one-input{width: 85px;}
+  .buttton-2,.buttton {margin-left: 5px;}
+  .buttton {margin-left: 0px;}
+  .span-1, .span-2{font-size: 7px;padding-left: 4px;}
+  .buttton-person, .buttton-car {width: 15px;}
+  .select-1, .select-2 {width: 52px;}
+}
