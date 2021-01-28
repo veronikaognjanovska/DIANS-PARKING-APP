@@ -37,6 +37,12 @@ class UserServiceTest {
     @Mock
     private PasswordEncoder passwordEncoder;
 
+    private void saveUser(User user){
+        when(passwordEncoder.encode(any())).thenReturn("proba");
+        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
+        when(userRepository.save(any())).thenReturn(new User());
+    }
+
     @InjectMocks
     UserService userService;
 
@@ -49,12 +55,9 @@ class UserServiceTest {
     @Test
     public void shouldLoadUserByUsername(){
 
-        //slucaj 1 - pozitiven
         UserDetails user = userService.loadUserByUsername("anastasija");
         assertNotNull(user);
 
-
-        //slucaj 2 - negativen
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
 
         try {
@@ -62,7 +65,6 @@ class UserServiceTest {
         }catch (UsernameNotFoundException exception){
             assertEquals("User with email kgldsmf cannot be found.", exception.getMessage());
         }
-
     }
 
 
@@ -72,9 +74,7 @@ class UserServiceTest {
         User user = new User();
         user.setEmail("user@gmail.com");
 
-        when(passwordEncoder.encode(any())).thenReturn("proba");
-        when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
-        when(userRepository.save(any())).thenReturn(new User());
+        saveUser(user);
 
         Exception exception = assertThrows(InvalidArgumentsException.class, () -> {
             userService.signUpUser(user);
