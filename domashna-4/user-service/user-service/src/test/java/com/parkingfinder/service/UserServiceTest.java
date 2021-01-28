@@ -71,7 +71,7 @@ class UserServiceTest {
 
         User user = new User();
         user.setEmail("user@gmail.com");
-        //slucaj 1 - negativen
+
         when(passwordEncoder.encode(any())).thenReturn("proba");
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
         when(userRepository.save(any())).thenReturn(new User());
@@ -79,7 +79,7 @@ class UserServiceTest {
         Exception exception = assertThrows(InvalidArgumentsException.class, () -> {
             userService.signUpUser(user);
         });
-        //slucaj 2 - pozitiven
+
 
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
         Boolean b = userService.signUpUser(user);
@@ -151,8 +151,5 @@ class UserServiceTest {
         Exception exception = assertThrows(InvalidArgumentsException.class, () -> {
             userService.signUpUser(user2);
         });
-
-
     }
-
 }

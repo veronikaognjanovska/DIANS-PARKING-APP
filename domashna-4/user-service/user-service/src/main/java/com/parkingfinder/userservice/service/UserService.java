@@ -1,11 +1,9 @@
 package com.parkingfinder.userservice.service;
 
-import com.parkingfinder.userservice.config.CustomUsernamePasswordAuthenticationProvider;
+
 import com.parkingfinder.userservice.model.exception.InvalidArgumentsException;
 import com.parkingfinder.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,6 +26,14 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    private void setUser(User user){
+        User update = this.userRepository.findById(user.getID()).get();
+        update.setEmail(user.getEmail());
+        update.setPassword(passwordEncoder.encode(user.getPassword()));
+        update.setName(user.getName());
+        userRepository.save(update);
+    }
+
     public boolean updateUser(User user) throws InvalidArgumentsException
     {
         String email= SecurityContextHolder.getContext().getAuthentication().getName();
@@ -36,11 +42,7 @@ public class UserService implements UserDetailsService {
             throw new InvalidArgumentsException();
         }
         try {
-            User update = this.userRepository.findById(user.getID()).get();
-            update.setEmail(user.getEmail());
-            update.setPassword(passwordEncoder.encode(user.getPassword()));
-            update.setName(user.getName());
-            userRepository.save(update);
+            setUser(user);
         }catch (Exception e){
             throw new InvalidArgumentsException();
         }
