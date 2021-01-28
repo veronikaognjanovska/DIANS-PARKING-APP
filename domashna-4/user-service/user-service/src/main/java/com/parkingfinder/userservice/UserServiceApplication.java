@@ -7,6 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Spring boot application
+ */
+
 @SpringBootApplication
 @EnableEurekaClient
 public class UserServiceApplication {
