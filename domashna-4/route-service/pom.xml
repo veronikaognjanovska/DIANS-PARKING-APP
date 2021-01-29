@@ -64,10 +64,17 @@
 		<dependency>
 			<groupId>com.github.vladimir-bukhtoyarov</groupId>
 			<artifactId>bucket4j-core</artifactId>
-		<version>4.10.0</version>
-
-	</dependency>
-
+			<version>4.10.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -106,5 +113,6 @@
 			<url>https://repo.spring.io/milestone</url>
 		</repository>
 	</repositories>
+
 
 </project>

@@ -1,31 +1,30 @@
 package com.parkingfinder.routeservice.model;
 
-
 import javax.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 import java.time.ZonedDateTime;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Route database model
+ * Model for retrieving and persisting routes to database
+ **/
 @Entity
 @Data
 public class Route {
-  @Id
+    @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer ID;
 
-     private String userEmail;
+    private String userEmail;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Point> points;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set<StreetName> streetNames;
 
     private ZonedDateTime timestamp;

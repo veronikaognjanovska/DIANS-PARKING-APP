@@ -21,4 +21,9 @@ public class RouteServiceApplication {
 		return new RestTemplate();
 	}
 
+	@Bean(name = "restTemplateNoLoadBalanced")
+	public RestTemplate restTemplateNoLoadBalanced() {
+		return new RestTemplate();
+	}
+
 }
