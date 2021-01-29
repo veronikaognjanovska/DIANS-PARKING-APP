@@ -19,7 +19,7 @@ public class PointFinderController extends BaseController{
     public PointService pointService;
 
     /**
-     * Default controller that sets bucket bandwidth limit
+     * Default constructor that sets bucket bandwidth limit
      */
     public PointFinderController()
     {

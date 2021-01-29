@@ -21,7 +21,7 @@ public class Route {
 
     private String userEmail;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Point> points;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)

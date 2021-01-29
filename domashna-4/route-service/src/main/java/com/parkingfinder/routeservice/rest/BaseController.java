@@ -7,7 +7,7 @@ import io.github.bucket4j.Refill;
 import java.time.Duration;
 
 /**
- * Abstract class
+ * Abstract base controller for rest endpoints
  * @author Veronika Ognjanovska and Veronika Stefanovska
  */
 public abstract class BaseController {

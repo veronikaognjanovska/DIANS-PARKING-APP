@@ -10,5 +10,10 @@ import java.util.List;
  **/
 @Repository
 public interface RouteRepository  extends JpaRepository<Route, Integer> {
+    /**
+     * Method that finds a list of routes searched by a user with the given email
+     * @param userEmail
+     * @return
+     */
     List<Route> findAllByUserEmail(String userEmail);
 }

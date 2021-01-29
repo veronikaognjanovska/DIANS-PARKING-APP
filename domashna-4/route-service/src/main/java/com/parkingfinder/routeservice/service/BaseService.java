@@ -4,7 +4,8 @@ import net.minidev.json.parser.ParseException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * Abstract class for Template pattern
+ * Generic abstract class for resolving geoObject
+ * T - geoObject
  * @author Veronika Ognjanovska and Veronika Stefanovska
  **/
 public abstract class BaseService <T> {
@@ -47,7 +48,7 @@ public abstract class BaseService <T> {
     }
 
     /**
-     * Method that saves geoObject to database.
+     * Hook method that saves geoObject to database.
      * @param geoObject - geoObject(route or point)
      **/
     protected void saveToDatabase(T geoObject){}

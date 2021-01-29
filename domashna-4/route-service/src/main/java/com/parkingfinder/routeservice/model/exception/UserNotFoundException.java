@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UserNotFoundException extends RuntimeException{
 
     /**
-     * Method that represents the constructor of the UserNotFoundException
+     * Constructor that represents the constructor of the UserNotFoundException
      */
     public UserNotFoundException() {
         super(String.format("User was not found"));
     }
 
     /**
-     * Method that represents the constructor of the UserNotFoundException
+     * Parameterized constructor that represents the constructor of the UserNotFoundException
      * @param email - string representing user email
      */
     public UserNotFoundException(String email) {

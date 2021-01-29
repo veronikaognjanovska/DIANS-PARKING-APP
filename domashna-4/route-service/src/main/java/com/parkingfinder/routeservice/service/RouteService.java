@@ -24,8 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Route service.
- * Subclass in Template pattern.
+ * Route service for fetching routes from start point to end point.
  * Stores in memory routes.
  * @author Veronika Ognjanovska
  **/
@@ -57,10 +56,7 @@ public class RouteService extends BaseService<Route>{
         try {
             JSONObject json=(JSONObject) objectJson;
             fillStreetNames( json, route);
-            JSONArray j2 = (JSONArray) json.get(Constants.ROUTES);
-            JSONObject routes = (JSONObject) j2.get(0);
-            JSONObject geometry = (JSONObject) routes.get(Constants.GEOMETRY);
-            JSONArray coordinates = (JSONArray) geometry.get(Constants.COORDINATES);
+            JSONArray coordinates = this.getArrayObject(json);
             for (int i = 0; i < coordinates.size(); i++) {
                 Point point=this.getPoint( (JSONArray) coordinates.get(i));
                 route.getPoints().add(point);
@@ -157,5 +153,14 @@ public class RouteService extends BaseService<Route>{
         streetName.setStreetName(name);
         streetNameRepository.save(streetName);
         return  streetName;
+    }
+
+    private JSONArray getArrayObject(JSONObject json)
+    {
+        JSONArray j2 = (JSONArray) json.get(Constants.ROUTES);
+        JSONObject routes = (JSONObject) j2.get(0);
+        JSONObject geometry = (JSONObject) routes.get(Constants.GEOMETRY);
+        JSONArray coordinates = (JSONArray) geometry.get(Constants.COORDINATES);
+        return coordinates;
     }
 }

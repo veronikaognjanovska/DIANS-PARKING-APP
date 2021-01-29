@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class RouteNotFoundException extends RuntimeException{
 
     /**
-     * Method that represents the constructor of the RouteNotFoundException
+     * Constructor that represents the constructor of the RouteNotFoundException
      */
     public RouteNotFoundException() {
         super(String.format("Route was not found"));

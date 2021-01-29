@@ -8,7 +8,7 @@ package com.parkingfinder.routeservice.model.exception;
 public class InvalidArgumentsException extends RuntimeException {
 
     /**
-     * Method that represents the constructor of the InvalidArgumentsException
+     * Constructor that represents the constructor of the InvalidArgumentsException
      */
     public InvalidArgumentsException() {
         super("Invalid arguments exception");

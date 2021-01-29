@@ -12,8 +12,7 @@ import com.parkingfinder.routeservice.model.Point;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Point service.
- * Subclass in Template pattern.
+ * Point service for resolving geolocation from name
  * @author Veronika Stefanovska
  **/
 @Service

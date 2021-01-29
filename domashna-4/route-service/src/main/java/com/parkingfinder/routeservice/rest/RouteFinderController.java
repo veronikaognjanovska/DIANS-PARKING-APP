@@ -21,7 +21,7 @@ public class RouteFinderController extends BaseController{
     public  RouteService routeService;
 
     /**
-     * Default controller that sets bucket bandwidth limit
+     * Default constructor that sets bucket bandwidth limit
      */
     public RouteFinderController() {
         this.setBandwidthLimit();
