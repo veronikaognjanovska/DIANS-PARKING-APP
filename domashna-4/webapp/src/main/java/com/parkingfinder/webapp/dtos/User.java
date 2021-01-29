@@ -1,31 +1,29 @@
-package com.parkingfinder.userservice.model;
+package com.parkingfinder.webapp.dtos;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.parkingfinder.webapp.enumeration.UserRole;
+import com.parkingfinder.webapp.util.CustomAuthorityDeserializer;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import com.parkingfinder.userservice.enumeration.UserRole;
 
-import javax.persistence.*;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
 /**
- * User database model
- * Model for User management in database
- * @author Anastasija Petrovska
- */
+ * User class for custom authentication
+ * @implements UserDetails
+ * */
 
-@Entity
-@Table(name="`User`")
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class User implements UserDetails, Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer ID;
 
     @NotNull
@@ -45,6 +43,7 @@ public class User implements UserDetails, Serializable {
     @Enumerated()
     private UserRole userRole = UserRole.USER;
 
+
     /**
      * Default constructor for the User class
      */
@@ -57,7 +56,7 @@ public class User implements UserDetails, Serializable {
      * @param password - string that represents the password of the user
      * @param role - UserRole that represents the role of the user
      */
-    public User(String name,String email,String password,UserRole role) {
+    public User(String name, String email, String password, UserRole role) {
         this.name=name;
         this.email=email;
         this.password=password;
@@ -68,6 +67,7 @@ public class User implements UserDetails, Serializable {
      * Method that returns a list of authorities
      * @return List - a list of user roles
      */
+    @JsonDeserialize(using = CustomAuthorityDeserializer.class)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(userRole);

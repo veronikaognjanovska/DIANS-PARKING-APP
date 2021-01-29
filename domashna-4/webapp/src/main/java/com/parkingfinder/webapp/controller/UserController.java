@@ -1,11 +1,15 @@
 package com.parkingfinder.webapp.controller;
 
+import com.parkingfinder.webapp.config.CustomUsernamePasswordAuthenticationProvider;
 import com.parkingfinder.webapp.dtos.RouteDto;
+import com.parkingfinder.webapp.dtos.User;
 import com.parkingfinder.webapp.dtos.UserDto;
+import com.parkingfinder.webapp.enumeration.UserManagement;
 import com.parkingfinder.webapp.service.RouteFetchService;
 import com.parkingfinder.webapp.service.UserFetchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,6 +44,9 @@ public class UserController {
     @Autowired
     private RouteFetchService routeService;
 
+    @Autowired
+    private CustomUsernamePasswordAuthenticationProvider authenticationProvider;
+
     private final Comparator<RouteDto> routeComparator = Comparator.comparing(RouteDto::getTimestamp).reversed();
 
     /**
@@ -63,20 +70,20 @@ public class UserController {
     /**
      * Successful sing in handler method
      * @param req - current request of type HttpServletRequest
-     * @param user - user email
+     * @param email - user email
      * @param pass - user password
      * */
     @PostMapping("/sign-in-post")
-    public void login(HttpServletRequest req, String user, String pass) {
-        Authentication auth = userService.signInUser(user, pass);
-        if (auth!=null) {
-            authenticate(req, auth);
-        }
+    public void login(HttpServletRequest req, String email, String pass) {
+        authenticate(req, email, pass);
     }
 
-    private void authenticate(HttpServletRequest request, Authentication authentication) {
+    private void authenticate(HttpServletRequest request, String email, String pass) {
         SecurityContext sc = SecurityContextHolder.getContext();
-        sc.setAuthentication(authentication);
+        UsernamePasswordAuthenticationToken authReq
+                = new UsernamePasswordAuthenticationToken(email, pass);
+        Authentication auth = authenticationProvider.authenticate(authReq);
+        sc.setAuthentication(auth);
         HttpSession session = request.getSession(true);
         session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
     }
@@ -88,7 +95,7 @@ public class UserController {
     @GetMapping("/user-details")
     String details(Model model) {
         try{
-        UserDto user = fetchCurrentlyLoggedInUser();
+        User user = fetchCurrentlyLoggedInUser();
             if (user!=null) {
                 model.addAttribute("routes", findRoutesForUser(user.getEmail()));
                 model.addAttribute("user", user);
@@ -100,10 +107,10 @@ public class UserController {
         return "/error/404";
     }
 
-    private UserDto fetchCurrentlyLoggedInUser() {
+    private User fetchCurrentlyLoggedInUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
-        return userService.loadUserByUsername(email);
+        return (User) userService.loadUserByUsername(email);
     }
 
     private List<RouteDto> findRoutesForUser(String email) {
@@ -130,9 +137,9 @@ public class UserController {
      * @param model - model object
     * */
     @PostMapping("/register")
-    String signUp(@ModelAttribute @Valid UserDto user, BindingResult bindingResult, Model model) {
+    String signUp(@ModelAttribute("user") @Valid UserDto user, BindingResult bindingResult, Model model) {
         return checkBindingResult(user, bindingResult, model,
-                "register", "redirect:/sign-in");
+                "register", "redirect:/sign-in", UserManagement.REGISTER);
     }
 
     /**
@@ -142,28 +149,30 @@ public class UserController {
      * @param model - model object
      * */
     @PostMapping("/update")
-    String updateUser(@Valid UserDto user, BindingResult bindingResult, Model model)
+    String updateUser(@ModelAttribute("user") @Valid UserDto user, BindingResult bindingResult, Model model)
     {
         return checkBindingResult(user, bindingResult, model,
-                "editprofile", "redirect:/user-details");
+                "editprofile", "redirect:/user-details", UserManagement.UPDATE);
     }
 
-    private String checkBindingResult(UserDto user, BindingResult bindingResult, Model model, String url, String redirect) {
+    private String checkBindingResult(UserDto user, BindingResult bindingResult, Model model, String url, String redirect, UserManagement action) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("user", user);
             return url;
         }
         try {
-            HttpStatus status = userService.updateUser(user);
-            if (status.equals(HttpStatus.OK)){
-                return redirect;
-            } else if (status.equals(HttpStatus.CONFLICT)){
-                model.addAttribute("emailExists", true);
-                return url;
+            HttpStatus status = null;
+            if (action.equals(UserManagement.UPDATE)){
+                status = userService.updateUser(user);
+            } else {
+                status = userService.register(user);
             }
+            return redirect;
         }catch (Exception e) {
-            e.printStackTrace();
+            model.addAttribute("user");
+            model.addAttribute("emailExists", true);
+            return url;
         }
-        return "error/404";
     }
 
     /**
@@ -173,7 +182,7 @@ public class UserController {
     String updateUp(Model model) {
         Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         try {
-            UserDto user = (UserDto) userService.loadUserByUsername(principal.getName());
+            User user = (User) userService.loadUserByUsername(principal.getName());
             model.addAttribute("user", user);
         }catch (Exception e) {
             return "error/404";

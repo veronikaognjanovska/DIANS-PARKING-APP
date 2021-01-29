@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * Spring boot application
+ * Spring boot application for user microservice
  */
 
 @SpringBootApplication
