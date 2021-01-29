@@ -5,6 +5,7 @@ import com.parkingfinder.webapp.dtos.RouteDto;
 import com.parkingfinder.webapp.dtos.User;
 import com.parkingfinder.webapp.dtos.UserDto;
 import com.parkingfinder.webapp.enumeration.UserManagement;
+import com.parkingfinder.webapp.exception.UserNotFoundException;
 import com.parkingfinder.webapp.service.RouteFetchService;
 import com.parkingfinder.webapp.service.UserFetchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,8 +75,13 @@ public class UserController {
      * @param pass - user password
      * */
     @PostMapping("/sign-in-post")
-    public void login(HttpServletRequest req, String email, String pass) {
-        authenticate(req, email, pass);
+    public String login(HttpServletRequest req, String email, String pass) {
+        try {
+            authenticate(req, email, pass);
+            return "home";
+        }catch (Exception e){
+            return "redirect:/sing-in-error";
+        }
     }
 
     private void authenticate(HttpServletRequest request, String email, String pass) {
@@ -83,6 +89,9 @@ public class UserController {
         UsernamePasswordAuthenticationToken authReq
                 = new UsernamePasswordAuthenticationToken(email, pass);
         Authentication auth = authenticationProvider.authenticate(authReq);
+        if (auth==null) {
+            throw new UserNotFoundException();
+        }
         sc.setAuthentication(auth);
         HttpSession session = request.getSession(true);
         session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
