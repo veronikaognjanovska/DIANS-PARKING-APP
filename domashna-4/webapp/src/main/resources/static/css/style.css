@@ -1,10 +1,9 @@
-body {font-family: Arial, Helvetica, sans-serif;}
-.body-color {background-color: #272727;}
+body {font-family: Arial, Helvetica, sans-serif;}/*body font-family*/
 main {
   width: 800px;
   margin: auto !important;
 }
-/*maps style*/
+/*maps style for home-page and user-page*/
 .map1, .map2{
   position: absolute;
   bottom: 120px;
@@ -21,17 +20,16 @@ main {
 /*color-black*/
 .input_line, .one-input, .buttton, .buttton-2, .buttton-izberi, .buttton-person, .buttton-car, .select-1, .select-2{color: black;}
 /*color-white*/
-footer, .info-la, .street, .registerbtn, .input_submit, .registerbtn-detali, .promena, .span-1, .span-2, .upa {color: white;}
+footer, .info-la, .street, .registerbtn, .input_submit, .registerbtn-detali, .promena, .span-1, .span-2, .upa, .as {color: white;}
 /*background-color*/
-footer, .input_line, .street{background-color: #272727;}
-/*logo*/
-.carpin-black{
+footer, .input_line, .street, .nb, .body-color {background-color: #272727;}
+.nb{height: 85px;}/*header navbar*/
+.carpin-black{/*logo*/
   width: 70px;
   height: 70px;
   margin-left: -20px;
 }
-/*input pole*/
-.input_line{
+.input_line{/*input_line for manual control*/
   position: absolute;
   position: fixed;
   bottom: 130px;
@@ -41,7 +39,7 @@ footer, .input_line, .street{background-color: #272727;}
   z-index:600;
   border-radius: 25px;
 }
-.one-input, .two-input, .search-input{
+.one-input, .two-input, .search-input{/*first,second input in input_line and search input in navbar*/
   position: relative;
   top: 2px;
   left: 50px;
@@ -51,10 +49,16 @@ footer, .input_line, .street{background-color: #272727;}
   z-index:600;
   font-weight: bold;
 }
-.span-1{padding-left: 50px;}
+.span-1{padding-left: 50px;}/*span-1 and span-2 text in input_line*/
 .span-2{padding-left: 70px;}
-/*efect for input-buttons*/
-.buttton-izberi {
+/*efect for buttons*/
+.buttton-2:hover, .buttton:hover, .buttton-person:hover, .buttton-car:hover {background-color: #EBC74A}
+.buttton-2:active, .buttton:active, .buttton-person:active, .buttton-car:active {
+  background-color: #008b8b;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.buttton-izberi {/*button in pop-up*/
   width: auto;
   height: auto;
   text-align: center;
@@ -67,13 +71,7 @@ footer, .input_line, .street{background-color: #272727;}
   border-radius: 10px;
   font-weight: bold;
 }
-.buttton-2:hover, .buttton:hover, .buttton-person:hover, .buttton-car:hover {background-color: #EBC74A}
-.buttton-2:active, .buttton:active, .buttton-person:active, .buttton-car:active {
-  background-color: #008b8b;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-.buttton-2, .buttton {
+.buttton-2, .buttton {/*button 'Коoрдинати' and 'Рута'*/
   padding: 5px 5px;
   text-align: center;
   cursor: pointer;
@@ -88,7 +86,7 @@ footer, .input_line, .street{background-color: #272727;}
 }
 .buttton-2 {margin-left: 75px;}
 .buttton {margin-left: 5px;}
-.buttton-person, .buttton-car {
+.buttton-person, .buttton-car {/*button for person and car*/
   width: 30px;
   height: 30px;
   text-align: center;
@@ -102,7 +100,7 @@ footer, .input_line, .street{background-color: #272727;}
   border-radius: 10px;
   font-weight: bold;
 }
-.select-1, .select-2{
+.select-1, .select-2{/*select button for 'Пристап' and 'Тип'*/
   padding: 5px 5px;
   text-align: center;
   cursor: pointer;
@@ -118,12 +116,11 @@ footer, .input_line, .street{background-color: #272727;}
 }
 .select-1{margin-left: 90px;}
 .select-2{margin-left: 10px;}
-/*foother*/
-footer{
+footer{/*foother*/
   position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
-  position: fixed;
   height: 120px;
 }
 .footer-style{
@@ -131,12 +128,7 @@ footer{
   padding-top: 35px;
   font-size: 20px;
 }
-/*pole ruta*/
-.p-ruta{
-  text-align: center;
-  padding: 10px;
-}
-.street{
+.street{/*field 'Рута'*/
   position: absolute;
   position: fixed;
   top: 200px;
@@ -146,12 +138,15 @@ footer{
   z-index:600;
   border-radius: 25px;
 }
-.input-address{
+.p-ruta{/*field 'Рута'*/
+  text-align: center;
+  padding: 10px;
+}
+.input-address{/*field 'Рута' for all streets*/
   color:white;
   padding: 10px 5px 10px 5px;
 }
-
-.input_korisnichko_ime, .input_password, .input_ime, .input_detali {
+.input_korisnichko_ime, .input_password, .input_ime, .input_detali {/*input fields for 'корисничко име','лозинка','име','детали'*/
   margin: 8px 0;
   display: inline-block;
   box-sizing: border-box;
@@ -177,16 +172,16 @@ footer{
   border: 5px solid #272727;
   font-weight: bold;
 }
-.input_submit:hover {
+.input_submit:hover {/*efect for input_submit */
   opacity: 0.8;
 }
-.imgcontainer {
+.imgcontainer {/*images in sign-in, registar,parking-details, editprofile*/
   text-align: center;
   margin: 24px 0 0 0;
   padding-top: 5px;
 }
 .imgcontainer-img{max-width:200px;}
-.container, .container-detali {padding: 16px;}
+.container, .container-detali {padding: 16px;}/*input field in pages*/
 .container {width: 500px;}
 .container-detali {width: 700px;}
 .pole, .pole-detali{
@@ -209,7 +204,7 @@ footer{
   font-weight: bold;
 }
 .labela{font-weight: bold;}
-.registerbtn, .registerbtn-detali, .promena, .detali-home {
+.registerbtn, .registerbtn-detali, .promena, .detali-home {/*buttons*/
   cursor: pointer;
   opacity: 0.9;
   border-radius: 10px;
@@ -223,6 +218,8 @@ footer{
   padding:16px 20px;
   width: 100%;
 }
+.registerbtn {margin: 8px 0 8px 240px;}
+.registerbtn-detali {margin: 8px 0 8px 340px;}
 .promena {
   background-color: #008b8b;
   padding:3px 10px;
@@ -235,9 +232,8 @@ footer{
   padding:3px 3px;
   margin: 3px 0;
   width: 300px;
- }
-.registerbtn {margin: 8px 0 8px 240px;}
-.registerbtn-detali {margin: 8px 0 8px 340px;}
+}
+/*efect for buttons*/
 .registerbtn span, .registerbtn-detali span, .promena span, .detali-home span {
   cursor: pointer;
   display: inline-block;
@@ -270,14 +266,8 @@ footer{
 }
 .span-red{color:red;}
 .dp-no{display: none;}
-.nb{
-  background-color: #272727;
-  height: 85px;
-}
-.as{
-  color: white;
-  font-weight: bold;
-}
+
+.as{font-weight: bold;}
 .upi{
   border-radius: 50%;
   background-color: white;
@@ -294,7 +284,7 @@ footer{
 .kori-div2{padding-left: 15%;}
 .kori-img{width: 150px; border-radius: 50%; height: 150px;background-color: white;}
 /*--------------------------------------------------------------------------------------------------*/
-@media only screen and (max-width: 1025px) {
+@media only screen and (max-width: 1025px) {/*for IPad Pro,IPad*/
   .pole{width: 450px;}
   .img-detali{max-width:150px;}
   .pole-detali{width: 540px;}
@@ -346,7 +336,7 @@ footer{
   .poleuredi {width: 450px;}
 }
 /*--------------------------------------------------------------------------------------------------*/
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 700px) {/*for iPhone 6/7/8 Plus, Pixel 2 XL, Pixel2*/
   header{font-size: 8px;}
   .carpin-black{
     width: 60px;
@@ -410,7 +400,7 @@ footer{
   .korisnik-2{top:110px;}
 }
 /*----------------------------------------------------------------------------------------------------------*/
-@media only screen and (max-width: 378px) {
+@media only screen and (max-width: 378px) {/*for iPhone 6/7/8, iPhone X*/
   .input_line{
     width: 330px;
     left: 5%;
@@ -431,7 +421,7 @@ footer{
   .registerbtn-detali {margin: 4px 0 4px 37%;/*margin: 4px 0 0 37%;?*/}
 }
 /*--------------------------------------------------------------------------------------------------*/
-@media only screen and (max-width: 367px) {
+@media only screen and (max-width: 367px) {/*for MotoG4,Galaxy S5,*/
   header{font-size: 7px;}
   .one-input, .two-input, .search-input{left: 3px;}
   .span-1{
@@ -462,7 +452,7 @@ footer{
   .registerbtn-detali {margin-left: 37%;}
 }
 /*--------------------------------------------------------------------------------------------------*/
-@media only screen and (max-width: 325px) {
+@media only screen and (max-width: 325px) {/*for iPone 5/SE*/
   body {font-size: 15px;}
   .pole{
     height: 535px;
