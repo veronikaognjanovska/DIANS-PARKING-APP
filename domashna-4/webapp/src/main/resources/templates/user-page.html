@@ -36,7 +36,6 @@
     </nav>
 </header>
 
-
 <div class="korisnik row">
 
     <div  class="col-md-4 kori-div1">
@@ -100,7 +99,6 @@
                     lats[ind]
                 ]);
             }
-
          var polyline = L.polyline(latlng, {colors: colors[index] }).addTo(map);
          console.log(polyline);
          map.fitBounds(polyline.getBounds());
