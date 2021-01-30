@@ -10,7 +10,6 @@ import com.parkingfinder.routeservice.repository.PointRepository;
 import com.parkingfinder.routeservice.repository.RouteRepository;
 import com.parkingfinder.routeservice.repository.StreetNameRepository;
 
-import javax.annotation.PostConstruct;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -33,6 +32,7 @@ public class RouteEvictionService {
 
     /**
      * Asynchronous method for evicting routes older than 7 days
+     * Scheduled every night at 1 am
      * @return Integer - number od routes deleted
      */
     @Async
@@ -44,14 +44,6 @@ public class RouteEvictionService {
                 .filter(route -> Math.abs(Duration.between(ZonedDateTime.now(),
                         route.getTimestamp()).toDays()) > 7).collect(Collectors.toList());
         int deleted = toDelete.size();
-        toDelete.stream()
-                .map(Route::getPoints)
-                .filter(p -> p!=null && !p.isEmpty())
-                .forEach(p -> pointRepository.deleteAll(p));
-        toDelete.stream()
-                .map(Route::getStreetNames)
-                .filter(s -> s!=null && !s.isEmpty())
-                .forEach(s -> streetNameRepository.deleteAll(s));
         routeRepository.deleteAll(toDelete);
         return deleted;
     }
