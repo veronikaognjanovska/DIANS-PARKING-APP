@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Simple value store for application properties base urls
  * */
 @Component
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:bootstrap.yml")
 @Data
 public class LocalBaseUrls {
     @Value("${base.url.parking.service}")
