@@ -60,8 +60,7 @@ public class UserService implements UserDetailsService {
      */
     public boolean updateUser(User user) throws InvalidArgumentsException
     {
-        String email= SecurityContextHolder.getContext().getAuthentication().getName();
-        User u = this.userRepository.findByEmail(email).get();
+        User u = this.userRepository.findByEmail(user.getEmail()).get();
 
         return checkUser(u,user);
 

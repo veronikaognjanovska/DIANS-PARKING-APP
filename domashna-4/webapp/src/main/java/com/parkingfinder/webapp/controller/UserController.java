@@ -6,6 +6,7 @@ import com.parkingfinder.webapp.dtos.User;
 import com.parkingfinder.webapp.dtos.UserDto;
 import com.parkingfinder.webapp.enumeration.UserManagement;
 import com.parkingfinder.webapp.exception.UserNotFoundException;
+import com.parkingfinder.webapp.rest.AuthenticationController;
 import com.parkingfinder.webapp.service.RouteFetchService;
 import com.parkingfinder.webapp.service.UserFetchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import java.security.Principal;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ import static org.springframework.security.web.context.HttpSessionSecurityContex
  * \n Uses the UserFetchService and RouteFetchService
  * */
 @Controller
+@RequestMapping("/")
 public class UserController {
 
     @Autowired
@@ -48,13 +50,17 @@ public class UserController {
     @Autowired
     private CustomUsernamePasswordAuthenticationProvider authenticationProvider;
 
+    @Autowired
+    private AuthenticationController authenticationController;
+
     private final Comparator<RouteDto> routeComparator = Comparator.comparing(RouteDto::getTimestamp).reversed();
 
     /**
     * Returns simple sign in form
     * */
-    @GetMapping("/sign-in")
+    @GetMapping("/login")
     String signIn() {
+        authenticationController.setCurrentUser(null);
         return "sign-in";
     }
 
@@ -62,7 +68,7 @@ public class UserController {
     * Handler for user sing in error
     * @param model - Model object used to set error attribute
     * */
-    @GetMapping("/sign-in-error")
+    @GetMapping("/login-error")
     String signInError(Model model) {
         model.addAttribute("loginError", true);
         return "sign-in";
@@ -71,16 +77,16 @@ public class UserController {
     /**
      * Successful sing in handler method
      * @param req - current request of type HttpServletRequest
-     * @param email - user email
-     * @param pass - user password
+     * @param username - user email
+     * @param password - user password
      * */
-    @PostMapping("/sign-in-post")
-    public String login(HttpServletRequest req, String email, String pass) {
+    @PostMapping("/login")
+    public String login(HttpServletRequest req, String username, String password) {
         try {
-            authenticate(req, email, pass);
+            authenticate(req, username, password);
             return "home";
         }catch (Exception e){
-            return "redirect:/sing-in-error";
+            return "redirect:/login-error";
         }
     }
 
@@ -89,6 +95,7 @@ public class UserController {
         UsernamePasswordAuthenticationToken authReq
                 = new UsernamePasswordAuthenticationToken(email, pass);
         Authentication auth = authenticationProvider.authenticate(authReq);
+        System.out.println("Auth: " + auth.getName());
         if (auth==null) {
             throw new UserNotFoundException();
         }
@@ -135,7 +142,7 @@ public class UserController {
     * */
     @GetMapping("/register")
     String signUp(Model model) {
-        model.addAttribute("user", new UserDto());
+        model.addAttribute("user", new User());
         return "register";
     }
 
@@ -146,9 +153,9 @@ public class UserController {
      * @param model - model object
     * */
     @PostMapping("/register")
-    String signUp(@ModelAttribute("user") @Valid UserDto user, BindingResult bindingResult, Model model) {
+    String signUp(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
         return checkBindingResult(user, bindingResult, model,
-                "register", "redirect:/sign-in", UserManagement.REGISTER);
+                "register", "redirect:/login", UserManagement.REGISTER);
     }
 
     /**
@@ -158,23 +165,24 @@ public class UserController {
      * @param model - model object
      * */
     @PostMapping("/update")
-    String updateUser(@ModelAttribute("user") @Valid UserDto user, BindingResult bindingResult, Model model)
+    String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model)
     {
         return checkBindingResult(user, bindingResult, model,
                 "editprofile", "redirect:/user-details", UserManagement.UPDATE);
     }
 
-    private String checkBindingResult(UserDto user, BindingResult bindingResult, Model model, String url, String redirect, UserManagement action) {
+    private String checkBindingResult(User user, BindingResult bindingResult, Model model, String url, String redirect, UserManagement action) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("user", user);
             return url;
         }
         try {
             HttpStatus status = null;
+            UserDto userDto = mapUserToUserDto(user);
             if (action.equals(UserManagement.UPDATE)){
-                status = userService.updateUser(user);
+                status = userService.updateUser(userDto);
             } else {
-                status = userService.register(user);
+                status = userService.register(userDto);
             }
             return redirect;
         }catch (Exception e) {
@@ -184,14 +192,24 @@ public class UserController {
         }
     }
 
+    private UserDto mapUserToUserDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setName(user.getName());
+        userDto.setPassword(user.getPassword());
+        userDto.setEmail(user.getEmail());
+        userDto.setID(user.getID());
+        return userDto;
+    }
+
     /**
      * Method that returns edit user form for currently logged in user
+     * @param model - Model object for sending attributes to html page
      * */
     @GetMapping("/update")
     String updateUp(Model model) {
-        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         try {
-            User user = (User) userService.loadUserByUsername(principal.getName());
+            User user = (User) userService.loadUserByUsername(principal.getEmail());
             model.addAttribute("user", user);
         }catch (Exception e) {
             return "error/404";

@@ -9,7 +9,7 @@
 </head>
 <body class="body-color">
 
-<form  role="form" th:action="@{/sign-in-post}" th:method="post" class="pole">
+<form  role="form" name="form" th:action="@{/login}" th:method="post" class="pole">
     <div class="imgcontainer">
         <img class="imgcontainer-img" src="images/carpin-white.png" alt="Avatar">
     </div>
@@ -22,7 +22,6 @@
         <input class="input_password" type="password" id="password" name="password" required>
         <span class="span-red" th:if="${loginError}">Погрешно корисничко име или лозинка</span>
         <br/>
-
         <input class="input_submit" type="submit" value="Најави се!"><br/>
     </div>
     <a class="registerbtn" th:href="@{/}"><span>Почетна</span></a>

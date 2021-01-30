@@ -79,7 +79,7 @@ public class RouteService extends BaseService<Route>{
             ResponseEntity<String> result =
                     restTemplate.exchange(Constants.WEB_APP_AUTHENTICATION,
                             HttpMethod.GET, new HttpEntity<>(String.class), String.class);
-            if (result.getBody() == null || result.getBody().isEmpty()) {
+            if (result.getBody() != null) {
                 route.setUserEmail(result.getBody());
                 routeRepository.save(route);
             }
@@ -151,7 +151,6 @@ public class RouteService extends BaseService<Route>{
         String name = (String) waitpoint.get(Constants.NAME);
         StreetName streetName = new StreetName();
         streetName.setStreetName(name);
-        streetNameRepository.save(streetName);
         return  streetName;
     }
 

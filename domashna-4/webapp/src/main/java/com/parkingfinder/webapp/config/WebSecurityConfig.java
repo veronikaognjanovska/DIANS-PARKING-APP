@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Method for setting up authentication for endpoints
+     * @param http - HttpSecurity object security builder
      * */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,15 +37,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/assets/**",
-                        "/css/**", "/images/**", "/register/**",
-                        "/parking/**", "/point**","/route/**", "/user/**").permitAll()
+                        "/css/**", "/images/**", "/register/**", "/login**",
+                        "/parking/**", "/point**","/route/**", "/authentication/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/sign-in").permitAll()
-                .loginProcessingUrl("/sign-in-post")
-                .failureUrl("/sign-in-error")
+                .loginPage("/login").permitAll()
+                .loginProcessingUrl("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .failureUrl("/login-error")
                 .defaultSuccessUrl("/", true)
                 .and()
                 .logout()
@@ -52,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/sign-in");
+                .logoutSuccessUrl("/login");
     }
 
     /**

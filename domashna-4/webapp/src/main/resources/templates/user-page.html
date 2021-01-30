@@ -13,7 +13,6 @@
     <meta content="application/xhtml+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Мој профил</title>
-
 </head>
 <body>
 <header>
@@ -58,7 +57,7 @@
     </div>
     <div class="col-md-4">
         <h3>Последни пребарани рути</h3>
-        <div class='map2' id="map"></div>
+        <div class="map2" id="map" style="margin: 50px 5px;position:static !important;height:100%"></div>
     </div>
 
     <div class="korisnik-2 col-md-4">
@@ -67,7 +66,7 @@
         <div th:each="route: ${routes}">
             <h3>РУТА: </h3>
             <ul th:each="name:${route.streetNames}">
-                <li th:text="${name.streetName}" />
+                <li th:if="${name.streetName != null && name.streetName != ''}" th:text="${name.streetName}" />
                 <div class="points">
                     <div hidden th:each="point: ${route.points}">
                         <p class="lat" th:text="${point.lat}" hidden></p>

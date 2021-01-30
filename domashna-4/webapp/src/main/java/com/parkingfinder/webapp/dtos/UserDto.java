@@ -12,6 +12,8 @@ import javax.validation.constraints.Size;
 @Data
 public class UserDto {
 
+    private int ID;
+
     @NotNull
     @Size(min = 5, message = "Името мора да содржи барем 5 знаци")
     private String name;
