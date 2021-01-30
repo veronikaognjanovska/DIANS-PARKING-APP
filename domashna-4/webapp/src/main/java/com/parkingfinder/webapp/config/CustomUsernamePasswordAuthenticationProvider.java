@@ -1,9 +1,8 @@
 package com.parkingfinder.webapp.config;
 
-import com.parkingfinder.webapp.dtos.User;
-import com.parkingfinder.webapp.exception.UserNotFoundException;
+import com.parkingfinder.webapp.controller.UserController;
+import com.parkingfinder.webapp.rest.AuthenticationController;
 import com.parkingfinder.webapp.service.UserFetchService;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,9 +24,10 @@ public class CustomUsernamePasswordAuthenticationProvider implements Authenticat
     private UserFetchService userService;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private AuthenticationController authenticationController;
 
-    private User user = new User();
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private void areCredentialsInvalid(String email, String password){
         if (email.isEmpty() || password.isEmpty()) {
@@ -60,14 +60,12 @@ public class CustomUsernamePasswordAuthenticationProvider implements Authenticat
             return null;
         }
         isPasswordIncorrect(password, userDetails);
-
-        return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+        authenticationController.setCurrentUser(userDetails);
+        return new UsernamePasswordAuthenticationToken(userDetails,
+                userDetails.getPassword(), userDetails.getAuthorities());
 
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
     /**
      * Method that examines if the class given as parameter equals the token class
      * @param aClass - class that is examined if it is supported

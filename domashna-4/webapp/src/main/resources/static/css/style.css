@@ -4,18 +4,17 @@ main {
   margin: auto !important;
 }
 /*maps style for home-page and user-page*/
-.map1, .map2{
+.map1, map2 {
   position: absolute;
   bottom: 120px;
   left:0;
   right: 0;
 }
-.map1 {top:85px;}
 .map2{
   top:-45px;
-  margin: 50px 5px;
-  position:static !important;
-  height:100%
+}
+.map1{
+  top:85px;
 }
 /*color-black*/
 .input_line, .one-input, .buttton, .buttton-2, .buttton-izberi, .buttton-person, .buttton-car, .select-1, .select-2{color: black;}

@@ -15,6 +15,7 @@ import java.util.List;
  * @author Veronika Ognjanovska
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/route")
 public class RouteFinderController extends BaseController{
     @Autowired
@@ -67,14 +68,14 @@ public class RouteFinderController extends BaseController{
 
     /**
      * Method that returns a filtered result of routes based on user previous searches
-     * @param req - http servlet request
+     * @param userName - Currently logged in user's username
      * @return List<Route> - a list of last 5 searched routes by the user
      */
-    @GetMapping("/history")
-    public List<Route> getRouteHistory(HttpServletRequest req) {
+    @PostMapping("/history")
+    public List<Route> getRouteHistory(@RequestBody String userName) {
         try {
             bucket.tryConsume(1);
-            return this.routeService.findHistoryRoutes(req.getRemoteUser());
+            return this.routeService.findHistoryRoutes(userName);
         }catch (Exception ex){
             return new LinkedList<>();
         }

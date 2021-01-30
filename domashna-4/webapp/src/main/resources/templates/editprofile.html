@@ -22,12 +22,12 @@
 
         <input class="input_korisnichko_ime" type="text" id="email" name="email" placeholder="Email адреса" th:value="*{email}" ><br/>
         <p class="span-red" th:if="${#fields.hasErrors('email')}">Невалидна e-mail адреса</p>
-
+        <p th:if="${emailExists}" class="span-red">Email адресата веќе постои</p>
         <input class="input_password" type="password" id="password" name="password" placeholder="Лозинка"  th:field="*{password}"> <br/>
         <p class="span-red" th:if="${#fields.hasErrors('password')}">Невалидна лозинка</p>
 
         <input type="submit" class="input_submit" value="Промени">
-        </input>
+
     </div>
     <a class="registerbtn" th:href="@{/}"><span>Почетна</span></a>
 

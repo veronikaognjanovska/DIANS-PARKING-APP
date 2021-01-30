@@ -12,6 +12,7 @@ import com.parkingfinder.routeservice.service.PointService;
  * @author Veronika Stefanovska
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/point")
 public class PointFinderController extends BaseController{
 
