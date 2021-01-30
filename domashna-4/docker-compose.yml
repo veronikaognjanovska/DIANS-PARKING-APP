@@ -1,0 +1,143 @@
+version: '2'
+services:
+    config-server:
+        container_name: config-server
+        build:
+            context: .
+            dockerfile: ./config-server/config-server/Dockerfile
+        image: config-server:latest
+        expose:
+            - 9003
+        ports:
+        - "9003:9003"
+        logging:
+            driver: json-file
+        depends_on:
+            - eureka-server
+        network_mode: "host"
+    eureka-server:
+        container_name: eureka-server
+        build:
+            context: .
+            dockerfile: ./eureka-server/Dockerfile
+        image: eureka-server:latest
+        expose:
+            - 8761
+        ports:
+            - "8761:8761"
+        logging:
+            driver: json-file
+        network_mode: "host"
+    gateway-api:
+        container_name: gateway-api
+        build:
+            context: .
+            dockerfile: ./gateway-api/Dockerfile
+        image: gateway-api:latest
+        expose:
+            - 9191
+        ports:
+            - "9191:9191"
+
+        depends_on:
+            - config-server
+            - eureka-server
+        logging:
+            driver: json-file
+        network_mode: "host"
+    parking-service:
+        container_name: parking-service
+        build:
+            context: .
+            dockerfile: ./parking-service/Dockerfile
+        image: parking-service:latest
+        expose:
+            - 9001
+        ports:
+            - "9001:9001"
+        depends_on:
+            - config-server
+            - eureka-server
+            - db
+        logging:
+            driver: json-file
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=parking_spots
+            - DB_SERVER=db
+        network_mode: "host"
+    route-service:
+        container_name: route-service
+        build:
+            context: .
+            dockerfile: ./route-service/Dockerfile
+        image: route-service:latest
+        expose:
+            - 9002
+        ports:
+            - "9002:9002"
+
+        depends_on:
+            - config-server
+            - eureka-server
+            - db
+        logging:
+            driver: json-file
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=parking_spots
+            - DB_SERVER=db
+        network_mode: "host"
+    user-service:
+        container_name: user-service
+        build:
+            context: .
+            dockerfile: ./user-service/user-service/Dockerfile
+        image: user-service:latest
+        expose:
+            - 9004
+        ports:
+            - "9004:9004"
+
+        depends_on:
+            - config-server
+            - eureka-server
+            - db
+        logging:
+            driver: json-file
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=parking_spots
+            - DB_SERVER=db
+        network_mode: "host"
+    webapp:
+        container_name: webapp
+        build:
+            context: .
+            dockerfile: ./webapp/Dockerfile
+        image: webapp:latest
+        expose:
+            - 8080
+        ports:
+            - "8080:8080"
+
+        depends_on:
+            - config-server
+            - eureka-server
+        logging:
+            driver: json-file
+        network_mode: "host"
+    db:
+        image: postgres
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=parking_spots
+
+volumes:
+    postgres-data:
