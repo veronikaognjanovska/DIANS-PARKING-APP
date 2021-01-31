@@ -9,12 +9,20 @@ services:
         expose:
             - 9003
         ports:
-        - "9003:9003"
+            - 9003:9003
         logging:
             driver: json-file
         depends_on:
             - eureka-server
-        network_mode: "host"
+        networks:
+            - spring-cloud-network
+        links:
+            - eureka-server:eureka-server
+        hostname: 'config-server'    
+        environment: 
+            # Important for clients to register with eureka
+            - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+
     eureka-server:
         container_name: eureka-server
         build:
@@ -24,10 +32,13 @@ services:
         expose:
             - 8761
         ports:
-            - "8761:8761"
+            - 8761:8761
         logging:
             driver: json-file
-        network_mode: "host"
+        networks:
+            - spring-cloud-network
+        hostname: 'eureka-server'
+
     gateway-api:
         container_name: gateway-api
         build:
@@ -37,14 +48,23 @@ services:
         expose:
             - 9191
         ports:
-            - "9191:9191"
-
+            - 9191:9191
         depends_on:
             - config-server
             - eureka-server
         logging:
             driver: json-file
-        network_mode: "host"
+        networks:
+            - spring-cloud-network
+        links:
+            - config-server:config-server
+            - eureka-server:eureka-server
+        hostname: 'gateway-api'
+        environment: 
+            # Important for clients to register with eureka
+            - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+            - spring.cloud.config.uri=http://config-server:9003
+
     parking-service:
         container_name: parking-service
         build:
@@ -54,19 +74,25 @@ services:
         expose:
             - 9001
         ports:
-            - "9001:9001"
+            - 9001:9001
         depends_on:
             - config-server
             - eureka-server
-            - db
+            - gateway-api
         logging:
             driver: json-file
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-            - POSTGRES_DB=parking_spots
-            - DB_SERVER=db
-        network_mode: "host"
+        networks:
+            - spring-cloud-network
+        links:
+            - config-server:config-server
+            - eureka-server:eureka-server
+            - gateway-api:gateway-api
+        hostname: 'PARKING-SERVICE'
+        environment: 
+            # Important for clients to register with eureka
+            - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+            - spring.cloud.config.uri=http://config-server:9003
+
     route-service:
         container_name: route-service
         build:
@@ -76,20 +102,25 @@ services:
         expose:
             - 9002
         ports:
-            - "9002:9002"
-
+            - 9002:9002
         depends_on:
             - config-server
             - eureka-server
-            - db
+            - gateway-api
         logging:
             driver: json-file
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-            - POSTGRES_DB=parking_spots
-            - DB_SERVER=db
-        network_mode: "host"
+        networks:
+            - spring-cloud-network
+        links:
+            - config-server:config-server
+            - eureka-server:eureka-server
+            - gateway-api:gateway-api
+        hostname: 'ROUTE-SERVICE'
+        environment: 
+            # Important for clients to register with eureka
+            - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+            - spring.cloud.config.uri=http://config-server:9003
+
     user-service:
         container_name: user-service
         build:
@@ -99,45 +130,57 @@ services:
         expose:
             - 9004
         ports:
-            - "9004:9004"
-
+            - 9004:9004
         depends_on:
             - config-server
             - eureka-server
-            - db
+            - gateway-api
         logging:
             driver: json-file
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-            - POSTGRES_DB=parking_spots
-            - DB_SERVER=db
-        network_mode: "host"
+        networks:
+            - spring-cloud-network
+        links:
+            - config-server:config-server
+            - eureka-server:eureka-server
+            - gateway-api:gateway-api
+        hostname: 'USER-SERVICE'
+        environment: 
+            # Important for clients to register with eureka
+            - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+            - spring.cloud.config.uri=http://config-server:9003
+
     webapp:
         container_name: webapp
         build:
             context: .
             dockerfile: ./webapp/Dockerfile
         image: webapp:latest
+
         expose:
             - 8080
         ports:
-            - "8080:8080"
-
+            - 8080:8080
         depends_on:
             - config-server
             - eureka-server
+            - gateway-api
         logging:
             driver: json-file
-        network_mode: "host"
-    db:
-        image: postgres
-        ports:
-            - "5432:5432"
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-            - POSTGRES_DB=parking_spots
+        links:
+            - config-server:config-server
+            - eureka-server:eureka-server
+            - route-service:route-service
+            - parking-service:parking-service
+            - user-service:user-service
+            - gateway-api:gateway-api
+        networks:
+            - spring-cloud-network
+        hostname: 'WEBAPP'
+        environment: 
+            # Important for clients to register with eureka
+            - eureka.client.serviceUrl.defaultZone=http://eureka-server:8761/eureka/
+            - spring.cloud.config.uri=http://config-server:9003
 
-volumes:
-    postgres-data:
+networks:
+    spring-cloud-network:
+        driver: bridge
